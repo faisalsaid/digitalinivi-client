@@ -1,3 +1,5 @@
+import { printLog } from './hook/helper';
+
 function App() {
   return (
     <>
