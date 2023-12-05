@@ -1,10 +1,9 @@
 function App() {
- 
   return (
     <>
-    <div>Halo</div>
+      <div className="text-2xl text-red-500">Halo</div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
