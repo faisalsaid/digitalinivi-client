@@ -7,9 +7,9 @@ import React from 'react';
 const DashboardComponent = () => {
   return (
     <Stack component={'div'}>
-      <div className="flex gap-2 flex-col sm:flex-row sm:justify-between">
+      <div className="flex gap-2  justify-between items-center">
         <Typography component={'h3'} variant="h5" fontWeight={400} color={'darkslategray'}>
-          Hi, User
+          Dashboard
         </Typography>
         <Button variant="contained" startIcon={<AddBusinessIcon />}>
           Create Store

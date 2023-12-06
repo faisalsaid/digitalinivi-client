@@ -23,6 +23,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -72,6 +73,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const Layout = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const { curentUser } = useSelector((state) => state.user);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -90,7 +92,7 @@ const Layout = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Digital Invitation
+            {curentUser ? curentUser?.name : 'Guest'}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -125,14 +127,14 @@ const Layout = () => {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
-          ))}
+          ))} */}
         </List>
       </Drawer>
       <Main open={open}>
