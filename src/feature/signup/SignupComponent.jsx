@@ -5,6 +5,8 @@ import { Button, Stack, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { printLog } from '../../hook/helper';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../profile/config/userSlice';
 
 import * as Yup from 'yup';
 
@@ -21,9 +23,13 @@ const validationSchema = Yup.object({
 });
 
 const SignupComponent = () => {
+  const { curentUser, isLoading, isError, isSuccess, message } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   // Handle submit form
   const onSubmit = (value, props) => {
-    console.log(value);
+    dispatch(register(value));
+    // console.log(value);
   };
 
   // Handle reset form

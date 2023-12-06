@@ -1,7 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import userService from './userService';
+
+// Get User from localSotarage
+const user = JSON.parse(localStorage.getItem('user'));
+
+// Register user
+export const register = createAsyncThunk('user/register', async (paylod, thunkAPI) => {
+  // console.log(paylod);
+  try {
+    return await userService.registerUser(paylod);
+  } catch (err) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 const initialState = {
-  user: {},
+  user: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -13,22 +28,23 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder;
-    // handle add menu
-    // .addCase(createNewMenu.pending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(createNewMenu.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isSuccess = true;
-    //   state.listMenu.push(action.payload);
-    //   toast(`Add ${action.payload.title} success`);
-    // })
-    // .addCase(createNewMenu.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isError = true;
-    //   state.message = action.error.message;
-    // })
+    builder
+      // handle REGISTER START
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.curentUser = action.payload;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.curentUser = null;
+      });
+    // handle REGISTER END
   },
 });
 
