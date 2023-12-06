@@ -3,15 +3,16 @@ import SendIcon from '@mui/icons-material/Send';
 
 import { Button, Stack, TextField } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SigninComponent = () => {
   return (
     <div className="flex w-full mx-0 h-screen justify-center items-center">
       <div className="sm:max-w-7xl  sm:h-[80%] sm:w-[80%] flex rounded-md overflow-hidden">
         <div className="flex-1 hidden sm:flex bg-sky-600"></div>
-        <div className="flex-1 flex justify-center items-center bg-white p-4 sm:max-w-[50%]">
+        <div className="flex-1 flex flex-col gap-2 justify-center items-center bg-white p-4 sm:max-w-[50%]">
           <div className="border p-4 rounded-md bg-white w-full">
-            <h2 className="uppercase text-xl text-center font-semibold mb-4">Login</h2>
+            <h2 className="uppercase text-xl text-center font-semibold mb-4 text-sky-700">Login</h2>
             <form>
               <Stack gap={2}>
                 <TextField fullWidth id="outlined-basic" label="Email" variant="outlined" />
@@ -21,6 +22,12 @@ const SigninComponent = () => {
                 </Button>
               </Stack>
             </form>
+          </div>
+          <div className="w-full flex gap-2">
+            <p className="text-sm text-slate-600">Dont have an acount?</p>{' '}
+            <Link className="text-sm  underline text-sky-600" to={'/signup'}>
+              Signup
+            </Link>
           </div>
         </div>
       </div>
