@@ -4,6 +4,7 @@ import PageNotFound from './components/template/pageNotFound';
 import SigninComponent from './feature/signin/SigninComponent';
 import SignupComponent from './feature/signup/SignupComponent';
 import DashboardComponent from './feature/dashboard/DashboardComponent';
+import Layout from './components/template/Layout';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
         <Routes>
           <Route path="/signin" element={<SigninComponent />} />
           <Route path="/signup" element={<SignupComponent />} />
-          <Route path="/dashboard" element={<DashboardComponent />} />
+          <Route element={<Layout />}>
+            <Route path="/dashboard" element={<DashboardComponent />} />
+          </Route>
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
