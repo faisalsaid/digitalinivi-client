@@ -11,7 +11,7 @@ const SigninComponent = () => {
         <div className="flex-1 hidden sm:flex bg-sky-600"></div>
         <div className="sm:flex-1 w-full  flex flex-col gap-2 justify-center items-center bg-white  p-4 sm:max-w-[50%]">
           <div className="border p-4 rounded-md bg-white w-full">
-            <h2 className="uppercase text-xl text-center font-semibold mb-4 text-sky-700">Sign Up</h2>
+            <h2 className="uppercase text-xl text-center font-semibold mb-4 text-sky-700">Sign In</h2>
             <form>
               <Stack gap={2}>
                 <TextField fullWidth id="outlined-basic" label="Email" variant="outlined" />
