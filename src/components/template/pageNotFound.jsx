@@ -6,8 +6,7 @@ const PageNotFound = () => {
       <div className="text-5xl font-semibold ">404 Ops! Page Not Found</div>
       <div>
         <Link className="underline" to={'/'}>
-          {' '}
-          Go Home{' '}
+          Go Home
         </Link>
       </div>
     </div>
