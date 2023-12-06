@@ -6,7 +6,7 @@ const ProfileComponent = () => {
     <Stack direction={'column'}>
       <Stack>
         <Typography component={'h3'} variant="h5">
-          Halo User
+          Profile
         </Typography>
       </Stack>
     </Stack>
