@@ -115,7 +115,7 @@ const Layout = () => {
           {listMenu.map((menu, index) => (
             <Link key={menu.value} to={menu.value}>
               <ListItem disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={handleDrawerClose}>
                   <ListItemIcon>{menu.icon}</ListItemIcon>
                   <ListItemText primary={menu.label} />
                 </ListItemButton>
