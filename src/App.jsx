@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
+import TemplatesComponent from './feature/templates/TemplatesComponent';
 
 function App() {
   const { curentUser } = useSelector((state) => state.user);
@@ -29,6 +30,7 @@ function App() {
               <Route path="/profile" element={<ProfileComponent />} />
             </Route>
           </Route>
+          <Route path="/template" element={<TemplatesComponent />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
