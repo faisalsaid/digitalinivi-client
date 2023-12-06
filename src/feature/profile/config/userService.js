@@ -11,9 +11,20 @@ const registerUser = async (payload) => {
   return response.data;
 };
 
+// Login user
+const login = async (payload) => {
+  console.log('service -> login', payload);
+  const response = await axios.post(`${apiURI}/auth/signin`, payload);
+  if (response.data) {
+    localStorage.setItem('user', JSON.stringify(response.data));
+  }
+
+  return response.data;
+};
+
 const userService = {
   registerUser,
-  // login,
+  login,
   // googleOAuth,
 };
 

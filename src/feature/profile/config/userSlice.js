@@ -15,6 +15,16 @@ export const register = createAsyncThunk('user/register', async (paylod, thunkAP
   }
 });
 
+// User Login
+export const login = createAsyncThunk('user/login', async (user, thunkAPI) => {
+  try {
+    return await userService.login(user);
+  } catch (err) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   user: user ? user : null,
   isError: false,
@@ -26,7 +36,14 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = '';
+    },
+  },
   extraReducers: (builder) => {
     builder
       // handle REGISTER START
@@ -43,10 +60,27 @@ const userSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.curentUser = null;
+      })
+      // handle REGISTER END
+
+      // handle LOGIN START
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.curentUser = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.curentUser = null;
       });
-    // handle REGISTER END
+    // handle LOGIN END
   },
 });
 
-export const {} = userSlice.actions;
+export const { reset } = userSlice.actions;
 export default userSlice.reducer;

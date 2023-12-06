@@ -6,6 +6,8 @@ import SignupComponent from './feature/signup/SignupComponent';
 import DashboardComponent from './feature/dashboard/DashboardComponent';
 import Layout from './components/template/Layout';
 import ProfileComponent from './feature/profile/ProfileComponent';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 }
