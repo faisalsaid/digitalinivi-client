@@ -54,6 +54,7 @@ const SignupComponent = () => {
                           // console.log(field, meta);
                           return (
                             <TextField
+                              disabled={isLoading}
                               {...field}
                               variant="outlined"
                               label="Name"
@@ -69,6 +70,7 @@ const SignupComponent = () => {
                           // console.log(field, meta);
                           return (
                             <TextField
+                              disabled={isLoading}
                               {...field}
                               variant="outlined"
                               label="Email"
@@ -84,6 +86,7 @@ const SignupComponent = () => {
                           // console.log(field, form, meta);
                           return (
                             <TextField
+                              disabled={isLoading}
                               {...field}
                               variant="outlined"
                               label="Password"
@@ -95,8 +98,8 @@ const SignupComponent = () => {
                         }}
                       </Field>
 
-                      <Button type="submit" variant="contained" startIcon={<SendIcon />}>
-                        register
+                      <Button type="submit" variant="contained" startIcon={<SendIcon />} disabled={isLoading}>
+                        {isLoading ? '...loading' : 'register'}
                       </Button>
                     </Stack>
                   </Form>
