@@ -14,6 +14,7 @@ function App() {
           <Route path="/signin" element={<SigninComponent />} />
           <Route path="/signup" element={<SignupComponent />} />
           <Route element={<Layout />}>
+            <Route path="/" element={<DashboardComponent />} />
             <Route path="/dashboard" element={<DashboardComponent />} />
           </Route>
           <Route path="/*" element={<PageNotFound />} />
