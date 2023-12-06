@@ -2,11 +2,13 @@ import SendIcon from '@mui/icons-material/Send';
 // end Icon
 
 import { Button, Stack, TextField } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import { printLog } from '../../hook/helper';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../profile/config/userSlice';
+import { register, reset } from '../profile/config/userSlice';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 import * as Yup from 'yup';
 
@@ -25,6 +27,19 @@ const validationSchema = Yup.object({
 const SignupComponent = () => {
   const { curentUser, isLoading, isError, isSuccess, message } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || curentUser) {
+      navigate('/dashboard');
+    }
+
+    dispatch(reset());
+  }, [curentUser, isError, isSuccess, message, navigate, dispatch]);
 
   // Handle submit form
   const onSubmit = (value, props) => {

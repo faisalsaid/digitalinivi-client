@@ -26,7 +26,7 @@ export const login = createAsyncThunk('user/login', async (user, thunkAPI) => {
 });
 
 const initialState = {
-  user: user ? user : null,
+  curentUser: user ? user : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
