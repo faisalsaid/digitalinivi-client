@@ -34,7 +34,7 @@ const SignupComponent = () => {
       toast.error(message);
     }
 
-    if (isSuccess || curentUser) {
+    if (isSuccess) {
       navigate('/dashboard');
     }
 

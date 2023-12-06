@@ -7,19 +7,27 @@ import DashboardComponent from './feature/dashboard/DashboardComponent';
 import Layout from './components/template/Layout';
 import ProfileComponent from './feature/profile/ProfileComponent';
 import { ToastContainer } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
+  const { curentUser } = useSelector((state) => state.user);
+
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/signin" element={<SigninComponent />} />
-          <Route path="/signup" element={<SignupComponent />} />
-          <Route element={<Layout />}>
-            <Route path="/" element={<DashboardComponent />} />
-            <Route path="/dashboard" element={<DashboardComponent />} />
-            <Route path="/profile" element={<ProfileComponent />} />
+          <Route element={<PrivateRoute authenticated={!curentUser} />}>
+            <Route path="/signin" element={<SigninComponent />} />
+            <Route path="/signup" element={<SignupComponent />} />
+          </Route>
+          <Route element={<PrivateRoute authenticated={curentUser} />}>
+            <Route element={<Layout />}>
+              <Route path="/" element={<DashboardComponent />} />
+              <Route path="/dashboard" element={<DashboardComponent />} />
+              <Route path="/profile" element={<ProfileComponent />} />
+            </Route>
           </Route>
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
