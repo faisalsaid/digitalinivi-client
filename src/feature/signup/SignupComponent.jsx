@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { Button, Stack, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const SigninComponent = () => {
+const SignupComponent = () => {
   return (
     <div className="flex w-full mx-0 h-screen justify-center items-center">
       <div className="sm:max-w-7xl w-full p-4  sm:h-[80%] sm:w-[80%] flex rounded-md overflow-hidden">
@@ -14,18 +14,19 @@ const SigninComponent = () => {
             <h2 className="uppercase text-xl text-center font-semibold mb-4 text-sky-700">Sign Up</h2>
             <form>
               <Stack gap={2}>
+                <TextField fullWidth id="outlined-basic" label="Name" variant="outlined" />
                 <TextField fullWidth id="outlined-basic" label="Email" variant="outlined" />
                 <TextField fullWidth id="outlined-basic" label="Password" variant="outlined" />
                 <Button variant="contained" startIcon={<SendIcon />}>
-                  Login
+                  signup
                 </Button>
               </Stack>
             </form>
           </div>
           <div className="w-full flex gap-2">
-            <p className="text-sm text-slate-600">Dont have an acount?</p>{' '}
-            <Link className="text-sm  underline text-sky-600" to={'/signup'}>
-              Signup
+            <p className="text-sm text-slate-600">Already have an acount?</p>
+            <Link className="text-sm  underline text-sky-600" to={'/signin'}>
+              Signin
             </Link>
           </div>
         </div>
@@ -34,4 +35,4 @@ const SigninComponent = () => {
   );
 };
 
-export default SigninComponent;
+export default SignupComponent;
