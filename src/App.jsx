@@ -5,6 +5,7 @@ import SigninComponent from './feature/signin/SigninComponent';
 import SignupComponent from './feature/signup/SignupComponent';
 import DashboardComponent from './feature/dashboard/DashboardComponent';
 import Layout from './components/template/Layout';
+import ProfileComponent from './feature/profile/ProfileComponent';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<DashboardComponent />} />
             <Route path="/dashboard" element={<DashboardComponent />} />
+            <Route path="/profile" element={<ProfileComponent />} />
           </Route>
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
