@@ -64,6 +64,8 @@ const VIewTemplateComponents = () => {
           ))}
         </div>
       </div>
+
+      {/* BRIDE START */}
       <div id="bride" className={` w-full min-h-screen  relative  justify-center items-center `}>
         <div className="px-6 py-14 bg-green-800 text-white flex gap-4 flex-col">
           <p className="text-center">
@@ -72,84 +74,90 @@ const VIewTemplateComponents = () => {
           </p>
           <p className="text-center text-xl">Q.S. Ar-Rum : 21</p>
         </div>
-        <div className="px-4 py-14 flex flex-col gap-10 ">
+        <div className="px-4 py-14 flex flex-col gap-10 justify-center items-center ">
           <p className="text-center">Dengan Memohon Rahmat Dan Ridho Dari Allah SWT. Kami Bermaksud Menyelenggarakan Syukuran Pernikahan Putra Putri Kami :</p>
-          <div className="flex flex-col items-center gap-4">
-            <div className={`w-52 h-52 bg-green-100 border rounded-3xl`}>
-              <img src="" alt="" />
+          <div className="flex flex-col gap-10 sm:flex-row">
+            <div className="flex flex-col items-center gap-4">
+              <div className={`w-52 h-52 bg-green-100 border rounded-3xl`}>
+                <img src="" alt="" />
+              </div>
+              <p className="text-center text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
+                Ini Budi Pratama S.Pd M.M
+              </p>
+              <div className="flex flex-col gap-1 justify-center items-center">
+                <p>Putra Dari:</p>
+                <p className="font-semibold">Bpk Ini Budi & Ibu Ini Budi</p>
+              </div>
             </div>
-            <p className="text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-              Ini Budi
-            </p>
-            <div className="flex flex-col gap-1 justify-center items-center">
-              <p>Putra Dari:</p>
-              <p className="font-semibold">Bpk Ini Budi & Ibu Ini Budi</p>
-            </div>
-          </div>
-          <div className="flex flex-col items-center gap-4">
-            <div className={`w-52 h-52 bg-green-100 border rounded-3xl`}>
-              <img src="" alt="" />
-            </div>
-            <p className="text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-              Ini Wati
-            </p>
-            <div className="flex flex-col gap-1 justify-center items-center">
-              <p>Putri Dari:</p>
-              <p className="font-semibold">Bpk Ini Wati & Ibu Ini Wati</p>
+            <div className="flex flex-col items-center gap-4">
+              <div className={`w-52 h-52 bg-green-100 border rounded-3xl`}>
+                <img src="" alt="" />
+              </div>
+              <p className="text-center text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
+                Dr. Ini Wati S.Sos
+              </p>
+              <div className="flex flex-col gap-1 justify-center items-center">
+                <p>Putri Dari:</p>
+                <p className="font-semibold">Bpk Ini Wati & Ibu Ini Wati</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      {/* BRIDE END */}
+
       {/* LOCATION START */}
       <div id="location" className="px-4 py-14 flex justify-center flex-col min-h-screen gap-8">
-        <p>Insya Allah Acara Akan Dilaksanakan Pada :</p>
-        <div className="flex flex-col gap-2">
-          <p className="font-medium">Akad Nikah :</p>
-          <div className="flex gap-2 items-center">
-            <div>
-              <MdOutlineDateRange />
+        <p className="text-center">Insya Allah Acara Akan Dilaksanakan Pada :</p>
+        <div className="flex flex-col gap-8 sm:flex-row">
+          <div className="flex flex-col gap-2 flex-1">
+            <p className="font-medium">Akad Nikah :</p>
+            <div className="flex gap-2 items-center">
+              <div>
+                <MdOutlineDateRange />
+              </div>
+              <p>Tanggal : Jumat, 28 April 2023</p>
             </div>
-            <p>Tanggal : Jumat, 28 April 2023</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <div>
-              <MdOutlineAccessTime />
+            <div className="flex gap-2 items-center">
+              <div>
+                <MdOutlineAccessTime />
+              </div>
+              <p>Pukul : 09.00 WIT - Selesai</p>
             </div>
-            <p>Pukul : 09.00 WIT - Selesai</p>
-          </div>
-          <div className="flex gap-2 items-baseline">
-            <div>
-              <MdOutlinePinDrop />
+            <div className="flex gap-2 items-baseline">
+              <div>
+                <MdOutlinePinDrop />
+              </div>
+              <p>Lokasi : Rumah Mempelai Wanita, Kapaha Hotel Monalisa Rt. 001 / Rw. 005 </p>
             </div>
-            <p>Lokasi : Rumah Mempelai Wanita, Kapaha Hotel Monalisa Rt. 001 / Rw. 005 </p>
+            <button className="bg-green-700 text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800">
+              <FaMapMarkedAlt /> <span>View Location</span>
+            </button>
           </div>
-          <button className="bg-green-700 text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800">
-            <FaMapMarkedAlt /> <span>View Location</span>
-          </button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <p className="font-medium">Resepsi :</p>
-          <div className="flex gap-2 items-center">
-            <div>
-              <MdOutlineDateRange />
+          <div className="flex flex-col gap-2 flex-1">
+            <p className="font-medium">Resepsi :</p>
+            <div className="flex gap-2 items-center">
+              <div>
+                <MdOutlineDateRange />
+              </div>
+              <p>Tanggal : Jumat, 28 April 2023</p>
             </div>
-            <p>Tanggal : Jumat, 28 April 2023</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <div>
-              <MdOutlineAccessTime />
+            <div className="flex gap-2 items-center">
+              <div>
+                <MdOutlineAccessTime />
+              </div>
+              <p>Pukul : 09.00 WIT - Selesai</p>
             </div>
-            <p>Pukul : 09.00 WIT - Selesai</p>
-          </div>
-          <div className="flex gap-2 items-baseline">
-            <div>
-              <MdOutlinePinDrop />
+            <div className="flex gap-2 items-baseline">
+              <div>
+                <MdOutlinePinDrop />
+              </div>
+              <p>Lokasi : Gedung Ashari Al-Fatah </p>
             </div>
-            <p>Lokasi : Gedung Ashari Al-Fatah </p>
+            <button className="bg-green-700 text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800">
+              <FaMapMarkedAlt /> <span>View Location</span>
+            </button>
           </div>
-          <button className="bg-green-700 text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800">
-            <FaMapMarkedAlt /> <span>View Location</span>
-          </button>
         </div>
       </div>
       {/* LOCATION END */}
@@ -238,7 +246,7 @@ const VIewTemplateComponents = () => {
           </p>
           <p>Sabtu, 29 April 2023</p>
         </div>
-        <div className="shadow-lg bg-transparent">
+        <div className="shadow-lg bg-transparent max-w-2xl mx-auto">
           <p className="bg-green-700 text-white p-2 rounded-t-lg">Beri Ucapan Spesial</p>
           <form action="">
             <div className="p-4 bg-green-200 flex flex-col gap-2">
