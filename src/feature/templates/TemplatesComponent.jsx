@@ -47,7 +47,7 @@ const TemplatesComponent = () => {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                Code: NKH-001
+                NKH-001
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Undangan Penikahan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci mollitia ad ullam?

@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
 import TemplatesComponent from './feature/templates/TemplatesComponent';
+import VIewTemplateComponents from './feature/templates/VIewTemplateComponents';
 
 function App() {
   const { curentUser } = useSelector((state) => state.user);
@@ -19,18 +20,20 @@ function App() {
     <>
       <Router>
         <Routes>
+          <Route path="/" element={<div>Landing Page</div>} />
+          <Route path="home" element={<div>Landing Page</div>} />
           <Route element={<PrivateRoute authenticated={!curentUser} />}>
-            <Route path="/signin" element={<SigninComponent />} />
-            <Route path="/signup" element={<SignupComponent />} />
+            <Route path="signin" element={<SigninComponent />} />
+            <Route path="signup" element={<SignupComponent />} />
           </Route>
           <Route element={<PrivateRoute authenticated={curentUser} />}>
             <Route element={<Layout />}>
-              <Route path="/" element={<DashboardComponent />} />
-              <Route path="/dashboard" element={<DashboardComponent />} />
-              <Route path="/profile" element={<ProfileComponent />} />
+              <Route path="dashboard" element={<DashboardComponent />} />
+              <Route path="profile" element={<ProfileComponent />} />
             </Route>
           </Route>
-          <Route path="/template" element={<TemplatesComponent />} />
+          <Route path="template" element={<TemplatesComponent />} />
+          <Route path="template/:id" element={<VIewTemplateComponents />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
