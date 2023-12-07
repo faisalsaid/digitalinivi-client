@@ -5,6 +5,9 @@ import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { MdOutlinePinDrop, MdOutlineDateRange, MdOutlineAccessTime } from 'react-icons/md';
 import { FaMapMarkedAlt } from 'react-icons/fa';
+import { IoIosSend } from 'react-icons/io';
+import { GiConfirmed } from 'react-icons/gi';
+import { FaWhatsapp } from 'react-icons/fa';
 // import icons end
 
 import { Stack, IconButton } from '@mui/material';
@@ -153,30 +156,142 @@ const VIewTemplateComponents = () => {
       {/* GALERY START */}
       <div id="galery" className="px-4 py-14 flex  flex-col min-h-screen gap-4 ">
         <p className="text-xl">Galeri Photo :</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          <img
-            className="rounded-md"
-            src="https://plus.unsplash.com/premium_photo-1683290222216-a9fab340cbf8?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="wedding-1"
-          ></img>
-          <img
-            className="rounded-md"
-            src="https://plus.unsplash.com/premium_photo-1670430623154-24626c42fb33?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="wedding-1"
-          ></img>
-          <img
-            className="rounded-md"
-            src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="wedding-1"
-          ></img>
-          <img
-            className="rounded-md"
-            src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="wedding-1"
-          ></img>
+
+        <div className="columns-2 sm:columns-2 md:columns-3 gap-3 ">
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://plus.unsplash.com/premium_photo-1683290222216-a9fab340cbf8?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://plus.unsplash.com/premium_photo-1670430623154-24626c42fb33?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1460364157752-926555421a7e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1487621199565-dc425a60897b?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
+          <div className="w-full mb-3">
+            <img
+              className="max-w-full rounded-md"
+              src="https://images.unsplash.com/photo-1533418466759-ac54bd32122e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="wedding-1"
+            ></img>
+          </div>
         </div>
       </div>
       {/* GALERY END */}
+      {/* COMENT START */}
+      <div id="comment" className="px-4 py-14 flex  flex-col min-h-screen gap-4 ">
+        <p className="text-center">
+          Tiada Yang Dapat Kami Ungkapkan Selain Rasa Terimakasih Dari Hati Yang Tulus Apabila Bapak/ Ibu/ Saudara/i Berkenan Hadir Untuk Memberikan Do’a Restu Kepada Kami
+        </p>
+        <div className="flex flex-col items-center gap-4">
+          <div className={`w-52 h-52 bg-green-100 border rounded-3xl`}>
+            <img src="" alt="" />
+          </div>
+          <p className="text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
+            Budi & Wati
+          </p>
+          <p>Sabtu, 29 April 2023</p>
+        </div>
+        <div className="shadow-lg bg-transparent">
+          <p className="bg-green-700 text-white p-2 rounded-t-lg">Beri Ucapan Spesial</p>
+          <form action="">
+            <div className="p-4 bg-green-200 flex flex-col gap-2">
+              <input className="w-full p-2 rounded-md" type="text" placeholder="Nama" />
+              <textarea className="w-full p-2 rounded-md h-36" placeholder="Ketik pesan ..."></textarea>
+              <select className="w-full p-2 rounded-md">
+                <option value="">Konfirmasi Kehadiran</option>
+                <option value="confirm">Hadir</option>
+                <option value="reject">Tidak Hadir</option>
+                <option value="consider">Pertimbangkan</option>
+              </select>
+              <button className="flex gap-2 bg-green-700 text-white items-center px-4 py-2 rounded-md justify-center" type="submit">
+                <IoIosSend /> <span>Kirim</span>
+              </button>
+            </div>
+          </form>
+          <div className="bg-slate-50 p-4 rounded-b-lg overflow-hidden flex flex-col gap-3 ">
+            <div className="flex flex-col gap-1 text-slate-700 border-b pb-2">
+              <div className="flex gap-2">
+                <p className="font-medium">Emmanuel Macron</p>
+                <p className="flex gap-1 items-center bg-green-200 px-2 rounded-md text-sm">
+                  <GiConfirmed />
+                  <span>hadir</span>
+                </p>
+              </div>
+              <p className="text-xs text-slate-400">Dua hari yang lalu</p>
+              <p className="text-sm">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere voluptas doloremque in incidunt possimus illo ab quo sequi id natus expedita quas, hic veniam ad
+                harum provident delectus quia soluta!
+              </p>
+            </div>
+            <div className="flex flex-col gap-1 text-slate-700">
+              <div className="flex gap-2">
+                <p>Mister Puttin</p>
+                <p className="flex gap-1 items-center bg-red-300 px-2 rounded-md text-sm">
+                  <GiConfirmed />
+                  <span>Tidak hadir</span>
+                </p>
+              </div>
+              <p className="text-xs text-slate-400">Dua hari yang lalu</p>
+              <p className="text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. ...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* COMENT START */}
+
+      <div id="comment" className="px-4 py-14 flex  flex-col h-80 gap-2 bg-green-800 justify-center items-center text-white">
+        <p className="text-xl">Vendor Name</p>
+        <p className="flex gap-2 items-center">
+          <FaWhatsapp /> <span>08123456789</span>
+        </p>
+      </div>
 
       <div className="h-[75px]"></div>
 
