@@ -116,7 +116,7 @@ const VIewTemplateComponents = () => {
     });
   };
 
-  const handleRadioColorTheme = (value) => {
+  const handleColorTheme = (value) => {
     setTheme(value);
   };
 
@@ -124,19 +124,27 @@ const VIewTemplateComponents = () => {
     <>
       <div className="p-6 flex justify-between flex-col gap-2">
         <p>Kode Thema : NKH-001</p>
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-1 flex-col">
           <p>Warna Tema :</p>
-          <div className="flex gap-2 items-center">
-            <input type="radio" name="theme_color" value="green" onChange={() => handleRadioColorTheme('green')} />
-            <label for="javascript">Daun</label>
-          </div>
-          <div className="flex gap-2 items-center">
-            <input type="radio" name="theme_color" value="rose" onChange={() => handleRadioColorTheme('rose')} />
-            <label for="javascript">Mawar</label>
-          </div>
-          <div className="flex gap-2 items-center">
-            <input type="radio" name="theme_color" value="orange" onChange={() => handleRadioColorTheme('orange')} />
-            <label for="javascript">Jeruk</label>
+          <div className="flex gap-6 items-center">
+            <div className="flex gap-2 items-center  bg-[#EEFFD2] px-2 border-[#2F4D04] rounded-md border">
+              <input className="cursor-pointer" type="radio" name="theme_color" id="green" value="green" onChange={() => handleColorTheme('green')} />
+              <label className="cursor-pointer " htmlFor="green">
+                Daun
+              </label>
+            </div>
+            <div className="flex gap-2 items-center bg-[#FFDEDE] px-2 border-[#DA3434] rounded-md border">
+              <input className="cursor-pointer" type="radio" name="theme_color" id="rose" value="rose" onChange={() => handleColorTheme('rose')} />
+              <label className="cursor-pointer" htmlFor="rose">
+                Mawar
+              </label>
+            </div>
+            <div className="flex gap-2 items-center bg-[#FFE8C4] px-2 border-[#CF7000] rounded-md border">
+              <input className="cursor-pointer" type="radio" name="theme_color" id="orange" value="orange" onChange={() => handleColorTheme('orange')} />
+              <label className="cursor-pointer" htmlFor="orange">
+                Jeruk
+              </label>
+            </div>
           </div>
         </div>
       </div>
