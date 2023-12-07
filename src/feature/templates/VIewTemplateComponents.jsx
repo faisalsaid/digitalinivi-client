@@ -12,7 +12,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 
 import { Stack, IconButton } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const bottomMenu = [
   {
@@ -37,11 +37,44 @@ const bottomMenu = [
   },
 ];
 
-const theme = {
-  color: 'green',
-};
+// const colorTheme = {
+//   green: {
+//     bgColor: '#EEFFD2',
+//     color: 'darkgreen',
+//   },
+//   rose: {
+//     bgColor: '#EEFFD2',
+//     color: 'darkgreen',
+//   },
+// };
 
+const colorTheme = [
+  {
+    name: 'green',
+    text: 'darkgreen',
+    light: '#EEFFD2',
+    dark: '#2F4D04',
+    medium: '#D3DEBF',
+  },
+  {
+    name: 'rose',
+    text: '#DA3434',
+    light: '#FFDEDE',
+    dark: '#DA3434',
+    medium: '#FFB2B2',
+  },
+  {
+    name: 'orange',
+    text: '#864800',
+    light: '#FFE8C4',
+    medium: '#FFBB6C',
+    dark: '#CF7000',
+  },
+];
 const VIewTemplateComponents = () => {
+  const [theme, setTheme] = useState('orange');
+  const [category, setCategory] = useState('');
+
   const coverSection = useRef(null);
   const brideSection = useRef(null);
   const dateSection = useRef(null);
@@ -51,27 +84,27 @@ const VIewTemplateComponents = () => {
   const bottomMenu = [
     {
       label: 'cover',
-      icon: <ArticleIcon color="success" />,
+      icon: <ArticleIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: coverSection,
     },
     {
       label: 'bride',
-      icon: <FavoriteIcon color="success" />,
+      icon: <FavoriteIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: brideSection,
     },
     {
       label: 'date',
-      icon: <EventIcon color="success" />,
+      icon: <EventIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: dateSection,
     },
     {
       label: 'galery',
-      icon: <ImageIcon color="success" />,
+      icon: <ImageIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: galerySection,
     },
     {
       label: 'comment',
-      icon: <CommentIcon color="success" />,
+      icon: <CommentIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: commentsSection,
     },
   ];
@@ -84,8 +117,18 @@ const VIewTemplateComponents = () => {
   };
 
   return (
-    <div className={`mx-auto max-w-7xl min-h-screen relative bg-green-50 text-green-700 overflow-hidden`} style={{ fontFamily: 'poppins' }}>
-      <div className={`fixed bottom-0 p-4 bg-${theme.color}-100 w-full  flex justify-around sm:max-w-lg left-1/2 -translate-x-1/2 sm:rounded-full sm:bottom-4 z-10`}>
+    <div
+      className={`mx-auto max-w-7xl min-h-screen relative overflow-hidden`}
+      style={{
+        fontFamily: 'poppins',
+        backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.light),
+        color: colorTheme.filter((data) => data.name === theme).map((data) => data.text),
+      }}
+    >
+      <div
+        className={`fixed bottom-0 p-4  w-full  flex justify-around sm:max-w-lg left-1/2 -translate-x-1/2 sm:rounded-full sm:bottom-4 z-10`}
+        style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.medium) }}
+      >
         {bottomMenu.map((menu, i) => (
           <IconButton onClick={() => scroolToSection(menu.section)} key={menu.label} aria-label={menu.label}>
             {menu.icon}
@@ -94,7 +137,7 @@ const VIewTemplateComponents = () => {
       </div>
       <div ref={coverSection} id="cover" className={` w-full min-h-screen p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
         <div className="absolute -top-[70px]  scale-125">
-          <img src={`/ornamen-${theme.color}.svg`} />
+          <img src={`/ornamen-${theme}.svg`} />
         </div>
         <p className={`text-lg font-semibold text-center`}>Kami Mengundang Anda ke pernikahan :</p>
         <div className={`w-52 h-52 bg-green-100 border rounded-3xl flex flex-grow overflow-hidden`}>
@@ -111,7 +154,12 @@ const VIewTemplateComponents = () => {
         <div className="flex gap-4">
           {['Hari', 'Jam', 'Menit'].map((data) => (
             <div key={data} className="">
-              <p className={`bg-green-800 w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}>99</p>
+              <p
+                className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
+                style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
+              >
+                99
+              </p>
               <p className="text-center ">{data}</p>
             </div>
           ))}
@@ -120,7 +168,7 @@ const VIewTemplateComponents = () => {
 
       {/* BRIDE START */}
       <div ref={brideSection} id="bride" className={` w-full min-h-screen  relative  justify-center items-center `}>
-        <div className="px-6 py-14 bg-green-800 text-white flex gap-4 flex-col">
+        <div className="px-6 py-14 text-white flex gap-4 flex-col" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}>
           <p className="text-center">
             “Dan Di Antara Tanda-Tanda (Kebesaran)-Nya Ialah Bahwa Dia Menciptakan Pasangan-Pasangan Untukmu Dari (Jenis) Dirimu Sendiri Agar Kamu Merasa Tenteram KepadaNya. Dia
             Menjadikan Di Antaramu Rasa Cinta Dan Kasih Sayang. Sesungguhnya Pada Yang Demikian Itu Benar-Benar Terdapat Tanda-Tanda (Kebesaran Allah) Bagi Kaum Yang Berpikir”
@@ -167,7 +215,7 @@ const VIewTemplateComponents = () => {
       </div>
       {/* BRIDE END */}
       <div>
-        <img className="mx-auto" src="/ornamen-green.svg" />
+        <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
       </div>
       {/* LOCATION START */}
       <div ref={dateSection} id="date" className="px-4 py-14 flex justify-center flex-col min-h-screen gap-8">
@@ -193,7 +241,10 @@ const VIewTemplateComponents = () => {
               </div>
               <p>Lokasi : Rumah Mempelai Wanita, Kapaha Hotel Monalisa Rt. 001 / Rw. 005 </p>
             </div>
-            <button className="bg-green-700 text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800">
+            <button
+              className=" text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800"
+              style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
+            >
               <FaMapMarkedAlt /> <span>View Location</span>
             </button>
           </div>
@@ -217,7 +268,10 @@ const VIewTemplateComponents = () => {
               </div>
               <p>Lokasi : Gedung Ashari Al-Fatah </p>
             </div>
-            <button className="bg-green-700 text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800">
+            <button
+              className=" text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800"
+              style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
+            >
               <FaMapMarkedAlt /> <span>View Location</span>
             </button>
           </div>
@@ -225,7 +279,7 @@ const VIewTemplateComponents = () => {
       </div>
       {/* LOCATION END */}
       <div>
-        <img className="mx-auto" src="/ornamen-green.svg" />
+        <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
       </div>
       {/* GALERY START */}
       <div ref={galerySection} id="galery" className="px-4 py-14 flex  flex-col min-h-screen gap-4 ">
@@ -299,7 +353,7 @@ const VIewTemplateComponents = () => {
       </div>
       {/* GALERY END */}
       <div>
-        <img className="mx-auto" src="/ornamen-green.svg" />
+        <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
       </div>
       {/* COMENT START */}
       <div ref={commentsSection} id="comment" className="px-4 py-14 flex  flex-col min-h-screen gap-4 ">
@@ -320,9 +374,11 @@ const VIewTemplateComponents = () => {
           <p>Sabtu, 29 April 2023</p>
         </div>
         <div className="shadow-lg bg-transparent max-w-2xl mx-auto">
-          <p className="bg-green-700 text-white p-2 rounded-t-lg">Beri Ucapan Spesial</p>
+          <p className=" text-white p-2 rounded-t-lg" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}>
+            Beri Ucapan Spesial
+          </p>
           <form action="">
-            <div className="p-4 bg-green-200 flex flex-col gap-2">
+            <div className="p-4  flex flex-col gap-2 text-slate-700" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.medium) }}>
               <input className="w-full p-2 rounded-md" type="text" placeholder="Nama" />
               <textarea className="w-full p-2 rounded-md h-36" placeholder="Ketik pesan ..."></textarea>
               <select className="w-full p-2 rounded-md">
@@ -331,7 +387,11 @@ const VIewTemplateComponents = () => {
                 <option value="reject">Tidak Hadir</option>
                 <option value="consider">Pertimbangkan</option>
               </select>
-              <button className="flex gap-2 bg-green-700 text-white items-center px-4 py-2 rounded-md justify-center" type="submit">
+              <button
+                className="flex gap-2  text-white items-center px-4 py-2 rounded-md justify-center"
+                type="submit"
+                style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
+              >
                 <IoIosSend /> <span>Kirim</span>
               </button>
             </div>
@@ -367,9 +427,13 @@ const VIewTemplateComponents = () => {
       </div>
       {/* COMENT START */}
 
-      <div id="comment" className="px-4 py-14 flex  flex-col h-80 gap-2 bg-green-800 justify-center items-center text-white relative">
+      <div
+        id="comment"
+        className="px-4 py-14 flex  flex-col h-80 gap-2 justify-center items-center text-white relative pb-20"
+        style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
+      >
         <div className="absolute -top-[70px]  scale-125">
-          <img src="/ornamen-green.svg" />
+          <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
         </div>
         <p className="text-xl">Vendor Name</p>
         <p className="flex gap-2 items-center">
@@ -377,29 +441,29 @@ const VIewTemplateComponents = () => {
         </p>
       </div>
 
-      <div className="bg-green-800 h-[75px]"></div>
+      {/* <div className="bg-green-800 h-[75px]"></div> */}
     </div>
   );
 };
 
 export default VIewTemplateComponents;
 
-const topDecoration = (
-  <svg xmlns="http://www.w3.org/2000/svg" width="175" height="149" viewBox="0 0 175 149" fill="none">
-    <path
-      d="M95.9614 89.2728C50.5811 62.0446 62.0776 49.3382 56.632 27.5557C69.7418 32.3962 100.318 48.6121 117.744 74.7511C135.557 101.471 137.185 118.884 137.848 125.997C139.217 129.077 138.731 130.245 138.316 129.207C138.096 128.656 137.996 127.582 137.848 125.997C135.224 120.094 125.783 107.166 95.9614 89.2728Z"
-      fill={theme.color}
-      fillOpacity="0.3"
-    />
-    <path
-      d="M125.135 43.2923C87.8657 17.2024 78.6887 29.9494 56.632 32.6152C64.5255 41.0994 87.6142 59.345 116.821 64.4535C146.676 69.6755 163.623 65.4653 170.546 63.7443C173.815 63.8245 174.802 63.0883 173.712 63.0965C173.133 63.1009 172.088 63.3608 170.546 63.7443C164.279 63.5906 149.627 60.4373 125.135 43.2923Z"
-      fill={theme.color}
-      fillOpacity="0.5"
-    />
-    <path
-      d="M55.4802 90.5432C54.5053 37.6301 71.3742 40.6405 86.9557 24.4742C89.8024 38.1561 92.265 72.6785 79.3419 101.313C66.1317 130.583 52.2306 141.195 46.551 145.529C44.6657 148.323 43.4181 148.53 44.0776 147.628C44.4281 147.149 45.2854 146.495 46.551 145.529C50.1646 140.174 56.1208 125.315 55.4802 90.5432Z"
-      fill={theme.color}
-      fillOpacity="0.8"
-    />
-  </svg>
-);
+// const topDecoration = (
+//   <svg xmlns="http://www.w3.org/2000/svg" width="175" height="149" viewBox="0 0 175 149" fill="none">
+//     <path
+//       d="M95.9614 89.2728C50.5811 62.0446 62.0776 49.3382 56.632 27.5557C69.7418 32.3962 100.318 48.6121 117.744 74.7511C135.557 101.471 137.185 118.884 137.848 125.997C139.217 129.077 138.731 130.245 138.316 129.207C138.096 128.656 137.996 127.582 137.848 125.997C135.224 120.094 125.783 107.166 95.9614 89.2728Z"
+//       fill={theme.color}
+//       fillOpacity="0.3"
+//     />
+//     <path
+//       d="M125.135 43.2923C87.8657 17.2024 78.6887 29.9494 56.632 32.6152C64.5255 41.0994 87.6142 59.345 116.821 64.4535C146.676 69.6755 163.623 65.4653 170.546 63.7443C173.815 63.8245 174.802 63.0883 173.712 63.0965C173.133 63.1009 172.088 63.3608 170.546 63.7443C164.279 63.5906 149.627 60.4373 125.135 43.2923Z"
+//       fill={theme.color}
+//       fillOpacity="0.5"
+//     />
+//     <path
+//       d="M55.4802 90.5432C54.5053 37.6301 71.3742 40.6405 86.9557 24.4742C89.8024 38.1561 92.265 72.6785 79.3419 101.313C66.1317 130.583 52.2306 141.195 46.551 145.529C44.6657 148.323 43.4181 148.53 44.0776 147.628C44.4281 147.149 45.2854 146.495 46.551 145.529C50.1646 140.174 56.1208 125.315 55.4802 90.5432Z"
+//       fill={theme.color}
+//       fillOpacity="0.8"
+//     />
+//   </svg>
+// );

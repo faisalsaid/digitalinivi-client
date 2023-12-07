@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "code": "NKH-001",
+        "theme": {
+            "color": "hijau"
+        },
+        "invitationDetail": {
+            "type": "marriage",
+            "theme": "nkh-001",
+            "groomDetail": {
+                "fullName": "Prof Ini Budi S.Pd M.M",
+                "nickName": "Budi",
+                "father": "Bpk Ini Budi",
+                "mother": "Ibu Ini Budi"
+            },
+            "brideDetail": {
+                "name": "Prof Ini Wati S.Pd M.M",
+                "nickName": "Wati",
+                "father": "Bpk Ini Wati",
+                "mother": "Ibu Ini Wati"
+            },
+            "marriageDetail": {
+                "date": "Jumat 15 Desember 2020",
+                "time": "10:00 WIT - 12:00 WIT",
+                "location": "Rumah mempelai wanita. Jln Baru Buat, No 43 Ambon",
+                "map": ""
+            },
+            "receptionDetail": {
+                "date": "15 Desember 2020",
+                "time": "20:00 WIT - Selesai",
+                "location": "Gedung Ashari Al-Fatah Ambon",
+                "map": ""
+            },
+            "comments": [
+                {
+                    "name": "Bapak Puttin",
+                    "time": "3 hari lalu",
+                    "text": "lorem ipsum dolor amet",
+                    "confirm": "confirm"
+                },
+                {
+                    "name": "Bapak Jho Bidden",
+                    "time": "3 hari lalu",
+                    "text": "lorem ipsum dolor amet",
+                    "confirm": "reject"
+                }
+            ],
+            "galery": [
+                {
+                    "link": "",
+                    "text": ""
+                }
+            ]
+        }
+    }
+]
