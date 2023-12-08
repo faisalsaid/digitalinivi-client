@@ -30,7 +30,7 @@ const SigninComponent = () => {
       toast.error(message);
     }
 
-    if (isSuccess) {
+    if (isSuccess || curentUser) {
       navigate('/dashboard');
     }
 

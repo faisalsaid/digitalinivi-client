@@ -12,7 +12,7 @@ const DashboardComponent = () => {
           Dashboard
         </Typography>
         <Button variant="contained" startIcon={<AddBusinessIcon />}>
-          Create Store
+          Buat Toko
         </Button>
       </div>
     </Stack>

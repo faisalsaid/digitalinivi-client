@@ -13,7 +13,7 @@ const registerUser = async (payload) => {
 
 // Login user
 const login = async (payload) => {
-  console.log('service -> login', payload);
+  // console.log('service -> login', payload);
   const response = await axios.post(`${apiURI}/auth/signin`, payload);
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));

@@ -9,7 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 // Import Icons END
 
 import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -24,7 +24,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../feature/profile/config/userSlice';
 
 const drawerWidth = 240;
 
@@ -75,6 +76,8 @@ const Layout = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const { curentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -86,6 +89,9 @@ const Layout = () => {
 
   const handleLogout = () => {
     handleDrawerClose();
+    navigate('/');
+    localStorage.removeItem('user');
+    dispatch(logout());
   };
 
   return (

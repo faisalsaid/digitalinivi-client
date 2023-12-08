@@ -43,7 +43,7 @@ const userSlice = createSlice({
       state.isSuccess = false;
       state.message = '';
     },
-    reset: (state) => {
+    logout: (state) => {
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
@@ -89,5 +89,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { reset } = userSlice.actions;
+export const { reset, logout } = userSlice.actions;
 export default userSlice.reducer;
