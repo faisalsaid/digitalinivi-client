@@ -40,31 +40,38 @@ const bottomMenu = [
 
 const colorTheme = [
   {
-    name: 'green',
-    text: 'darkgreen',
-    light: '#EEFFD2',
-    dark: '#2F4D04',
-    medium: '#D3DEBF',
+    name: 'daun',
+    text: '#0B4D24',
+    light: '#EDFDF3',
+    medium: '#C1EFD2',
+    dark: '#24944D',
   },
   {
-    name: 'rose',
-    text: '#DA3434',
-    light: '#FFDEDE',
-    dark: '#DA3434',
-    medium: '#FFB2B2',
+    name: 'laut',
+    text: '#00575C',
+    light: '#DDFDFF',
+    medium: '#6CF6FF',
+    dark: '#00949D',
   },
   {
-    name: 'orange',
-    text: '#864800',
-    light: '#FFE8C4',
-    medium: '#FFBB6C',
-    dark: '#CF7000',
+    name: 'kopi',
+    text: '#57350D',
+    light: '#FFEFDD',
+    medium: '#F3D0A7',
+    dark: '#B57B38',
+  },
+  {
+    name: 'mawar',
+    text: '#67083B',
+    light: '#FFECF6',
+    medium: '#FFB6DD',
+    dark: '#B41C6E',
   },
 ];
 
 const MasterTemplate = () => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
-  const [theme, setTheme] = useState('green');
+  const [theme, setTheme] = useState('mawar');
   const [themeCode, setThemeCode] = useState('nkh-001');
   const [category, setCategory] = useState('');
   const [decoration, setDecoration] = useState('');
@@ -142,19 +149,23 @@ const MasterTemplate = () => {
         <div ref={coverSection}>
           <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
-        <Quote theme={theme} colorTheme={colorTheme} />
+        {useSection.quote && <Quote theme={theme} colorTheme={colorTheme} />}
         <div ref={brideSection}>
           <Bride theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
         <div ref={dateSection}>
           <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
-        <div ref={galerySection}>
-          <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
-        </div>
-        <div ref={commentsSection}>
-          <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} />
-        </div>
+        {useSection?.galery && (
+          <div ref={galerySection}>
+            <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          </div>
+        )}
+        {useSection.comment && (
+          <div ref={commentsSection}>
+            <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          </div>
+        )}
       </div>
     </>
   );
