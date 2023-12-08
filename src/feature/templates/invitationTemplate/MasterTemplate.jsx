@@ -69,17 +69,27 @@ const colorTheme = [
   },
 ];
 
-const MasterTemplate = () => {
+const MasterTemplate = ({ themeDetail }) => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
   const [theme, setTheme] = useState('daun');
-  const [themeCode, setThemeCode] = useState('nkh-002');
   const [category, setCategory] = useState('');
-  const [decoration, setDecoration] = useState('');
+  const [decoration, setDecoration] = useState('/nkh-001-daun.svg');
 
   useEffect(() => {
-    const decorationColor = colorTheme.filter((data) => data.name === theme).map((data) => data.name);
-    setDecoration(`/${themeCode}-${decorationColor}.svg`);
-  }, []);
+    console.log(themeDetail);
+    if (themeDetail && themeDetail?.invitationCode && themeDetail?.themeColor) {
+      setDecoration(`/${themeDetail.invitationCode}-${themeDetail.themeColor}.svg`);
+    }
+    if (themeDetail && themeDetail.themeColor) {
+      setTheme(themeDetail.themeColor);
+    }
+  }, [themeDetail]);
+
+  // useEffect(() => {
+  //   console.log(themeDetail);
+  //   const decorationColor = colorTheme.filter((data) => data.name === theme).map((data) => data.name);
+  //   setDecoration(`/${themeCode}-${decorationColor}.svg`);
+  // }, [themeDetail]);
 
   const coverSection = useRef(null);
   const brideSection = useRef(null);

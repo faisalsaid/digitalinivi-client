@@ -13,6 +13,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { Stack, IconButton } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
+import MasterTemplate from './invitationTemplate/MasterTemplate';
 
 const bottomMenu = [
   {
@@ -50,429 +51,84 @@ const bottomMenu = [
 
 const colorTheme = [
   {
-    name: 'green',
-    text: 'darkgreen',
-    light: '#EEFFD2',
-    dark: '#2F4D04',
-    medium: '#D3DEBF',
+    name: 'daun',
+    text: '#0B4D24',
+    light: '#EDFDF3',
+    medium: '#C1EFD2',
+    dark: '#24944D',
   },
   {
-    name: 'rose',
-    text: '#DA3434',
-    light: '#FFDEDE',
-    dark: '#DA3434',
-    medium: '#FFB2B2',
+    name: 'laut',
+    text: '#00575C',
+    light: '#DDFDFF',
+    medium: '#6CF6FF',
+    dark: '#00949D',
   },
   {
-    name: 'orange',
-    text: '#864800',
-    light: '#FFE8C4',
-    medium: '#FFBB6C',
-    dark: '#CF7000',
+    name: 'kopi',
+    text: '#57350D',
+    light: '#FFEFDD',
+    medium: '#F3D0A7',
+    dark: '#B57B38',
+  },
+  {
+    name: 'mawar',
+    text: '#67083B',
+    light: '#FFECF6',
+    medium: '#FFB6DD',
+    dark: '#B41C6E',
   },
 ];
+
 const VIewTemplateComponents = () => {
-  const [theme, setTheme] = useState('orange');
+  const [colorSchema, setColorSchema] = useState('daun');
+  const [invitationCode, setInvitationCode] = useState('nkh-002');
   const [category, setCategory] = useState('');
 
-  const coverSection = useRef(null);
-  const brideSection = useRef(null);
-  const dateSection = useRef(null);
-  const galerySection = useRef(null);
-  const commentsSection = useRef(null);
-
-  const bottomMenu = [
-    {
-      label: 'cover',
-      icon: <ArticleIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
-      section: coverSection,
-    },
-    {
-      label: 'bride',
-      icon: <FavoriteIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
-      section: brideSection,
-    },
-    {
-      label: 'date',
-      icon: <EventIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
-      section: dateSection,
-    },
-    {
-      label: 'galery',
-      icon: <ImageIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
-      section: galerySection,
-    },
-    {
-      label: 'comment',
-      icon: <CommentIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
-      section: commentsSection,
-    },
-  ];
-
-  const scroolToSection = (section) => {
-    window.scrollTo({
-      top: section.current.offsetTop,
-      behavior: 'smooth',
-    });
-  };
-
-  const handleColorTheme = (value) => {
-    setTheme(value);
+  const handleColorSchema = (value) => {
+    setColorSchema(value);
   };
 
   return (
     <>
       <div className="p-6 flex justify-between flex-col gap-2">
-        <p>Kode Thema : NKH-001</p>
+        <p>
+          Kode Thema : <span className="uppercase">{invitationCode}</span>
+        </p>
         <div className="flex gap-1 flex-col">
           <p>Warna Tema :</p>
           <div className="flex gap-6 items-center">
-            <div className="flex gap-2 items-center  bg-[#EEFFD2] px-2 border-[#2F4D04] rounded-md border">
-              <input className="cursor-pointer" type="radio" name="theme_color" id="green" value="green" onChange={() => handleColorTheme('green')} />
-              <label className="cursor-pointer " htmlFor="green">
+            {colorTheme &&
+              colorTheme.map((data, i) => (
+                <div key={data.name} className="flex gap-2 items-center   px-2  rounded-md border" style={{ backgroundColor: data.light, borderColor: data.dark }}>
+                  <input className="cursor-pointer" type="radio" name="theme_color" id={data.name} value={data.name} onChange={() => handleColorSchema(data.name)} />
+                  <label className="cursor-pointer " htmlFor={data.name}>
+                    <span className="capitalize">{data.name}</span>
+                  </label>
+                </div>
+              ))}
+            {/* <div className="flex gap-2 items-center  bg-[#EEFFD2] px-2 border-[#2F4D04] rounded-md border">
+              <input className="cursor-pointer" type="radio" name="theme_color" id="daun" value="daun" onChange={() => handleColorSchema('daun')} />
+              <label className="cursor-pointer " htmlFor="daun">
                 Daun
               </label>
             </div>
             <div className="flex gap-2 items-center bg-[#FFDEDE] px-2 border-[#DA3434] rounded-md border">
-              <input className="cursor-pointer" type="radio" name="theme_color" id="rose" value="rose" onChange={() => handleColorTheme('rose')} />
-              <label className="cursor-pointer" htmlFor="rose">
+              <input className="cursor-pointer" type="radio" name="theme_color" id="mawar" value="mawar" onChange={() => handleColorSchema('mawar')} />
+              <label className="cursor-pointer" htmlFor="mawar">
                 Mawar
               </label>
             </div>
             <div className="flex gap-2 items-center bg-[#FFE8C4] px-2 border-[#CF7000] rounded-md border">
-              <input className="cursor-pointer" type="radio" name="theme_color" id="orange" value="orange" onChange={() => handleColorTheme('orange')} />
-              <label className="cursor-pointer" htmlFor="orange">
-                Jeruk
+              <input className="cursor-pointer" type="radio" name="theme_color" id="kopi" value="kopi" onChange={() => handleColorSchema('kopi')} />
+              <label className="cursor-pointer" htmlFor="kopi">
+                Kopi
               </label>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-      <div
-        className={`mx-auto max-w-7xl min-h-screen relative overflow-hidden`}
-        style={{
-          fontFamily: 'poppins',
-          backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.light),
-          color: colorTheme.filter((data) => data.name === theme).map((data) => data.text),
-        }}
-      >
-        <div
-          className={`fixed bottom-0 p-4  w-full  flex justify-around sm:max-w-lg left-1/2 -translate-x-1/2 sm:rounded-full sm:bottom-4 z-10`}
-          style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.medium) }}
-        >
-          {bottomMenu.map((menu, i) => (
-            <IconButton onClick={() => scroolToSection(menu.section)} key={menu.label} aria-label={menu.label}>
-              {menu.icon}
-            </IconButton>
-          ))}
-        </div>
-        <div ref={coverSection} id="cover" className={` w-full min-h-screen p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
-          <div className="absolute -top-[70px]  scale-125">
-            <img src={`/ornamen-${theme}.svg`} />
-          </div>
-          <p className={`text-lg font-semibold text-center`}>Kami Mengundang Anda ke pernikahan :</p>
-          <div className={`w-52 h-52 bg-green-100 border rounded-3xl flex flex-grow overflow-hidden`}>
-            <img
-              className="max-h-full min-w-full object-cover align-bottom"
-              src="https://images.unsplash.com/photo-1517456215183-9a2c3a748d0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
-          </div>
-          <p className={`  text-center text-6xl `} style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-            Budi & Wati
-          </p>
-          <p className="text-lg font-semibold  text-center">Sabtu, 29 April 2023</p>
-          <div className="flex gap-4">
-            {['Hari', 'Jam', 'Menit'].map((data) => (
-              <div key={data} className="">
-                <p
-                  className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
-                  style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
-                >
-                  99
-                </p>
-                <p className="text-center ">{data}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* BRIDE START */}
-        <div ref={brideSection} id="bride" className={` w-full min-h-screen  relative  justify-center items-center `}>
-          <div className="px-6 py-14 text-white flex gap-4 flex-col" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}>
-            <p className="text-center">
-              “Dan Di Antara Tanda-Tanda (Kebesaran)-Nya Ialah Bahwa Dia Menciptakan Pasangan-Pasangan Untukmu Dari (Jenis) Dirimu Sendiri Agar Kamu Merasa Tenteram KepadaNya. Dia
-              Menjadikan Di Antaramu Rasa Cinta Dan Kasih Sayang. Sesungguhnya Pada Yang Demikian Itu Benar-Benar Terdapat Tanda-Tanda (Kebesaran Allah) Bagi Kaum Yang Berpikir”
-            </p>
-            <p className="text-center text-xl">Q.S. Ar-Rum : 21</p>
-          </div>
-          <div className="px-4 py-14 flex flex-col gap-10 justify-center items-center ">
-            <p className="text-center">Dengan Memohon Rahmat Dan Ridho Dari Allah SWT. Kami Bermaksud Menyelenggarakan Syukuran Pernikahan Putra Putri Kami :</p>
-            <div className="flex flex-col gap-10 sm:flex-row">
-              <div className="flex flex-col items-center gap-4 flex-1">
-                <div className={`w-52 max-w-52 h-52 max-h-52 bg-green-100 border rounded-3xl flex flex-grow overflow-hidden`}>
-                  <img
-                    className="max-h-full min-w-full object-cover align-bottom"
-                    src="https://images.unsplash.com/photo-1582897291228-f7676bfcd52c?q=80&w=1904&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </div>
-                <p className="text-center text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-                  Ini Budi Pratama S.Pd M.M
-                </p>
-                <div className="flex flex-col gap-1 justify-center items-center">
-                  <p>Putra Dari:</p>
-                  <p className="font-semibold">Bpk Ini Budi & Ibu Ini Budi</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-4 flex-1">
-                <div className={`w-52 max-w-52 h-52 max-h-52 bg-green-100 border flex rounded-3xl flex-grow overflow-hidden `}>
-                  <img
-                    className="max-h-full min-w-full object-cover align-bottom"
-                    src="https://images.unsplash.com/photo-1517455850349-65b65b06f255?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
-                </div>
-                <p className="text-center text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-                  Dr. Ini Wati S.Sos
-                </p>
-                <div className="flex flex-col gap-1 justify-center items-center">
-                  <p>Putri Dari:</p>
-                  <p className="font-semibold">Bpk Ini Wati & Ibu Ini Wati</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* BRIDE END */}
-        <div>
-          <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
-        </div>
-        {/* LOCATION START */}
-        <div ref={dateSection} id="date" className="px-4 py-14 flex justify-center flex-col min-h-screen gap-8">
-          <p className="text-center">Insya Allah Acara Akan Dilaksanakan Pada :</p>
-          <div className="flex flex-col gap-8 sm:flex-row">
-            <div className="flex flex-col gap-2 flex-1">
-              <p className="font-medium">Akad Nikah :</p>
-              <div className="flex gap-2 items-center">
-                <div>
-                  <MdOutlineDateRange />
-                </div>
-                <p>Tanggal : Jumat, 28 April 2023</p>
-              </div>
-              <div className="flex gap-2 items-center">
-                <div>
-                  <MdOutlineAccessTime />
-                </div>
-                <p>Pukul : 09.00 WIT - Selesai</p>
-              </div>
-              <div className="flex gap-2 items-baseline">
-                <div>
-                  <MdOutlinePinDrop />
-                </div>
-                <p>Lokasi : Rumah Mempelai Wanita, Kapaha Hotel Monalisa Rt. 001 / Rw. 005 </p>
-              </div>
-              <button
-                className=" text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800"
-                style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
-              >
-                <FaMapMarkedAlt /> <span>View Location</span>
-              </button>
-            </div>
-            <div className="flex flex-col gap-2 flex-1">
-              <p className="font-medium">Resepsi :</p>
-              <div className="flex gap-2 items-center">
-                <div>
-                  <MdOutlineDateRange />
-                </div>
-                <p>Tanggal : Jumat, 28 April 2023</p>
-              </div>
-              <div className="flex gap-2 items-center">
-                <div>
-                  <MdOutlineAccessTime />
-                </div>
-                <p>Pukul : 09.00 WIT - Selesai</p>
-              </div>
-              <div className="flex gap-2 items-baseline">
-                <div>
-                  <MdOutlinePinDrop />
-                </div>
-                <p>Lokasi : Gedung Ashari Al-Fatah </p>
-              </div>
-              <button
-                className=" text-white max-w-fit self-center px-4 py-2 rounded-lg flex gap-2 items-center hover:bg-green-600 active:bg-green-800"
-                style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
-              >
-                <FaMapMarkedAlt /> <span>View Location</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        {/* LOCATION END */}
-        <div>
-          <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
-        </div>
-        {/* GALERY START */}
-        <div ref={galerySection} id="galery" className="px-4 py-14 flex  flex-col min-h-screen gap-4 ">
-          <p className="text-xl">Galeri Photo :</p>
-
-          <div className="columns-2 sm:columns-2 md:columns-3 gap-3 ">
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://plus.unsplash.com/premium_photo-1683290222216-a9fab340cbf8?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://plus.unsplash.com/premium_photo-1670430623154-24626c42fb33?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1460364157752-926555421a7e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1487621199565-dc425a60897b?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-            <div className="w-full mb-3">
-              <img
-                className="max-w-full rounded-md"
-                src="https://images.unsplash.com/photo-1533418466759-ac54bd32122e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="wedding-1"
-              ></img>
-            </div>
-          </div>
-        </div>
-        {/* GALERY END */}
-        <div>
-          <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
-        </div>
-        {/* COMENT START */}
-        <div ref={commentsSection} id="comment" className="px-4 py-14 flex  flex-col min-h-screen gap-4 ">
-          <p className="text-center">
-            Tiada Yang Dapat Kami Ungkapkan Selain Rasa Terimakasih Dari Hati Yang Tulus Apabila Bapak/ Ibu/ Saudara/i Berkenan Hadir Untuk Memberikan Do’a Restu Kepada Kami
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            <div className={`w-52 h-52 bg-green-100 border rounded-3xl flex flex-grow overflow-hidden`}>
-              <img
-                className="max-h-full min-w-full object-cover align-bottom"
-                src="https://images.unsplash.com/photo-1517456215183-9a2c3a748d0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt=""
-              />
-            </div>
-            <p className="text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-              Budi & Wati
-            </p>
-            <p>Sabtu, 29 April 2023</p>
-          </div>
-          <div className="shadow-lg bg-transparent max-w-2xl mx-auto">
-            <p className=" text-white p-2 rounded-t-lg" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}>
-              Beri Ucapan Spesial
-            </p>
-            <form action="">
-              <div className="p-4  flex flex-col gap-2 text-slate-700" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.medium) }}>
-                <input className="w-full p-2 rounded-md" type="text" placeholder="Nama" />
-                <textarea className="w-full p-2 rounded-md h-36" placeholder="Ketik pesan ..."></textarea>
-                <select className="w-full p-2 rounded-md">
-                  <option value="">Konfirmasi Kehadiran</option>
-                  <option value="confirm">Hadir</option>
-                  <option value="reject">Tidak Hadir</option>
-                  <option value="consider">Pertimbangkan</option>
-                </select>
-                <button
-                  className="flex gap-2  text-white items-center px-4 py-2 rounded-md justify-center"
-                  type="submit"
-                  style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
-                >
-                  <IoIosSend /> <span>Kirim</span>
-                </button>
-              </div>
-            </form>
-            <div className="bg-slate-50 p-4 rounded-b-lg overflow-hidden flex flex-col gap-3 ">
-              <div className="flex flex-col gap-1 text-slate-700 border-b pb-2">
-                <div className="flex gap-2">
-                  <p className="font-medium">Emmanuel Macron</p>
-                  <p className="flex gap-1 items-center bg-green-200 px-2 rounded-md text-sm">
-                    <GiConfirmed />
-                    <span>hadir</span>
-                  </p>
-                </div>
-                <p className="text-xs text-slate-400">Dua hari yang lalu</p>
-                <p className="text-sm">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere voluptas doloremque in incidunt possimus illo ab quo sequi id natus expedita quas, hic veniam ad
-                  harum provident delectus quia soluta!
-                </p>
-              </div>
-              <div className="flex flex-col gap-1 text-slate-700">
-                <div className="flex gap-2">
-                  <p>Mister Puttin</p>
-                  <p className="flex gap-1 items-center bg-red-300 px-2 rounded-md text-sm">
-                    <GiConfirmed />
-                    <span>Tidak hadir</span>
-                  </p>
-                </div>
-                <p className="text-xs text-slate-400">Dua hari yang lalu</p>
-                <p className="text-sm">Lorem ipsum dolor sit amet consectetur, adipisicing elit. ...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* COMENT END */}
-
-        <div
-          className="px-4 py-14 flex  flex-col h-80 gap-2 justify-center items-center text-white relative pb-20"
-          style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
-        >
-          <div className="absolute -top-[70px]  scale-125">
-            <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
-          </div>
-          <p className="text-xl">Vendor Name</p>
-          <p className="flex gap-2 items-center">
-            <FaWhatsapp /> <span>08123456789</span>
-          </p>
-        </div>
-
-        {/* <div className="bg-green-800 h-[75px]"></div> */}
-      </div>
+      <MasterTemplate themeDetail={{ invitationCode: invitationCode, themeColor: colorSchema }} />
     </>
   );
 };

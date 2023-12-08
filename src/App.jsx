@@ -34,8 +34,8 @@ function App() {
             </Route>
           </Route>
           <Route path="template" element={<TemplatesComponent />} />
-          {/* <Route path="template/:id" element={<VIewTemplateComponents />} /> */}
-          <Route path="template/:id" element={<MasterTemplate />} />
+          <Route path="template/:id" element={<VIewTemplateComponents />} />
+          {/* <Route path="template/:id" element={<MasterTemplate />} /> */}
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
