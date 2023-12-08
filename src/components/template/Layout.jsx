@@ -5,6 +5,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 // Import Icons END
 
 import { useState } from 'react';
@@ -83,6 +84,10 @@ const Layout = () => {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    handleDrawerClose();
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -127,14 +132,25 @@ const Layout = () => {
         </List>
         <Divider />
         <List>
-          {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))} */}
+          {settingMenu.map((menu, index) => (
+            <Link key={menu.value} to={menu.value}>
+              <ListItem disablePadding>
+                <ListItemButton onClick={handleDrawerClose}>
+                  <ListItemIcon>{menu.icon}</ListItemIcon>
+                  <ListItemText primary={menu.label} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          ))}
+
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Keluar'} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
       <Main open={open}>
@@ -151,3 +167,4 @@ const listMenu = [
   { label: 'Dashboard', value: 'dashboard', icon: <DashboardIcon /> },
   { label: 'Profile', value: 'profile', icon: <PersonIcon /> },
 ];
+const settingMenu = [{ label: 'Pengaturan', value: 'setting', icon: <DashboardIcon /> }];

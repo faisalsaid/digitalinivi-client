@@ -43,6 +43,13 @@ const userSlice = createSlice({
       state.isSuccess = false;
       state.message = '';
     },
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = '';
+      state.curentUser = null;
+    },
   },
   extraReducers: (builder) => {
     builder
