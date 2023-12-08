@@ -4,7 +4,7 @@ const Bride = ({ theme, colorTheme, decoration }) => {
   return (
     <>
       <div id="bride" className={` flex w-full min-h-screen flex-col justify-center items-center `}>
-        <div className=" top-0  scale-125">
+        <div className=" top-0  scale-x-105">
           <img src={decoration} />
         </div>
         <div className="p-4 flex flex-col gap-10 justify-center items-center ">
@@ -44,7 +44,7 @@ const Bride = ({ theme, colorTheme, decoration }) => {
             </div>
           </div>
         </div>
-        <div className="rotate-180 scale-125">
+        <div className="rotate-180  scale-x-105">
           <img src={decoration} />
         </div>
       </div>

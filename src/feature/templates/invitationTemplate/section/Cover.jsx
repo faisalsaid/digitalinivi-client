@@ -3,7 +3,7 @@ import React from 'react';
 const Cover = ({ theme, colorTheme, decoration }) => {
   return (
     <div id="cover" className={` w-full min-h-screen p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
-      <div className="absolute top-0  scale-125">
+      <div className="absolute top-0   scale-x-105">
         <img src={decoration} />
       </div>
       <p className={`text-lg font-semibold text-center`}>Kami Mengundang Anda ke pernikahan :</p>
@@ -31,7 +31,7 @@ const Cover = ({ theme, colorTheme, decoration }) => {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-0 rotate-180 scale-125">
+      <div className="absolute bottom-0 rotate-180  scale-x-105">
         <img src={decoration} />
       </div>
     </div>

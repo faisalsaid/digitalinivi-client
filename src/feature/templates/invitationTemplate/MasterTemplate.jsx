@@ -14,6 +14,7 @@ import Bride from './section/Bride';
 import { Stack, IconButton } from '@mui/material';
 import Quote from './section/Quote';
 import DateLocation from './section/DateLocation';
+import Galery from './section/Galery';
 
 const bottomMenu = [
   {
@@ -148,7 +149,7 @@ const MasterTemplate = () => {
           <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
         <div ref={galerySection}>
-          <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
         <div ref={commentsSection}>
           <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} />
