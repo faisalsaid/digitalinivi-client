@@ -2,7 +2,7 @@ import React from 'react';
 
 const Cover = ({ theme, colorTheme, decoration }) => {
   return (
-    <div id="cover" className={` w-full min-h-screen p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
+    <div id="cover" className={` w-full min-h-[calc[100vh-70px]] p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
       <div className="absolute top-0   scale-x-105">
         <img src={decoration} />
       </div>

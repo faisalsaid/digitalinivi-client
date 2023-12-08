@@ -71,8 +71,8 @@ const colorTheme = [
 
 const MasterTemplate = () => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
-  const [theme, setTheme] = useState('mawar');
-  const [themeCode, setThemeCode] = useState('nkh-001');
+  const [theme, setTheme] = useState('daun');
+  const [themeCode, setThemeCode] = useState('nkh-002');
   const [category, setCategory] = useState('');
   const [decoration, setDecoration] = useState('');
 
@@ -166,6 +166,18 @@ const MasterTemplate = () => {
             <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} />
           </div>
         )}
+        <div
+          className="px-4 pt-14  flex  flex-col h-80 gap-2 justify-center items-center text-white relative pb-28"
+          style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
+        >
+          {/* <div className="absolute -top-[70px]  scale-125">
+            <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
+          </div> */}
+          <p className="text-xl">Vendor Name</p>
+          <p className="flex gap-2 items-center">
+            <FaWhatsapp /> <span>08123456789</span>
+          </p>
+        </div>
       </div>
     </>
   );
