@@ -3,8 +3,6 @@ import EventIcon from '@mui/icons-material/Event';
 import ImageIcon from '@mui/icons-material/Image';
 import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { IoIosSend } from 'react-icons/io';
-import { GiConfirmed } from 'react-icons/gi';
 import { FaWhatsapp } from 'react-icons/fa';
 // import icons end
 
@@ -15,6 +13,7 @@ import { Stack, IconButton } from '@mui/material';
 import Quote from './section/Quote';
 import DateLocation from './section/DateLocation';
 import Galery from './section/Galery';
+import Comment from './section/Comment';
 
 const bottomMenu = [
   {
@@ -66,11 +65,13 @@ const colorTheme = [
 const MasterTemplate = () => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
   const [theme, setTheme] = useState('green');
+  const [themeCode, setThemeCode] = useState('nkh-001');
   const [category, setCategory] = useState('');
   const [decoration, setDecoration] = useState('');
 
   useEffect(() => {
-    setDecoration(`/nkh-001-green.svg`);
+    const decorationColor = colorTheme.filter((data) => data.name === theme).map((data) => data.name);
+    setDecoration(`/${themeCode}-${decorationColor}.svg`);
   }, []);
 
   const coverSection = useRef(null);
@@ -152,7 +153,7 @@ const MasterTemplate = () => {
           <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
         <div ref={commentsSection}>
-          <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} />
         </div>
       </div>
     </>

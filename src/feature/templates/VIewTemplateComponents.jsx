@@ -456,10 +456,9 @@ const VIewTemplateComponents = () => {
             </div>
           </div>
         </div>
-        {/* COMENT START */}
+        {/* COMENT END */}
 
         <div
-          id="comment"
           className="px-4 py-14 flex  flex-col h-80 gap-2 justify-center items-center text-white relative pb-20"
           style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}
         >
