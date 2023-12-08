@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Cover = ({ theme, colorTheme }) => {
+const Cover = ({ theme, colorTheme, decoration }) => {
   return (
     <div id="cover" className={` w-full min-h-screen p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
-      <div className="absolute -top-[70px]  scale-125">
-        <img src={`/ornamen-${theme}.svg`} />
+      <div className="absolute top-0  scale-125">
+        <img src={decoration} />
       </div>
       <p className={`text-lg font-semibold text-center`}>Kami Mengundang Anda ke pernikahan :</p>
       <div className={`w-52 h-52 bg-green-100 border rounded-3xl flex flex-grow overflow-hidden`}>
@@ -30,6 +30,9 @@ const Cover = ({ theme, colorTheme }) => {
             <p className="text-center ">{data}</p>
           </div>
         ))}
+      </div>
+      <div className="absolute bottom-0 rotate-180 scale-125">
+        <img src={decoration} />
       </div>
     </div>
   );
