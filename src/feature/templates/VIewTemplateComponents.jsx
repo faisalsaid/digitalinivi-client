@@ -14,6 +14,7 @@ import { Stack, IconButton } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import MasterTemplate from './invitationTemplate/MasterTemplate';
+import { colorTheme } from '../../hook/static/themeDetail';
 
 const bottomMenu = [
   {
@@ -35,48 +36,6 @@ const bottomMenu = [
   {
     label: 'comment',
     icon: <CommentIcon color="success" />,
-  },
-];
-
-// const colorTheme = {
-//   green: {
-//     bgColor: '#EEFFD2',
-//     color: 'darkgreen',
-//   },
-//   rose: {
-//     bgColor: '#EEFFD2',
-//     color: 'darkgreen',
-//   },
-// };
-
-const colorTheme = [
-  {
-    name: 'daun',
-    text: '#0B4D24',
-    light: '#EDFDF3',
-    medium: '#C1EFD2',
-    dark: '#24944D',
-  },
-  {
-    name: 'laut',
-    text: '#00575C',
-    light: '#DDFDFF',
-    medium: '#6CF6FF',
-    dark: '#00949D',
-  },
-  {
-    name: 'kopi',
-    text: '#57350D',
-    light: '#FFEFDD',
-    medium: '#F3D0A7',
-    dark: '#B57B38',
-  },
-  {
-    name: 'mawar',
-    text: '#67083B',
-    light: '#FFECF6',
-    medium: '#FFB6DD',
-    dark: '#B41C6E',
   },
 ];
 

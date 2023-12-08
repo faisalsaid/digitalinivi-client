@@ -14,6 +14,7 @@ import Quote from './section/Quote';
 import DateLocation from './section/DateLocation';
 import Galery from './section/Galery';
 import Comment from './section/Comment';
+import { colorTheme } from '../../../hook/static/themeDetail';
 
 const bottomMenu = [
   {
@@ -38,37 +39,6 @@ const bottomMenu = [
   },
 ];
 
-const colorTheme = [
-  {
-    name: 'daun',
-    text: '#0B4D24',
-    light: '#EDFDF3',
-    medium: '#C1EFD2',
-    dark: '#24944D',
-  },
-  {
-    name: 'laut',
-    text: '#00575C',
-    light: '#DDFDFF',
-    medium: '#6CF6FF',
-    dark: '#00949D',
-  },
-  {
-    name: 'kopi',
-    text: '#57350D',
-    light: '#FFEFDD',
-    medium: '#F3D0A7',
-    dark: '#B57B38',
-  },
-  {
-    name: 'mawar',
-    text: '#67083B',
-    light: '#FFECF6',
-    medium: '#FFB6DD',
-    dark: '#B41C6E',
-  },
-];
-
 const MasterTemplate = ({ themeDetail }) => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
   const [theme, setTheme] = useState('daun');
@@ -76,7 +46,7 @@ const MasterTemplate = ({ themeDetail }) => {
   const [decoration, setDecoration] = useState('/nkh-001-daun.svg');
 
   useEffect(() => {
-    console.log(themeDetail);
+    // console.log(themeDetail);
     if (themeDetail && themeDetail?.invitationCode && themeDetail?.themeColor) {
       setDecoration(`/${themeDetail.invitationCode}-${themeDetail.themeColor}.svg`);
     }
@@ -84,12 +54,6 @@ const MasterTemplate = ({ themeDetail }) => {
       setTheme(themeDetail.themeColor);
     }
   }, [themeDetail]);
-
-  // useEffect(() => {
-  //   console.log(themeDetail);
-  //   const decorationColor = colorTheme.filter((data) => data.name === theme).map((data) => data.name);
-  //   setDecoration(`/${themeCode}-${decorationColor}.svg`);
-  // }, [themeDetail]);
 
   const coverSection = useRef(null);
   const brideSection = useRef(null);
@@ -126,7 +90,7 @@ const MasterTemplate = ({ themeDetail }) => {
   ];
 
   const scroolToSection = (section) => {
-    console.log('scrool TO Section');
+    // console.log('scrool TO Section');
     window.scrollTo({
       top: section.current.offsetTop,
       behavior: 'smooth',
