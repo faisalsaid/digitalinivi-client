@@ -54,7 +54,7 @@ const SigninComponent = () => {
         <div className="flex-1 hidden sm:flex bg-sky-600"></div>
         <div className="sm:flex-1 w-full  flex flex-col gap-2 justify-center items-center bg-white  p-4 sm:max-w-[50%]">
           <div className="border p-4 rounded-md bg-white w-full">
-            <h2 className="uppercase text-xl text-center font-semibold mb-4 text-sky-700">Sign In</h2>
+            <h2 className="uppercase text-xl text-center font-semibold mb-4 text-sky-700">Masuk</h2>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
                 return (
@@ -84,7 +84,7 @@ const SigninComponent = () => {
                               disabled={isLoading}
                               {...field}
                               variant="outlined"
-                              label="Password"
+                              label="Kata Sandi"
                               type={'password'}
                               error={meta.touched && meta.error ? true : false}
                               helperText={meta.touched && meta.error && meta.error}
@@ -94,7 +94,7 @@ const SigninComponent = () => {
                       </Field>
 
                       <Button type="submit" variant="contained" startIcon={<SendIcon />} disabled={isLoading}>
-                        {isLoading ? '...loading' : 'register'}
+                        {isLoading ? '...loading' : 'Masuk'}
                       </Button>
                     </Stack>
                   </Form>
@@ -112,9 +112,9 @@ const SigninComponent = () => {
             </form> */}
           </div>
           <div className="w-full flex gap-2">
-            <p className="text-sm text-slate-600">Dont have an acount?</p>{' '}
+            <p className="text-sm text-slate-600">Belum punya akun?</p>{' '}
             <Link className="text-sm  underline text-sky-600" to={'/signup'}>
-              Signup
+              Daftar Sekarang
             </Link>
           </div>
         </div>
