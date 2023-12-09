@@ -112,7 +112,7 @@ const SigninComponent = () => {
             </form> */}
           </div>
           <div className="w-full flex gap-2">
-            <p className="text-sm text-slate-600">Belum punya akun?</p>{' '}
+            <p className="text-sm text-slate-600">Belum punya akun?</p>
             <Link className="text-sm  underline text-sky-600" to={'/signup'}>
               Daftar Sekarang
             </Link>
