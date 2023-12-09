@@ -170,7 +170,8 @@ const Layout = () => {
 export default Layout;
 
 const listMenu = [
-  { label: 'Dashboard', value: 'dashboard', icon: <DashboardIcon /> },
-  { label: 'Profile', value: 'profile', icon: <PersonIcon /> },
+  { label: 'Dasbor', value: 'dashboard', icon: <DashboardIcon /> },
+  { label: 'Toko', value: 'store', icon: <PersonIcon /> },
+  { label: 'Profil', value: 'profile', icon: <PersonIcon /> },
 ];
 const settingMenu = [{ label: 'Pengaturan', value: 'setting', icon: <DashboardIcon /> }];

@@ -13,6 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import TemplatesComponent from './feature/templates/TemplatesComponent';
 import VIewTemplateComponents from './feature/templates/VIewTemplateComponents';
 import MasterTemplate from './feature/templates/invitationTemplate/MasterTemplate';
+import StoreComponent from './feature/store/StoreComponent';
 
 function App() {
   const { curentUser } = useSelector((state) => state.user);
@@ -30,6 +31,7 @@ function App() {
           <Route element={<PrivateRoute authenticated={curentUser} />}>
             <Route element={<Layout />}>
               <Route path="dashboard" element={<DashboardComponent />} />
+              <Route path="store" element={<StoreComponent />} />
               <Route path="profile" element={<ProfileComponent />} />
             </Route>
           </Route>
