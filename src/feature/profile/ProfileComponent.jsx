@@ -4,24 +4,27 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import CloseIcon from '@mui/icons-material/Close';
 // import icons end
 
-import { Stack, Typography, Avatar, Modal, Box, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { useRef, useState } from 'react';
+import { Stack, Typography, Modal, Box, Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { updateAvatar } from './config/userSlice';
+import { cloudImage } from '../../config/cloudinary.js';
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from '@cloudinary/url-gen/actions/resize';
 
 const ProfileComponent = () => {
+  const dispatch = useDispatch();
   const imageImput = useRef();
   const { curentUser } = useSelector((state) => state.user);
-  const inputAvatar = useRef();
   const reader = new FileReader();
-
-  const [payloadAvatar, setPayloadAvatar] = useState(undefined);
   const [avatarImage, setAvatarImage] = useState('');
   const [openModal, setOpenModal] = useState(false);
 
+  const theImage = cloudImage.image(curentUser.avatar.publicId);
   const handleOpenModal = () => setOpenModal(true);
+  theImage.resize(fill().width(250).height(250));
 
   const handleCloseModal = () => {
-    setPayloadAvatar(undefined);
     setOpenModal(false);
     setAvatarImage('');
   };
@@ -29,23 +32,29 @@ const ProfileComponent = () => {
   const renderImage = (file) => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      // console.log(avatarImage);
       setAvatarImage(reader.result);
     };
   };
 
   const handleInputAvatarChange = (e) => {
-    console.log(e.target.files[0]);
-    setPayloadAvatar(e.target.files[0]);
+    // console.log(e.target.files[0]);
+    // setPayloadAvatar(e.target.files[0]);
     renderImage(e.target.files[0]);
   };
 
+  const handleUpdateAvatar = () => {
+    dispatch(updateAvatar(avatarImage));
+    handleCloseModal();
+  };
   // console.log(curentUser);
   return (
     <Stack direction={'column'} gap={2}>
       <div className="w-full h-52 bg-sky-400 relative">
-        <div className="w-32 h-32 absolute -bottom-12 left-1/2 -translate-x-1/2">
-          <Avatar alt="Remy Sharp" src={curentUser ? curentUser?.avatar : ''} sx={{ width: '100%', height: '100%' }} />
+        <div className="w-32 h-32 absolute -bottom-12 left-1/2 -translate-x-1/2 ">
+          <div className="rounded-full overflow-hidden">
+            <AdvancedImage cldImg={theImage} />
+          </div>
+          {/* <Avatar alt="Remy Sharp" src={curentUser ? curentUser?.avatar : ''} sx={{ width: '100%', height: '100%' }} /> */}
 
           <button onClick={handleOpenModal} className="w-10 h-10 bg-green-400 absolute right-0 bottom-0 rounded-full flex justify-center items-center text-white">
             <MdEdit className="text-xl" />
@@ -69,13 +78,13 @@ const ProfileComponent = () => {
           >
             <img src={avatarImage} />
             <p hidden={avatarImage}>Pilih Gambar</p>
-            <input ref={imageImput} onChange={handleInputAvatarChange} type="file" accept="image/.*" hidden />
+            <input ref={imageImput} onChange={handleInputAvatarChange} type="file" accept="image/png, image/jpg, image/svg,image/jpeg" hidden />
           </div>
           <div className="flex gap-2 justify-end">
             <Button color="error" className="" variant="contained" startIcon={<CloseIcon />} onClick={handleCloseModal}>
               Batal
             </Button>
-            <Button className="" variant="contained" startIcon={<PhotoIcon />} disabled={!payloadAvatar}>
+            <Button onClick={handleUpdateAvatar} className="" variant="contained" startIcon={<PhotoIcon />} disabled={!avatarImage}>
               Unggah
             </Button>
           </div>

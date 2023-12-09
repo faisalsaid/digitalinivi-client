@@ -22,9 +22,26 @@ const login = async (payload) => {
   return response.data;
 };
 
+const updateAvatar = async (payload, token) => {
+  // console.log('updateAvatar>>>', payload);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(`${apiURI}/auth/changeavatar`, { image: payload }, config);
+  if (response.data) {
+    localStorage.setItem('user', JSON.stringify(response.data));
+    // console.log(response.data);
+  }
+
+  return response.data;
+};
+
 const userService = {
   registerUser,
   login,
+  updateAvatar,
   // googleOAuth,
 };
 
