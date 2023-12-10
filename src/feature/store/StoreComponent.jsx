@@ -32,7 +32,7 @@ const StoreComponent = () => {
   };
   return (
     <div className="flex gap-4 flex-col">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between sm:items-center flex-col gap-2">
         <Typography variant="h5" component={'h4'}>
           Toko Anda :
         </Typography>

@@ -33,7 +33,7 @@ const createStore = async (payload, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  // const response = await axios.post(`${apiURI}/stores`,payload,  config);
+  const response = await axios.post(`${apiURI}/stores`, payload, config);
   // console.log(response.data);
 
   return response.data;

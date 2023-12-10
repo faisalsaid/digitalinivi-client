@@ -88,6 +88,23 @@ const storeSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.theStore = {};
+      })
+      // handle GET ONE STORE END
+
+      // handle GET ONE STORE START
+      .addCase(createStore.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createStore.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.storeList.push(action.payload);
+      })
+      .addCase(createStore.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.theStore = {};
       });
     // handle GET ONE STORE END
   },
