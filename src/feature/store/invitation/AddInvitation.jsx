@@ -4,7 +4,7 @@ import PhotoIcon from '@mui/icons-material/Photo';
 // END ICONS
 
 import React, { useState } from 'react';
-import { Button, Modal, Box, Tab, Tabs, TextField, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button, Modal, Box, Tab, Tabs, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Autocomplete } from '@mui/material';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import { Formik, Form, Field } from 'formik';
@@ -110,6 +110,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
                 // console.log(formik);
+                const { setFieldValue } = formik;
                 return (
                   <Form>
                     <div className="flex flex-col justify-between h-full">
@@ -174,34 +175,45 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                         </TabPanel>
                         <TabPanel value="invitationDetail">
                           <div className="flex flex-col gap-4">
-                            <Field name="invitationDetail.type">
+                            <FormControl fullWidth>
+                              <Field name="invitationDetail.type">
+                                {({ field, form, meta }) => {
+                                  //   console.log(field, form, meta);
+                                  return (
+                                    <>
+                                      <InputLabel id="invitation-type-label">Tipe</InputLabel>
+                                      <Select
+                                        {...field}
+                                        size="small"
+                                        labelId="invitation-type-label"
+                                        id="invitation-type-select"
+                                        value={form.values.invitationDetail.type}
+                                        label="Tipe"
+                                      >
+                                        <MenuItem value={'marriage'}>Nikahan</MenuItem>
+                                        <MenuItem value={'birthday'}>Ulang Tahun</MenuItem>
+                                      </Select>
+                                    </>
+                                  );
+                                }}
+                              </Field>
+                            </FormControl>
+                            <Field name="customerDetail.theme">
                               {({ field, form, meta }) => {
                                 console.log(field, form, meta);
                                 return (
-                                  <FormControl {...field} fullWidth>
-                                    <InputLabel id="invitation-type-label">Tipe</InputLabel>
-                                    <Select labelId="invitation-type" id="invitation-type-select" value={form.values.invitationDetail.type} label="Tipe">
-                                      <MenuItem value={'marriage'}>Nikahan</MenuItem>
-                                      <MenuItem value={'birthday'}>Ulang Tahun</MenuItem>
-                                    </Select>
-                                  </FormControl>
-                                );
-                              }}
-                            </Field>
-                            <Field name="customerDetail.theme">
-                              {({ field, form, meta }) => {
-                                // console.log(field, form, meta);
-                                return (
-                                  <TextField
-                                    // disabled={isLoading}
+                                  <Autocomplete
                                     {...field}
-                                    variant="outlined"
-                                    label="Email"
-                                    type={'text'}
                                     size="small"
+                                    disablePortal
+                                    id="combo-box-demo"
+                                    options={invitationThemes}
+                                    // sx={{ width: 300 }}
                                     fullWidth
-                                    error={meta.touched && meta.error ? true : false}
-                                    helperText={meta.touched && meta.error && meta.error}
+                                    defaultValue={{ value: 'nkh-001', label: 'NKH-001' }}
+                                    value={form.values.customerDetail.theme}
+                                    onChange={(e, data) => setFieldValue('customerDetail.theme', data.value)}
+                                    renderInput={(params) => <TextField {...params} label="Tema" />}
                                   />
                                 );
                               }}
@@ -247,3 +259,8 @@ const style = {
   flexDirection: 'column',
   gap: '8px',
 };
+
+const invitationThemes = [
+  { value: 'nkh-001', label: 'NKH-001' },
+  { value: 'nkh-002', label: 'NKH-002' },
+];
