@@ -90,7 +90,7 @@ const AddStore = ({ openModal, handleCloseModal, data }) => {
                         startIcon={<PhotoIcon />}
                         disabled={!formik.dirty || (formik.dirty && !formik.isValid)}
                       >
-                        {data && data?.storeName ? 'Edit' : 'Tambah'}
+                        {data && data?.storeName ? 'Perbarui' : 'Tambah'}
                       </Button>
                     </div>
                   </Stack>

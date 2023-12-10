@@ -40,7 +40,7 @@ const createStore = async (payload, token) => {
 };
 const updateStore = async (data, token) => {
   const { _id, ...payload } = data;
-  console.log('createStore', _id, '>>>>>', payload, '>>>>>', token);
+  // console.log('createStore', _id, '>>>>>', payload, '>>>>>', token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

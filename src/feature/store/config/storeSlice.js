@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import storeServices from './storeService.js';
+import { toast } from 'react-toastify';
 
 // Get all store
 export const fetchAllStore = createAsyncThunk('store/fetchAllStore', async (_, thunkAPI) => {
@@ -110,6 +111,7 @@ const storeSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.storeList.push(action.payload);
+        toast(`Berhasil Menambah Toko `);
       })
       .addCase(createStore.rejected, (state, action) => {
         state.isLoading = false;
@@ -127,7 +129,7 @@ const storeSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.storeList = state.storeList.map((store) => (store._id === action.payload._id ? { ...store, ...action.payload } : store));
-        // toast(`Update menu success`);
+        toast(`Berhasil Perbarui Toko `);
       })
       .addCase(updateStore.rejected, (state, action) => {
         state.isLoading = false;
