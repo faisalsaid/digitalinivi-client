@@ -2,24 +2,44 @@ import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-// import icons end
+import VisibilityIcon from '@mui/icons-material/Visibility';
+// ICONS END
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllStore } from '../store/config/storeSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Stack, Typography, Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Avatar } from '@mui/material';
+import { useNavigate } from 'react-router';
+import AddStore from './AddStore';
 
 const StoreComponent = () => {
   const { storeList, isLoading } = useSelector((state) => state.store);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   useEffect(() => {
     dispatch(fetchAllStore());
   }, []);
+
+  const handleChooseStore = (storeId) => {
+    navigate(`/store/${storeId}`);
+    // console.log(storeId);
+  };
   return (
     <div className="flex gap-4 flex-col">
-      <Typography variant="h5" component={'h4'}>
-        Toko Anda :
-      </Typography>
+      <div className="flex justify-between items-center">
+        <Typography variant="h5" component={'h4'}>
+          Toko Anda :
+        </Typography>
+        <Button variant="contained" startIcon={<AddBusinessIcon />} onClick={() => setOpenModal(true)}>
+          {storeList.length === 0 ? 'Buat Toko' : 'Tambah Toko'}
+        </Button>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         {storeList &&
           storeList.map((data, i) => (
@@ -27,8 +47,8 @@ const StoreComponent = () => {
               <CardHeader
                 avatar={<Avatar src={data.avatar} aria-label="recipe"></Avatar>}
                 action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
+                  <IconButton onClick={() => handleChooseStore(data._id)} aria-label="view_detail">
+                    <VisibilityIcon />
                   </IconButton>
                 }
                 title={data.storeName}
@@ -51,6 +71,7 @@ const StoreComponent = () => {
             </Card>
           ))}
       </div>
+      <AddStore openModal={openModal} handleCloseModal={handleCloseModal} />
     </div>
   );
 };

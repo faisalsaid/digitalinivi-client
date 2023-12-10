@@ -9,8 +9,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const DashboardComponent = () => {
-  const { storeList } = useSelector((state) => state.store);
-  console.log(storeList);
+  // const { storeList } = useSelector((state) => state.store);
+  // console.log(storeList);
   const dispatch = useDispatch();
 
   // useEffect(() => {

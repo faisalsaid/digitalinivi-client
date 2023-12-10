@@ -14,6 +14,7 @@ import TemplatesComponent from './feature/templates/TemplatesComponent';
 import VIewTemplateComponents from './feature/templates/VIewTemplateComponents';
 import MasterTemplate from './feature/templates/invitationTemplate/MasterTemplate';
 import StoreComponent from './feature/store/StoreComponent';
+import StoreDetails from './feature/store/StoreDetails';
 
 function App() {
   const { curentUser } = useSelector((state) => state.user);
@@ -32,6 +33,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="dashboard" element={<DashboardComponent />} />
               <Route path="store" element={<StoreComponent />} />
+              <Route path="store/:storeId" element={<StoreDetails />} />
               <Route path="profile" element={<ProfileComponent />} />
             </Route>
           </Route>
