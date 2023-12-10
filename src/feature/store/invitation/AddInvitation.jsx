@@ -9,9 +9,14 @@ import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { cloudImage } from '../../../config/cloudinary.js';
+import { AdvancedImage } from '@cloudinary/react';
 
 const AddInvitation = ({ openModal, handleCloseModal, data }) => {
   const [value, setValue] = useState('customerDetail');
+  const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
+
+  const themeThumbnail = cloudImage.image(themeThumbnailPublicId);
 
   const initialValues = {
     customerDetail: {
@@ -212,12 +217,16 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                     fullWidth
                                     defaultValue={{ value: 'nkh-001', label: 'NKH-001' }}
                                     value={form.values.customerDetail.theme}
-                                    onChange={(e, data) => setFieldValue('customerDetail.theme', data.value)}
+                                    onChange={(e, data) => {
+                                      setThemeThumbnailPublicId(data.thumbnail);
+                                      setFieldValue('customerDetail.theme', data.value);
+                                    }}
                                     renderInput={(params) => <TextField {...params} label="Tema" />}
                                   />
                                 );
                               }}
                             </Field>
+                            <AdvancedImage cldImg={themeThumbnail} />
                           </div>
                         </TabPanel>
                         <TabPanel value="brideDetail">brideDetail</TabPanel>
@@ -261,6 +270,6 @@ const style = {
 };
 
 const invitationThemes = [
-  { value: 'nkh-001', label: 'NKH-001' },
-  { value: 'nkh-002', label: 'NKH-002' },
+  { value: 'nkh-001', label: 'NKH-001', thumbnail: 'digitalinvi_avatar/userone-emial-com-avatar' },
+  { value: 'nkh-002', label: 'NKH-002', thumbnail: 'digitalinvi_avatar/ernsuckseed-mail-com-avatar' },
 ];
