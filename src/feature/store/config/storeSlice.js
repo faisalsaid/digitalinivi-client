@@ -119,7 +119,7 @@ const storeSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(createStore.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.isLoading = false;
         if (action.payload.message || action.payload.stack) {
           state.isSuccess = false;

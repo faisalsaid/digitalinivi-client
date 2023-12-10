@@ -35,7 +35,7 @@ const StoreDetails = () => {
               <h2 className="text-2xl">{theStore && theStore?.storeName}</h2>
             </div>
             <div>
-              <Button onClick={() => navigation('/suckseed-enterprize/nikah-budi-wati')} variant="contained" startIcon={<PostAddIcon />}>
+              <Button onClick={() => {}} variant="contained" startIcon={<PostAddIcon />}>
                 Buat Undangan
               </Button>
             </div>

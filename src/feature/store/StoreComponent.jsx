@@ -22,7 +22,7 @@ const StoreComponent = () => {
   const [prevData, setPrevData] = useState({});
   const [diplayStore, setDisplayStore] = useState([]);
 
-  console.log(storeList, isLoading, isSuccess);
+  // console.log(storeList, isLoading, isSuccess);
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -30,12 +30,12 @@ const StoreComponent = () => {
   };
 
   useEffect(() => {
-    console.log('fet');
+    // console.log('fet');
     dispatch(fetchAllStore());
   }, []);
 
   useEffect(() => {
-    console.log('change');
+    // console.log('change');
     setDisplayStore(storeList);
   }, [storeList]);
 
@@ -51,13 +51,13 @@ const StoreComponent = () => {
   };
 
   const handleDeleteStore = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     dispatch(deleteStore(_id));
   };
 
   return (
     <div className="flex gap-4 flex-col">
-      <div className="flex justify-between sm:items-center flex-col gap-2">
+      <div className="flex justify-between sm:flex-row sm:items-center flex-col gap-2">
         <Typography variant="h5" component={'h4'}>
           Toko Anda :
         </Typography>

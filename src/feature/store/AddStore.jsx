@@ -41,7 +41,7 @@ const AddStore = ({ openModal, handleCloseModal, data }) => {
 
   // Handle reset form
   const onReset = (value, props) => {
-    console.log(props);
+    // console.log(props);
     // props.setSubmitting(false);
   };
 

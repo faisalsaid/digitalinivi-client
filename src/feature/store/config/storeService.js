@@ -27,14 +27,14 @@ const getStoreById = async (storeId, token) => {
 };
 
 const createStore = async (payload, token) => {
-  console.log('createStore', payload, token);
+  // console.log('createStore', payload, token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.post(`${apiURI}/stores`, payload, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };
