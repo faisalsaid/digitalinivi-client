@@ -114,15 +114,21 @@ const storeSlice = createSlice({
       })
       // handle GET ONE STORE END
 
-      // handle GET ONE STORE START
+      // handle ADD ONE STORE START
       .addCase(createStore.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(createStore.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.isLoading = false;
-        state.isSuccess = true;
-        state.storeList.push(action.payload);
-        toast(`Berhasil Menambah Toko `);
+        if (action.payload.message || action.payload.stack) {
+          state.isSuccess = false;
+          toast(`Gagal, Coba Nama Toko Lain`);
+        } else {
+          state.isSuccess = true;
+          state.storeList.push(action.payload);
+          toast(`Berhasil Menambah Toko `);
+        }
       })
       .addCase(createStore.rejected, (state, action) => {
         state.isLoading = false;
@@ -130,7 +136,7 @@ const storeSlice = createSlice({
         state.message = action.payload;
         state.theStore = {};
       })
-      // handle GET ONE STORE END
+      // handle ADD ONE STORE END
 
       // handle update store start
       .addCase(updateStore.pending, (state) => {

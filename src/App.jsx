@@ -39,7 +39,9 @@ function App() {
           </Route>
           <Route path="template" element={<TemplatesComponent />} />
           <Route path="template/:id" element={<VIewTemplateComponents />} />
-          {/* <Route path="template/:id" element={<MasterTemplate />} /> */}
+          <Route path=":store">
+            <Route path=":nikah" element={<MasterTemplate />} />
+          </Route>
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </Router>
