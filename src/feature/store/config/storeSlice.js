@@ -35,6 +35,17 @@ export const createStore = createAsyncThunk('store/createStore', async (payload,
   }
 });
 
+// handle update store
+export const updateStore = createAsyncThunk('store/updateStore', async (data, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await storeServices.updateStore(data, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   storeList: [],
   theStore: {},
@@ -105,8 +116,26 @@ const storeSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.theStore = {};
+      })
+      // handle GET ONE STORE END
+
+      // handle update store start
+      .addCase(updateStore.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateStore.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.storeList = state.storeList.map((store) => (store._id === action.payload._id ? { ...store, ...action.payload } : store));
+        // toast(`Update menu success`);
+      })
+      .addCase(updateStore.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.error.message;
+        console.log(action);
       });
-    // handle GET ONE STORE END
+    // handle update store end
   },
 });
 

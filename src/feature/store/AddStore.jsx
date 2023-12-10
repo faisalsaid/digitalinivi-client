@@ -8,34 +8,52 @@ import { Stack, Typography, Modal, Box, Button, TextField } from '@mui/material'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { createStore } from './config/storeSlice';
+import { createStore, updateStore } from './config/storeSlice.js';
 
-const initialValues = {
-  storeName: '',
-};
+const AddStore = ({ openModal, handleCloseModal, data }) => {
+  //   console.log(data);
 
-const validationSchema = Yup.object({
-  storeName: Yup.string().required('Required').min(3, 'Min 3 character'),
-});
+  const initialValues = {
+    storeName: data && data?.storeName ? data?.storeName : '',
+  };
 
-const AddStore = ({ openModal, handleCloseModal }) => {
+  const validationSchema = Yup.object({
+    storeName: Yup.string().required('Harus terisi').min(3, 'Minimal 3 Karakter').max(25, 'Maksimal 25 Karakter'),
+  });
   const dispatch = useDispatch();
+
   // Handle submit form
   const onSubmit = (value, props) => {
     // console.log(value);
+    if (data && data?.storeName) {
+      //   console.log(value);
+      const dataUpdate = {
+        ...value,
+        _id: data._id,
+      };
+      handleCloseModal();
+      dispatch(updateStore(dataUpdate));
+      return;
+    }
     dispatch(createStore(value));
     handleCloseModal();
   };
 
   // Handle reset form
   const onReset = (value, props) => {
-    props.setSubmitting(false);
+    console.log(props);
+    // props.setSubmitting(false);
+  };
+
+  const handleToCloseModal = () => {
+    handleCloseModal();
+    onReset();
   };
   return (
-    <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+    <Modal open={openModal} onReset={onReset} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="p">
-          Tambahkan Toko
+          {data && data?.storeName ? 'Edit' : 'Tambahkan'} Toko
         </Typography>
         <div>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
@@ -61,7 +79,7 @@ const AddStore = ({ openModal, handleCloseModal }) => {
                       }}
                     </Field>
                     <div className="flex gap-2 justify-end">
-                      <Button type="button" color="error" className="" variant="contained" startIcon={<CloseIcon />} onClick={handleCloseModal}>
+                      <Button type="reset" color="error" className="" variant="contained" startIcon={<CloseIcon />} onClick={handleToCloseModal}>
                         Batal
                       </Button>
                       <Button
@@ -72,7 +90,7 @@ const AddStore = ({ openModal, handleCloseModal }) => {
                         startIcon={<PhotoIcon />}
                         disabled={!formik.dirty || (formik.dirty && !formik.isValid)}
                       >
-                        Tambah
+                        {data && data?.storeName ? 'Edit' : 'Tambah'}
                       </Button>
                     </div>
                   </Stack>

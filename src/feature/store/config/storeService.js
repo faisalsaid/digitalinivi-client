@@ -38,10 +38,25 @@ const createStore = async (payload, token) => {
 
   return response.data;
 };
+const updateStore = async (data, token) => {
+  const { _id, ...payload } = data;
+  console.log('createStore', _id, '>>>>>', payload, '>>>>>', token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(`${apiURI}/stores/${_id}`, payload, config);
+  // console.log(response.data);
+
+  return response.data;
+};
 
 const storeServices = {
   getAllStore,
   getStoreById,
   createStore,
+  updateStore,
 };
 export default storeServices;
