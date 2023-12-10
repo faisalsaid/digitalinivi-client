@@ -1,22 +1,32 @@
 import PostAddIcon from '@mui/icons-material/PostAdd';
 // ICONS END
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
 import { getOneStore } from './config/storeSlice';
 import { Button, Stack, Typography, Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Avatar, Tooltip } from '@mui/material';
+import AddInvitation from './invitation/AddInvitation';
 
 const StoreDetails = () => {
   const navigation = useNavigate();
   const { theStore, isLoading } = useSelector((state) => state.store);
   const dispatch = useDispatch();
   const { storeId } = useParams();
+  const [openModal, setOpenModal] = useState(false);
 
   //   console.log(theStore);
   useEffect(() => {
     dispatch(getOneStore(storeId));
   }, [storeId]);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleAddInvitationModal = () => {
+    setOpenModal(true);
+  };
 
   if (isLoading) {
     return <>...Loding</>;
@@ -35,11 +45,12 @@ const StoreDetails = () => {
               <h2 className="text-2xl">{theStore && theStore?.storeName}</h2>
             </div>
             <div>
-              <Button onClick={() => {}} variant="contained" startIcon={<PostAddIcon />}>
+              <Button onClick={handleAddInvitationModal} variant="contained" startIcon={<PostAddIcon />}>
                 Buat Undangan
               </Button>
             </div>
           </div>
+          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} />
         </div>
       )}
     </>

@@ -50,7 +50,7 @@ const AddStore = ({ openModal, handleCloseModal, data }) => {
     onReset();
   };
   return (
-    <Modal open={openModal} onReset={onReset} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+    <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="p">
           {data && data?.storeName ? 'Edit' : 'Tambahkan'} Toko
