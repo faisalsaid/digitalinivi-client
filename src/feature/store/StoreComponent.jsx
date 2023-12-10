@@ -8,18 +8,21 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 // ICONS END
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllStore } from '../store/config/storeSlice';
+import { deleteStore, fetchAllStore } from '../store/config/storeSlice';
 import { useEffect, useState } from 'react';
 import { Button, Stack, Typography, Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Avatar, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router';
 import AddStore from './AddStore';
 
 const StoreComponent = () => {
-  const { storeList, isLoading } = useSelector((state) => state.store);
+  const { storeList, isLoading, isSuccess, isError } = useSelector((state) => state.store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [prevData, setPrevData] = useState({});
+  const [diplayStore, setDisplayStore] = useState([]);
+
+  console.log(storeList, isLoading, isSuccess);
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -27,8 +30,14 @@ const StoreComponent = () => {
   };
 
   useEffect(() => {
+    console.log('fet');
     dispatch(fetchAllStore());
   }, []);
+
+  useEffect(() => {
+    console.log('change');
+    setDisplayStore(storeList);
+  }, [storeList]);
 
   const handleChooseStore = (storeId) => {
     navigate(`/store/${storeId}`);
@@ -39,6 +48,11 @@ const StoreComponent = () => {
     // console.log(data);
     setPrevData(data);
     setOpenModal(true);
+  };
+
+  const handleDeleteStore = (_id) => {
+    console.log(_id);
+    dispatch(deleteStore(_id));
   };
 
   return (
@@ -52,8 +66,8 @@ const StoreComponent = () => {
         </Button>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {storeList &&
-          storeList.map((data, i) => (
+        {diplayStore &&
+          diplayStore.map((data, i) => (
             <Card key={i}>
               <CardHeader
                 avatar={<Avatar src={data.avatar} aria-label="recipe"></Avatar>}
@@ -73,7 +87,7 @@ const StoreComponent = () => {
               </CardContent> */}
               <CardActions disableSpacing>
                 <Tooltip title="Hapus">
-                  <IconButton color="error" sx={{ marginRight: 'auto' }} aria-label="delete">
+                  <IconButton onClick={() => handleDeleteStore(data._id)} color="error" sx={{ marginRight: 'auto' }} aria-label="delete">
                     <DeleteForeverIcon />
                   </IconButton>
                 </Tooltip>

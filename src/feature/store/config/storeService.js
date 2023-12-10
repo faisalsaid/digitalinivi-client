@@ -38,6 +38,7 @@ const createStore = async (payload, token) => {
 
   return response.data;
 };
+
 const updateStore = async (data, token) => {
   const { _id, ...payload } = data;
   // console.log('createStore', _id, '>>>>>', payload, '>>>>>', token);
@@ -53,10 +54,25 @@ const updateStore = async (data, token) => {
   return response.data;
 };
 
+const deleteStore = async (_id, token) => {
+  // console.log('deleteStore >>', _id, '>>>>>', token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(`${apiURI}/stores/${_id}`, config);
+  // console.log(response.data);
+
+  return response.data;
+};
+
 const storeServices = {
   getAllStore,
   getStoreById,
   createStore,
   updateStore,
+  deleteStore,
 };
 export default storeServices;

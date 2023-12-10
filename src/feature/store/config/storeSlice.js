@@ -47,6 +47,17 @@ export const updateStore = createAsyncThunk('store/updateStore', async (data, th
   }
 });
 
+// handle delete store
+export const deleteStore = createAsyncThunk('store/deleteStore', async (_id, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await storeServices.deleteStore(_id, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   storeList: [],
   theStore: {},
@@ -136,8 +147,25 @@ const storeSlice = createSlice({
         state.isError = true;
         state.message = action.error.message;
         console.log(action);
+      })
+      // handle update store end
+
+      // handle delete Start
+      .addCase(deleteStore.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteStore.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.storeList = state.storeList.filter((store) => store._id !== action.payload);
+        toast(`Berhasil Hapus Toko`);
+      })
+      .addCase(deleteStore.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.error.message;
       });
-    // handle update store end
+    // handle delete End
   },
 });
 
