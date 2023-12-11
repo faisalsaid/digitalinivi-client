@@ -14,7 +14,8 @@ import { AdvancedImage } from '@cloudinary/react';
 import { useDispatch } from 'react-redux';
 import { createOrder } from '../../order/config/orderSlice.js';
 
-const AddInvitation = ({ openModal, handleCloseModal, data }) => {
+const AddInvitation = ({ openModal, handleCloseModal, store }) => {
+  // console.log(store);
   const dispatch = useDispatch();
   const [value, setValue] = useState('customerDetail');
   const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
@@ -28,10 +29,8 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
       email: '',
       phone: '',
     },
-    invitationDetail: {
-      type: 'marriage',
-      theme: 'nkh-001',
-    },
+    type: 'marriage',
+    theme: 'nkh-001',
     groomDetail: {
       fullName: '',
       nickName: '',
@@ -65,32 +64,30 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
       phone: Yup.string().required('No. Handphone harus terisi').min(8, 'Minimal 8 karakter'),
       email: Yup.string(),
     }),
-    invitationDetail: Yup.object({
-      type: Yup.string().required('Tipe harus Terisi'),
-      theme: Yup.string().required('Tema harus Terisi'),
-    }),
+    type: Yup.string().required('Tipe harus Terisi'),
+    theme: Yup.string().required('Tema harus Terisi'),
     groomDetail: Yup.object({
       fullName: Yup.string().required('Nama lengkap pria harus terisi').min(3, 'Minimal 3 karakter'),
       nickName: Yup.string().required('Nama sapaan pria harus terisi').min(3, 'Minimal 3 karakter'),
-      father: Yup.string().min(3, 'Minimal 3 karakter'),
-      mother: Yup.string().min(3, 'Minimal 3 karakter'),
+      father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+      mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
     }),
     brideDetail: Yup.object({
       fullName: Yup.string().required('Nama lengkap wanita harus terisi'),
       nickName: Yup.string().required('Nama sapaan wanita harus terisi'),
-      father: Yup.string(),
-      mother: Yup.string(),
+      father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+      mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
     }),
     marriageInfo: Yup.object({
-      date: Yup.date(),
-      time: Yup.date(),
-      location: Yup.string(),
+      date: Yup.date().required('Tanggal harus terisi'),
+      time: Yup.date().required('Waktu harus terisi'),
+      location: Yup.string().required('Lokasi harus terisi'),
       maps: Yup.string(),
     }),
     receptionInfo: Yup.object({
-      date: Yup.date(),
-      time: Yup.date(),
-      location: Yup.string(),
+      date: Yup.date().required('Tanggal harus terisi'),
+      time: Yup.date().required('Waktu harus terisi'),
+      location: Yup.string().required('Lokasi harus terisi'),
       maps: Yup.string(),
     }),
     galery: Yup.array(),
@@ -107,9 +104,22 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
 
   const onSubmit = (value, props) => {
     console.log(value);
-    dispatch(createOrder(value));
+
+    const { customerDetail, ...invitationDetail } = value;
+
+    const payload = {
+      store: store._id,
+      customerDetail,
+      invitationDetail,
+    };
+
+    console.log(payload);
+
+    dispatch(createOrder(payload));
   };
-  const onReset = () => {};
+  const onReset = (value, props) => {
+    console.log(props);
+  };
   return (
     <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
@@ -125,7 +135,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
             </Tabs>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
-                console.log(formik);
+                // console.log(formik);
                 const { setFieldValue } = formik;
                 return (
                   <Form>
@@ -193,20 +203,13 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                         <TabPanel value="invitationDetail">
                           <div className="flex flex-col gap-4">
                             <FormControl fullWidth>
-                              <Field name="invitationDetail.type">
+                              <Field name="type">
                                 {({ field, form, meta }) => {
                                   //   console.log(field, form, meta);
                                   return (
                                     <>
                                       <InputLabel id="invitation-type-label">Tipe</InputLabel>
-                                      <Select
-                                        {...field}
-                                        size="small"
-                                        labelId="invitation-type-label"
-                                        id="invitation-type-select"
-                                        value={form.values.invitationDetail.type}
-                                        label="Tipe"
-                                      >
+                                      <Select {...field} size="small" labelId="invitation-type-label" id="invitation-type-select" value={form.values.type} label="Tipe">
                                         <MenuItem value={'marriage'}>Nikahan</MenuItem>
                                         <MenuItem value={'birthday'}>Ulang Tahun</MenuItem>
                                       </Select>
@@ -215,7 +218,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                 }}
                               </Field>
                             </FormControl>
-                            <Field name="customerDetail.theme">
+                            <Field name="theme">
                               {({ field, form, meta }) => {
                                 console.log(field, form, meta);
                                 return (
@@ -228,10 +231,10 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                     // sx={{ width: 300 }}
                                     fullWidth
                                     defaultValue={{ value: 'nkh-001', label: 'NKH-001' }}
-                                    value={form.values.customerDetail.theme}
+                                    value={form.values.theme}
                                     onChange={(e, data) => {
                                       setThemeThumbnailPublicId(data.thumbnail);
-                                      setFieldValue('customerDetail.theme', data.value);
+                                      setFieldValue('theme', data.value);
                                     }}
                                     renderInput={(params) => <TextField {...params} label="Tema" />}
                                   />
@@ -440,7 +443,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="marriageInfo.locatin">
+                                <Field name="marriageInfo.location">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -517,7 +520,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="receptionInfo.locatin">
+                                <Field name="receptionInfo.location">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (

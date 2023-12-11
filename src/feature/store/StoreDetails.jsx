@@ -7,6 +7,7 @@ import { useParams, useNavigate } from 'react-router';
 import { getOneStore } from './config/storeSlice';
 import { Button, Stack, Typography, Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Avatar, Tooltip } from '@mui/material';
 import AddInvitation from './invitation/AddInvitation';
+import { fetchAllOrder } from '../order/config/orderSlice';
 
 const StoreDetails = () => {
   const navigation = useNavigate();
@@ -19,6 +20,10 @@ const StoreDetails = () => {
   useEffect(() => {
     dispatch(getOneStore(storeId));
   }, [storeId]);
+
+  useEffect(() => {
+    dispatch(fetchAllOrder(storeId));
+  }, [theStore]);
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -50,7 +55,7 @@ const StoreDetails = () => {
               </Button>
             </div>
           </div>
-          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} />
+          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} />
         </div>
       )}
     </>

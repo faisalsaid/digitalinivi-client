@@ -4,14 +4,26 @@ import { toast } from 'react-toastify';
 
 // Create new order
 export const createOrder = createAsyncThunk('store/createOrder', async (payload, thunkAPI) => {
-  console.log(payload);
-  //   try {
-  //     const token = thunkAPI.getState().user.curentUser.token;
-  //     return await orderServices.createOrder(payload, token);
-  //   } catch (error) {
-  //     const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-  //     return thunkAPI.rejectWithValue(message);
-  //   }
+  //   console.log(payload);
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await orderServices.createOrder(payload, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// fetch all order
+export const fetchAllOrder = createAsyncThunk('store/fetchAllOrder', async (store_id, thunkAPI) => {
+  //   console.log(store_id);
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await orderServices.getAllOrder(store_id, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
 });
 
 const initialState = {
@@ -57,8 +69,24 @@ const orderSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.theStore = {};
+      })
+      // handle ADD ONE STORE END
+
+      // handle GET ALL STORE START
+      .addCase(fetchAllOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchAllOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.listOrder = action.payload;
+      })
+      .addCase(fetchAllOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.error.message;
       });
-    // handle ADD ONE STORE END
+    // handle GET ALL STORE END
   },
 });
 
