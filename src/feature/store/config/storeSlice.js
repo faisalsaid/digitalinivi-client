@@ -25,7 +25,7 @@ export const getOneStore = createAsyncThunk('store/getOneStore', async (storeId,
   }
 });
 
-// handle create new purchase
+// handle create new store
 export const createStore = createAsyncThunk('store/createStore', async (payload, thunkAPI) => {
   try {
     const token = thunkAPI.getState().user.curentUser.token;

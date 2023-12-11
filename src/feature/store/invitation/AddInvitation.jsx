@@ -11,8 +11,11 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { cloudImage } from '../../../config/cloudinary.js';
 import { AdvancedImage } from '@cloudinary/react';
+import { useDispatch } from 'react-redux';
+import { createOrder } from '../../order/config/orderSlice.js';
 
 const AddInvitation = ({ openModal, handleCloseModal, data }) => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState('customerDetail');
   const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
   const [date, setDate] = useState(new Date());
@@ -104,6 +107,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
 
   const onSubmit = (value, props) => {
     console.log(value);
+    dispatch(createOrder(value));
   };
   const onReset = () => {};
   return (
