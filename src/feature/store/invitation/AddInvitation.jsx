@@ -15,6 +15,7 @@ import { AdvancedImage } from '@cloudinary/react';
 const AddInvitation = ({ openModal, handleCloseModal, data }) => {
   const [value, setValue] = useState('customerDetail');
   const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
+  const [date, setDate] = useState(new Date());
 
   const themeThumbnail = cloudImage.image(themeThumbnailPublicId);
 
@@ -41,14 +42,14 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
       mother: '',
     },
     marriageInfo: {
-      date: '',
-      time: '',
+      date: date,
+      time: date,
       location: '',
       maps: '',
     },
     receptionInfo: {
-      date: '',
-      time: '',
+      date: date,
+      time: date,
       location: '',
       maps: '',
     },
@@ -58,7 +59,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
   const validationSchema = Yup.object({
     customerDetail: Yup.object({
       name: Yup.string().required('Nama harus terisi').min(3, 'Minimal 3 karakter'),
-      phone: Yup.string().required('No. Handphone harus terisi').min(8, 'Minimal 3 karakter'),
+      phone: Yup.string().required('No. Handphone harus terisi').min(8, 'Minimal 8 karakter'),
       email: Yup.string(),
     }),
     invitationDetail: Yup.object({
@@ -78,15 +79,15 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
       mother: Yup.string(),
     }),
     marriageInfo: Yup.object({
-      date: Yup.date().nullable(),
-      time: Yup.date().nullable(),
-      // date: Yup.string().required('Waktu harus terisi'),
-      location: Yup.string().required('Lokasi harus terisi'),
+      date: Yup.date(),
+      time: Yup.date(),
+      location: Yup.string(),
       maps: Yup.string(),
     }),
     receptionInfo: Yup.object({
-      date: Yup.string().required('Waktu harus terisi'),
-      location: Yup.string().required('Lokasi harus terisi'),
+      date: Yup.date(),
+      time: Yup.date(),
+      location: Yup.string(),
       maps: Yup.string(),
     }),
     galery: Yup.array(),
