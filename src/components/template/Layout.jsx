@@ -79,7 +79,7 @@ const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(curentUser);
+  // console.log(curentUser);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

@@ -15,15 +15,15 @@ const createOrder = async (payload, token) => {
 };
 
 const getAllOrder = async (order_id, token) => {
-  console.log('createOrder', token);
+  // console.log('createOrder', token);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log(config);
+
   const response = await axios.get(`${apiURI}/order?store_id=${order_id}`, config);
-  console.log(response.data);
+  // console.log(response.data);
 
   return response.data;
 };
