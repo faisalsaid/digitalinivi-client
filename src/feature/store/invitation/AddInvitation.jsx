@@ -30,23 +30,25 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
     },
     groomDetail: {
       fullName: '',
-      nickname: '',
+      nickName: '',
       father: '',
       mother: '',
     },
     brideDetail: {
       fullName: '',
-      nickname: '',
+      nickName: '',
       father: '',
       mother: '',
     },
     marriageInfo: {
       date: '',
+      time: '',
       location: '',
       maps: '',
     },
     receptionInfo: {
       date: '',
+      time: '',
       location: '',
       maps: '',
     },
@@ -56,27 +58,29 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
   const validationSchema = Yup.object({
     customerDetail: Yup.object({
       name: Yup.string().required('Nama harus terisi').min(3, 'Minimal 3 karakter'),
+      phone: Yup.string().required('No. Handphone harus terisi').min(8, 'Minimal 3 karakter'),
       email: Yup.string(),
-      phone: Yup.string(),
     }),
     invitationDetail: Yup.object({
       type: Yup.string().required('Tipe harus Terisi'),
       theme: Yup.string().required('Tema harus Terisi'),
     }),
     groomDetail: Yup.object({
-      fullName: Yup.string().required('Nama lengkap harus terisi'),
-      nickname: Yup.string().required('Nama panggilan harus terisi'),
-      father: Yup.string(),
-      mother: Yup.string(),
+      fullName: Yup.string().required('Nama lengkap pria harus terisi').min(3, 'Minimal 3 karakter'),
+      nickName: Yup.string().required('Nama sapaan pria harus terisi').min(3, 'Minimal 3 karakter'),
+      father: Yup.string().min(3, 'Minimal 3 karakter'),
+      mother: Yup.string().min(3, 'Minimal 3 karakter'),
     }),
     brideDetail: Yup.object({
-      fullName: Yup.string().required('Nama lengkap harus terisi'),
-      nickname: Yup.string().required('Nama panggilan harus terisi'),
+      fullName: Yup.string().required('Nama lengkap wanita harus terisi'),
+      nickName: Yup.string().required('Nama sapaan wanita harus terisi'),
       father: Yup.string(),
       mother: Yup.string(),
     }),
     marriageInfo: Yup.object({
-      date: Yup.string().required('Waktu harus terisi'),
+      date: Yup.date().nullable(),
+      time: Yup.date().nullable(),
+      // date: Yup.string().required('Waktu harus terisi'),
       location: Yup.string().required('Lokasi harus terisi'),
       maps: Yup.string(),
     }),
@@ -111,14 +115,16 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
               <Tab label="Pemesan" value="customerDetail" />
               <Tab label="Detail" value="invitationDetail" />
               <Tab label="Pengantin" value="brideDetail" />
+              <Tab label="Waktu & Tempat" value="dateLocation" />
+              <Tab label="Galeri" value="galery" />
             </Tabs>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
-                // console.log(formik);
+                console.log(formik);
                 const { setFieldValue } = formik;
                 return (
                   <Form>
-                    <div className="flex flex-col justify-between h-full">
+                    <div className="flex flex-col justify-between h-full gap-2">
                       <div className=" h-96 overflow-y-scroll">
                         <TabPanel value="customerDetail">
                           <div className="flex flex-col gap-4">
@@ -140,24 +146,7 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                 );
                               }}
                             </Field>
-                            <Field name="customerDetail.email">
-                              {({ field, form, meta }) => {
-                                // console.log(field, form, meta);
-                                return (
-                                  <TextField
-                                    // disabled={isLoading}
-                                    {...field}
-                                    variant="outlined"
-                                    label="Email"
-                                    type={'text'}
-                                    size="small"
-                                    fullWidth
-                                    error={meta.touched && meta.error ? true : false}
-                                    helperText={meta.touched && meta.error && meta.error}
-                                  />
-                                );
-                              }}
-                            </Field>
+
                             <Field name="customerDetail.phone">
                               {({ field, form, meta }) => {
                                 // console.log(field, form, meta);
@@ -167,6 +156,24 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                                     {...field}
                                     variant="outlined"
                                     label="No Hp"
+                                    type={'text'}
+                                    size="small"
+                                    fullWidth
+                                    error={meta.touched && meta.error ? true : false}
+                                    helperText={meta.touched && meta.error && meta.error}
+                                  />
+                                );
+                              }}
+                            </Field>
+                            <Field name="customerDetail.email">
+                              {({ field, form, meta }) => {
+                                // console.log(field, form, meta);
+                                return (
+                                  <TextField
+                                    // disabled={isLoading}
+                                    {...field}
+                                    variant="outlined"
+                                    label="Email"
                                     type={'text'}
                                     size="small"
                                     fullWidth
@@ -229,7 +236,323 @@ const AddInvitation = ({ openModal, handleCloseModal, data }) => {
                             <AdvancedImage cldImg={themeThumbnail} />
                           </div>
                         </TabPanel>
-                        <TabPanel value="brideDetail">brideDetail</TabPanel>
+                        <TabPanel value="brideDetail">
+                          <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-4">
+                              <p>Pengantin Pria :</p>
+                              <div className="flex flex-col gap-4">
+                                <Field name="groomDetail.fullName">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Nama Lengkap"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="groomDetail.nickName">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Nama Sapaan"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="groomDetail.father">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Ayah"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="groomDetail.mother">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Ibu"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                              </div>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                              <p>Pengantin Wanita :</p>
+                              <div className="flex flex-col gap-4">
+                                <Field name="brideDetail.fullName">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Nama Lengkap"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="brideDetail.nickName">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Nama Sapaan"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="brideDetail.father">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Ayah"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="brideDetail.mother">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Ibu"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                              </div>
+                            </div>
+                          </div>
+                        </TabPanel>
+                        <TabPanel value="dateLocation">
+                          <div className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-4">
+                              <p>Akad :</p>
+                              <div className="flex flex-col gap-4">
+                                <Field name="marriageInfo.date">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Waktu"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="marriageInfo.time">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Waktu"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="marriageInfo.locatin">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Lokasi"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="marriageInfo.map">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Map"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                              </div>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                              <p>Resepsi :</p>
+                              <div className="flex flex-col gap-4">
+                                <Field name="receptionInfo.date">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Tanggal"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="receptionInfo.time">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Waktu"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="receptionInfo.locatin">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Lokasi"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                                <Field name="receptionInfo.map">
+                                  {({ field, form, meta }) => {
+                                    // console.log(field, form, meta);
+                                    return (
+                                      <TextField
+                                        // disabled={isLoading}
+                                        {...field}
+                                        variant="outlined"
+                                        label="Map"
+                                        type={'text'}
+                                        size="small"
+                                        fullWidth
+                                        error={meta.touched && meta.error ? true : false}
+                                        helperText={meta.touched && meta.error && meta.error}
+                                      />
+                                    );
+                                  }}
+                                </Field>
+                              </div>
+                            </div>
+                          </div>
+                        </TabPanel>
+                        <TabPanel value="galery">galery</TabPanel>
                       </div>
                       <div className="flex gap-2 justify-end">
                         <Button type="reset" color="error" className="" variant="contained" startIcon={<CloseIcon />} onClick={handleToCloseModal}>
@@ -258,7 +581,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '95%',
+  width: '380px',
   bgcolor: 'background.paper',
   // border: '2px solid #000',
   borderRadius: 1,
