@@ -27,9 +27,23 @@ const getAllOrder = async (order_id, token) => {
 
   return response.data;
 };
+const deleteOneById = async (order_id, token) => {
+  console.log('deleteOneById', order_id, token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(`${apiURI}/order/${order_id}`, config);
+  console.log(response.data);
+
+  return response.data;
+};
 
 const orderServices = {
   createOrder,
   getAllOrder,
+  deleteOneById,
 };
 export default orderServices;

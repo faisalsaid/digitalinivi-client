@@ -26,6 +26,17 @@ export const fetchAllOrder = createAsyncThunk('store/fetchAllOrder', async (stor
   }
 });
 
+export const deleteOrderById = createAsyncThunk('store/deleteOrderById', async (store_id, thunkAPI) => {
+  console.log(store_id);
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await orderServices.deleteOneById(store_id, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   listOrder: [],
   isError: false,
@@ -85,8 +96,25 @@ const orderSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.error.message;
+      })
+      // handle GET ALL STORE END
+
+      // handle delete Start
+      .addCase(deleteOrderById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteOrderById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.listOrder = state.listOrder.filter((store) => store._id !== action.payload);
+        toast(`Berhasil Hapus Order`);
+      })
+      .addCase(deleteOrderById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.error.message;
       });
-    // handle GET ALL STORE END
+    // handle delete End
   },
 });
 

@@ -10,7 +10,7 @@ import { useParams, useNavigate } from 'react-router';
 import { getOneStore } from './config/storeSlice';
 import { Button, IconButton, Tooltip } from '@mui/material';
 import AddInvitation from './invitation/AddInvitation';
-import { fetchAllOrder } from '../order/config/orderSlice';
+import { deleteOrderById, fetchAllOrder } from '../order/config/orderSlice';
 import { DataGrid } from '@mui/x-data-grid';
 
 const StoreDetails = () => {
@@ -85,7 +85,7 @@ const StoreDetails = () => {
   };
 
   const handleDeleteOrder = (order_id) => {
-    console.log(order_id);
+    dispatch(deleteOrderById(order_id));
   };
 
   if (isLoading) {
