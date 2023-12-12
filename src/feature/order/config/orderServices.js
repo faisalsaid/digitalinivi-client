@@ -57,11 +57,26 @@ const updateOrderById = async (order, token) => {
 
   return response.data;
 };
+const getOneOrder = async (params, token) => {
+  // console.log('getOneOrder', params);
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(`${apiURI}/order/${params.store}/${params.order}`, config);
+  // console.log(response.data);
+
+  return response.data;
+};
 
 const orderServices = {
   createOrder,
   getAllOrder,
   deleteOneById,
   updateOrderById,
+  getOneOrder,
 };
 export default orderServices;

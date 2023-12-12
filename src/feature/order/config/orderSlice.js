@@ -48,8 +48,20 @@ export const updateOrderById = createAsyncThunk('store/updateOrderById', async (
   }
 });
 
+export const getOneOrder = createAsyncThunk('store/getOneOrder', async (toParams, thunkAPI) => {
+  // console.log(order);
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await orderServices.getOneOrder(toParams, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   listOrder: [],
+  theOrder: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -69,6 +81,22 @@ const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      // handle GET ONE STORE START
+      .addCase(getOneOrder.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOneOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.theOrder = action.payload;
+      })
+      .addCase(getOneOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.error.message;
+      })
+      // handle GET ONE STORE END
 
       // handle ADD ONE STORE START
       .addCase(createOrder.pending, (state) => {

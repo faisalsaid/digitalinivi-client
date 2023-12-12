@@ -39,7 +39,8 @@ const bottomMenu = [
   },
 ];
 
-const MasterTemplate = ({ themeDetail }) => {
+const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
+  console.log(invitaionDetail);
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
   const [theme, setTheme] = useState('daun');
   const [category, setCategory] = useState('');
@@ -121,7 +122,7 @@ const MasterTemplate = ({ themeDetail }) => {
           ))}
         </div>
         <div ref={coverSection}>
-          <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} coverDetail={invitaionDetail} />
         </div>
         {useSection.quote && <Quote theme={theme} colorTheme={colorTheme} />}
         <div ref={brideSection}>

@@ -15,6 +15,7 @@ import VIewTemplateComponents from './feature/templates/VIewTemplateComponents';
 import MasterTemplate from './feature/templates/invitationTemplate/MasterTemplate';
 import StoreComponent from './feature/store/StoreComponent';
 import StoreDetails from './feature/store/StoreDetails';
+import OrderComponent from './feature/order/OrderComponent';
 
 function App() {
   const { curentUser } = useSelector((state) => state.user);
@@ -40,7 +41,7 @@ function App() {
           <Route path="template" element={<TemplatesComponent />} />
           <Route path="template/:id" element={<VIewTemplateComponents />} />
           <Route path=":store">
-            <Route path=":nikah" element={<MasterTemplate />} />
+            <Route path=":order" element={<OrderComponent />} />
           </Route>
           <Route path="/*" element={<PageNotFound />} />
         </Routes>

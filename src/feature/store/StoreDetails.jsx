@@ -87,13 +87,13 @@ const StoreDetails = () => {
               <DeleteForeverIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Edit">
-            <IconButton onClick={() => handleEditInvitation(params.row)} color="success" aria-label="delete">
+          <Tooltip title="Ubah">
+            <IconButton onClick={() => handleEditInvitation(params.row)} color="success" aria-label="edit">
               <EditNoteIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Edit">
-            <IconButton color="info" aria-label="delete">
+          <Tooltip title="Lihat Detail">
+            <IconButton onClick={() => handleViewOrderDetail(params.row)} color="info" aria-label="view">
               <VisibilityIcon />
             </IconButton>
           </Tooltip>
@@ -156,6 +156,11 @@ const StoreDetails = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+  };
+
+  const handleViewOrderDetail = (order_detail) => {
+    console.log(order_detail);
+    navigation(`/${order_detail.store.slug}/${order_detail.slug}`);
   };
 
   if (isLoading) {

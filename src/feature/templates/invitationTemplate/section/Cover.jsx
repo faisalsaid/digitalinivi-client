@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cover = ({ theme, colorTheme, decoration }) => {
+const Cover = ({ theme, colorTheme, decoration, coverDetail }) => {
   return (
     <div id="cover" className={` w-full min-h-[calc[100vh-70px]] p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
       <div className="absolute top-0   scale-x-105">
@@ -15,9 +15,10 @@ const Cover = ({ theme, colorTheme, decoration }) => {
         />
       </div>
       <p className={`  text-center text-6xl `} style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-        Budi & Wati
+        <span className="capitalize">{coverDetail.invitationDetail.groomDetail.nickName}</span> &{' '}
+        <span className="capitalize"> {coverDetail.invitationDetail.brideDetail.nickName}</span>
       </p>
-      <p className="text-lg font-semibold  text-center">Sabtu, 29 April 2023</p>
+      <p className="text-lg font-semibold  text-center">{coverDetail.invitationDetail.marriageInfo.date}</p>
       <div className="flex gap-4">
         {['Hari', 'Jam', 'Menit'].map((data) => (
           <div key={data} className="">
