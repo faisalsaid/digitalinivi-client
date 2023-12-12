@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Bride = ({ theme, colorTheme, decoration }) => {
+const Bride = ({ theme, colorTheme, decoration, detail }) => {
+  // console.log(detail);
   return (
     <>
       <div id="bride" className={` flex w-full min-h-screen flex-col justify-center items-center `}>
@@ -10,7 +11,7 @@ const Bride = ({ theme, colorTheme, decoration }) => {
         <div className="p-4 flex flex-col gap-10 justify-center items-center ">
           <p className="text-center">Dengan Memohon Rahmat Dan Ridho Dari Allah SWT. Kami Bermaksud Menyelenggarakan Syukuran Pernikahan Putra Putri Kami :</p>
           <div className="flex flex-col gap-10 sm:flex-row">
-            <div className="flex flex-col items-center gap-4 flex-1">
+            <div className="flex flex-col items-center gap-4 flex-1 sm:w-1/2">
               <div className={`w-52 max-w-52 h-52 max-h-52 bg-green-100 border rounded-3xl flex flex-grow overflow-hidden`}>
                 <img
                   className="max-h-full min-w-full object-cover align-bottom"
@@ -19,14 +20,16 @@ const Bride = ({ theme, colorTheme, decoration }) => {
                 />
               </div>
               <p className="text-center text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-                Ini Budi Pratama S.Pd M.M
+                {detail?.invitationDetail?.groomDetail?.fullName}
               </p>
               <div className="flex flex-col gap-1 justify-center items-center">
                 <p>Putra Dari:</p>
-                <p className="font-semibold">Bpk Ini Budi & Ibu Ini Budi</p>
+                <p className="font-semibold text-center">
+                  {detail?.invitationDetail?.groomDetail?.father} & {detail?.invitationDetail?.groomDetail?.mother}
+                </p>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-4 flex-1">
+            <div className="flex flex-col items-center gap-4 flex-1 sm:w-1/2">
               <div className={`w-52 max-w-52 h-52 max-h-52 bg-green-100 border flex rounded-3xl flex-grow overflow-hidden `}>
                 <img
                   className="max-h-full min-w-full object-cover align-bottom"
@@ -35,11 +38,13 @@ const Bride = ({ theme, colorTheme, decoration }) => {
                 />
               </div>
               <p className="text-center text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-                Dr. Ini Wati S.Sos
+                {detail?.invitationDetail?.brideDetail?.fullName}
               </p>
               <div className="flex flex-col gap-1 justify-center items-center">
                 <p>Putri Dari:</p>
-                <p className="font-semibold">Bpk Ini Wati & Ibu Ini Wati</p>
+                <p className="font-semibold">
+                  {detail?.invitationDetail?.brideDetail?.father} & {detail?.invitationDetail?.brideDetail?.mother}
+                </p>
               </div>
             </div>
           </div>

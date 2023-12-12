@@ -122,14 +122,14 @@ const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
           ))}
         </div>
         <div ref={coverSection}>
-          <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} coverDetail={invitaionDetail} />
+          <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
         </div>
         {useSection.quote && <Quote theme={theme} colorTheme={colorTheme} />}
         <div ref={brideSection}>
-          <Bride theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          <Bride theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
         </div>
         <div ref={dateSection}>
-          <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} />
+          <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
         </div>
         {useSection?.galery && (
           <div ref={galerySection}>
@@ -148,7 +148,7 @@ const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
           {/* <div className="absolute -top-[70px]  scale-125">
             <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
           </div> */}
-          <p className="text-xl">Vendor Name</p>
+          <p className="text-xl">{invitaionDetail?.store?.storeName}</p>
           <p className="flex gap-2 items-center">
             <FaWhatsapp /> <span>08123456789</span>
           </p>
