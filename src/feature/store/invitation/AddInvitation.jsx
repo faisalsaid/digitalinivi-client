@@ -12,10 +12,9 @@ import * as Yup from 'yup';
 import { cloudImage } from '../../../config/cloudinary.js';
 import { AdvancedImage } from '@cloudinary/react';
 import { useDispatch } from 'react-redux';
-import { createOrder } from '../../order/config/orderSlice.js';
+import { createOrder, updateOrderById } from '../../order/config/orderSlice.js';
 
 const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
-  console.log(Object.keys(data).length === 0 ? 'kosong' : 'ada isi');
   const dispatch = useDispatch();
   const [value, setValue] = useState('customerDetail');
   const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
@@ -117,10 +116,11 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
         store: store._id,
         ...value,
       };
-      console.log(payload);
-      // dispatch(createOrder(payload));
+      // console.log(payload);
+      dispatch(createOrder(payload));
     } else {
       console.log(value);
+      dispatch(updateOrderById(value));
     }
   };
   const onReset = (value, props) => {
@@ -141,7 +141,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
             </Tabs>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
-                // console.log(formik);
+                console.log(formik);
                 const { setFieldValue } = formik;
                 return (
                   <Form>
@@ -211,7 +211,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                             <FormControl fullWidth>
                               <Field name="invitationDetail.type">
                                 {({ field, form, meta }) => {
-                                  console.log(field, form, meta);
+                                  // console.log(field, form, meta);
                                   return (
                                     <>
                                       <InputLabel id="invitation-type-label">Tipe</InputLabel>

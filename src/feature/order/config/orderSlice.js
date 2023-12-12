@@ -37,6 +37,17 @@ export const deleteOrderById = createAsyncThunk('store/deleteOrderById', async (
   }
 });
 
+export const updateOrderById = createAsyncThunk('store/updateOrderById', async (order, thunkAPI) => {
+  // console.log(order);
+  try {
+    const token = thunkAPI.getState().user.curentUser.token;
+    return await orderServices.updateOrderById(order, token);
+  } catch (error) {
+    const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState = {
   listOrder: [],
   isError: false,

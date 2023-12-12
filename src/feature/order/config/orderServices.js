@@ -27,6 +27,7 @@ const getAllOrder = async (order_id, token) => {
 
   return response.data;
 };
+
 const deleteOneById = async (order_id, token) => {
   console.log('deleteOneById', order_id, token);
   const config = {
@@ -41,9 +42,26 @@ const deleteOneById = async (order_id, token) => {
   return response.data;
 };
 
+const updateOrderById = async (order, token) => {
+  console.log('updateOrderById', order);
+
+  const { _id, ...payload } = order;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(`${apiURI}/order/${_id}`, payload, config);
+  // console.log(response.data);
+
+  return response.data;
+};
+
 const orderServices = {
   createOrder,
   getAllOrder,
   deleteOneById,
+  updateOrderById,
 };
 export default orderServices;

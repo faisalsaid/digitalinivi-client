@@ -22,7 +22,7 @@ const StoreDetails = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
 
-  // const [rows, setRows] = useState([]);
+  console.log(listOrder);
 
   const columns = [
     { field: 'customerName', headerName: 'Pemesan', width: 200, valueGetter: (params) => params.row.customerDetail.name },
