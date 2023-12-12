@@ -31,12 +31,12 @@ const AddStore = ({ openModal, handleCloseModal, data }) => {
         ...value,
         _id: data._id,
       };
-      handleCloseModal();
+      handleToCloseModal();
       dispatch(updateStore(dataUpdate));
       return;
     }
+    handleToCloseModal();
     dispatch(createStore(value));
-    handleCloseModal();
   };
 
   // Handle reset form
