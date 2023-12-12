@@ -14,8 +14,8 @@ import { AdvancedImage } from '@cloudinary/react';
 import { useDispatch } from 'react-redux';
 import { createOrder } from '../../order/config/orderSlice.js';
 
-const AddInvitation = ({ openModal, handleCloseModal, store }) => {
-  // console.log(store);
+const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
+  console.log(Object.keys(data).length === 0 ? 'kosong' : 'ada isi');
   const dispatch = useDispatch();
   const [value, setValue] = useState('customerDetail');
   const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
@@ -23,40 +23,45 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
 
   const themeThumbnail = cloudImage.image(themeThumbnailPublicId);
 
-  const initialValues = {
-    customerDetail: {
-      name: '',
-      email: '',
-      phone: '',
-    },
-    type: 'marriage',
-    theme: 'nkh-001',
-    groomDetail: {
-      fullName: '',
-      nickName: '',
-      father: '',
-      mother: '',
-    },
-    brideDetail: {
-      fullName: '',
-      nickName: '',
-      father: '',
-      mother: '',
-    },
-    marriageInfo: {
-      date: date,
-      time: date,
-      location: '',
-      maps: '',
-    },
-    receptionInfo: {
-      date: date,
-      time: date,
-      location: '',
-      maps: '',
-    },
-    galery: [],
-  };
+  const initialValues =
+    Object.keys(data).length !== 0
+      ? data
+      : {
+          customerDetail: {
+            name: '',
+            email: '',
+            phone: '',
+          },
+          invitationDetail: {
+            type: 'marriage',
+            theme: 'nkh-001',
+            groomDetail: {
+              fullName: '',
+              nickName: '',
+              father: '',
+              mother: '',
+            },
+            brideDetail: {
+              fullName: '',
+              nickName: '',
+              father: '',
+              mother: '',
+            },
+            marriageInfo: {
+              date: date,
+              time: date,
+              location: '',
+              maps: '',
+            },
+            receptionInfo: {
+              date: date,
+              time: date,
+              location: '',
+              maps: '',
+            },
+            galery: [],
+          },
+        };
 
   const validationSchema = Yup.object({
     customerDetail: Yup.object({
@@ -64,33 +69,35 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
       phone: Yup.string().required('No. Handphone harus terisi').min(8, 'Minimal 8 karakter'),
       email: Yup.string(),
     }),
-    type: Yup.string().required('Tipe harus Terisi'),
-    theme: Yup.string().required('Tema harus Terisi'),
-    groomDetail: Yup.object({
-      fullName: Yup.string().required('Nama lengkap pria harus terisi').min(3, 'Minimal 3 karakter'),
-      nickName: Yup.string().required('Nama sapaan pria harus terisi').min(3, 'Minimal 3 karakter'),
-      father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
-      mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+    invitationDetail: Yup.object({
+      type: Yup.string().required('Tipe harus Terisi'),
+      theme: Yup.string().required('Tema harus Terisi'),
+      groomDetail: Yup.object({
+        fullName: Yup.string().required('Nama lengkap pria harus terisi').min(3, 'Minimal 3 karakter'),
+        nickName: Yup.string().required('Nama sapaan pria harus terisi').min(3, 'Minimal 3 karakter'),
+        father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+        mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+      }),
+      brideDetail: Yup.object({
+        fullName: Yup.string().required('Nama lengkap wanita harus terisi'),
+        nickName: Yup.string().required('Nama sapaan wanita harus terisi'),
+        father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+        mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
+      }),
+      marriageInfo: Yup.object({
+        date: Yup.date().required('Tanggal harus terisi'),
+        time: Yup.date().required('Waktu harus terisi'),
+        location: Yup.string().required('Lokasi harus terisi'),
+        maps: Yup.string(),
+      }),
+      receptionInfo: Yup.object({
+        date: Yup.date().required('Tanggal harus terisi'),
+        time: Yup.date().required('Waktu harus terisi'),
+        location: Yup.string().required('Lokasi harus terisi'),
+        maps: Yup.string(),
+      }),
+      galery: Yup.array(),
     }),
-    brideDetail: Yup.object({
-      fullName: Yup.string().required('Nama lengkap wanita harus terisi'),
-      nickName: Yup.string().required('Nama sapaan wanita harus terisi'),
-      father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
-      mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
-    }),
-    marriageInfo: Yup.object({
-      date: Yup.date().required('Tanggal harus terisi'),
-      time: Yup.date().required('Waktu harus terisi'),
-      location: Yup.string().required('Lokasi harus terisi'),
-      maps: Yup.string(),
-    }),
-    receptionInfo: Yup.object({
-      date: Yup.date().required('Tanggal harus terisi'),
-      time: Yup.date().required('Waktu harus terisi'),
-      location: Yup.string().required('Lokasi harus terisi'),
-      maps: Yup.string(),
-    }),
-    galery: Yup.array(),
   });
 
   const handleChange = (event, newValue) => {
@@ -103,19 +110,18 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
   };
 
   const onSubmit = (value, props) => {
-    console.log(value);
-
-    const { customerDetail, ...invitationDetail } = value;
-
-    const payload = {
-      store: store._id,
-      customerDetail,
-      invitationDetail,
-    };
-
-    console.log(payload);
-
-    dispatch(createOrder(payload));
+    // console.log(value);
+    // const { customerDetail, ...invitationDetail } = value;
+    if (Object.keys(data).length === 0) {
+      const payload = {
+        store: store._id,
+        ...value,
+      };
+      console.log(payload);
+      // dispatch(createOrder(payload));
+    } else {
+      console.log(value);
+    }
   };
   const onReset = (value, props) => {
     console.log(props);
@@ -203,13 +209,20 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                         <TabPanel value="invitationDetail">
                           <div className="flex flex-col gap-4">
                             <FormControl fullWidth>
-                              <Field name="type">
+                              <Field name="invitationDetail.type">
                                 {({ field, form, meta }) => {
-                                  //   console.log(field, form, meta);
+                                  console.log(field, form, meta);
                                   return (
                                     <>
                                       <InputLabel id="invitation-type-label">Tipe</InputLabel>
-                                      <Select {...field} size="small" labelId="invitation-type-label" id="invitation-type-select" value={form.values.type} label="Tipe">
+                                      <Select
+                                        {...field}
+                                        size="small"
+                                        labelId="invitation-type-label"
+                                        id="invitation-type-select"
+                                        value={form.values.invitationDetail.type}
+                                        label="Tipe"
+                                      >
                                         <MenuItem value={'marriage'}>Nikahan</MenuItem>
                                         <MenuItem value={'birthday'}>Ulang Tahun</MenuItem>
                                       </Select>
@@ -218,9 +231,9 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                 }}
                               </Field>
                             </FormControl>
-                            <Field name="theme">
+                            <Field name="invitationDetail.theme">
                               {({ field, form, meta }) => {
-                                console.log(field, form, meta);
+                                // console.log(field, form, meta);
                                 return (
                                   <Autocomplete
                                     {...field}
@@ -231,10 +244,10 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     // sx={{ width: 300 }}
                                     fullWidth
                                     defaultValue={{ value: 'nkh-001', label: 'NKH-001' }}
-                                    value={form.values.theme}
+                                    // value={form.values.invitationDetail.theme}
                                     onChange={(e, data) => {
                                       setThemeThumbnailPublicId(data.thumbnail);
-                                      setFieldValue('theme', data.value);
+                                      setFieldValue('invitationDetail.theme', data.value);
                                     }}
                                     renderInput={(params) => <TextField {...params} label="Tema" />}
                                   />
@@ -249,7 +262,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                             <div className="flex flex-col gap-4">
                               <p>Pengantin Pria :</p>
                               <div className="flex flex-col gap-4">
-                                <Field name="groomDetail.fullName">
+                                <Field name="invitationDetail.groomDetail.fullName">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -267,7 +280,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="groomDetail.nickName">
+                                <Field name="invitationDetail.groomDetail.nickName">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -285,7 +298,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="groomDetail.father">
+                                <Field name="invitationDetail.groomDetail.father">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -303,7 +316,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="groomDetail.mother">
+                                <Field name="invitationDetail.groomDetail.mother">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -326,7 +339,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                             <div className="flex flex-col gap-4">
                               <p>Pengantin Wanita :</p>
                               <div className="flex flex-col gap-4">
-                                <Field name="brideDetail.fullName">
+                                <Field name="invitationDetail.brideDetail.fullName">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -344,7 +357,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="brideDetail.nickName">
+                                <Field name="invitationDetail.brideDetail.nickName">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -362,7 +375,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="brideDetail.father">
+                                <Field name="invitationDetail.brideDetail.father">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -380,7 +393,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="brideDetail.mother">
+                                <Field name="invitationDetail.brideDetail.mother">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -407,7 +420,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                             <div className="flex flex-col gap-4">
                               <p>Akad :</p>
                               <div className="flex flex-col gap-4">
-                                <Field name="marriageInfo.date">
+                                <Field name="invitationDetail.marriageInfo.date">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -425,7 +438,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="marriageInfo.time">
+                                <Field name="invitationDetail.marriageInfo.time">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -443,7 +456,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="marriageInfo.location">
+                                <Field name="invitationDetail.marriageInfo.location">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -461,7 +474,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="marriageInfo.map">
+                                <Field name="invitationDetail.marriageInfo.map">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -484,7 +497,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                             <div className="flex flex-col gap-4">
                               <p>Resepsi :</p>
                               <div className="flex flex-col gap-4">
-                                <Field name="receptionInfo.date">
+                                <Field name="invitationDetail.receptionInfo.date">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -502,7 +515,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="receptionInfo.time">
+                                <Field name="invitationDetail.receptionInfo.time">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -520,7 +533,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="receptionInfo.location">
+                                <Field name="invitationDetail.receptionInfo.location">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
@@ -538,7 +551,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store }) => {
                                     );
                                   }}
                                 </Field>
-                                <Field name="receptionInfo.map">
+                                <Field name="invitationDetail.receptionInfo.map">
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (

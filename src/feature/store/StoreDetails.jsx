@@ -80,12 +80,13 @@ const StoreDetails = () => {
 
   const handleAddInvitationModal = () => {
     setOpenModal(true);
-    setModalData(theStore);
+    // setModalData(theStore);
   };
 
   const handleEditInvitation = (invitaion_data) => {
     setOpenModal(true);
-    console.log(invitaion_data);
+    setModalData(invitaion_data);
+    // console.log(invitaion_data);
   };
 
   const getRowId = (row) => {
@@ -133,7 +134,7 @@ const StoreDetails = () => {
               checkboxSelection
             />
           </div>
-          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={modalData} />
+          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} data={modalData} />
         </div>
       )}
     </>
