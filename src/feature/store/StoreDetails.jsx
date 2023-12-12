@@ -20,6 +20,8 @@ const StoreDetails = () => {
   const dispatch = useDispatch();
   const { storeId } = useParams();
   const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState({});
+
   // const [rows, setRows] = useState([]);
 
   const columns = [
@@ -45,7 +47,7 @@ const StoreDetails = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Edit">
-            <IconButton color="success" aria-label="delete">
+            <IconButton onClick={() => handleEditInvitation(params.row)} color="success" aria-label="delete">
               <EditNoteIcon />
             </IconButton>
           </Tooltip>
@@ -78,6 +80,12 @@ const StoreDetails = () => {
 
   const handleAddInvitationModal = () => {
     setOpenModal(true);
+    setModalData(theStore);
+  };
+
+  const handleEditInvitation = (invitaion_data) => {
+    setOpenModal(true);
+    console.log(invitaion_data);
   };
 
   const getRowId = (row) => {
@@ -125,7 +133,7 @@ const StoreDetails = () => {
               checkboxSelection
             />
           </div>
-          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} />
+          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={modalData} />
         </div>
       )}
     </>
