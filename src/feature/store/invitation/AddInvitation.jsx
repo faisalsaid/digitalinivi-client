@@ -18,49 +18,8 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('customerDetail');
   const [themeThumbnailPublicId, setThemeThumbnailPublicId] = useState('digitalinvi_avatar/userone-emial-com-avatar');
-  const [date, setDate] = useState(new Date());
 
   const themeThumbnail = cloudImage.image(themeThumbnailPublicId);
-
-  const initialValues =
-    Object.keys(data).length !== 0
-      ? data
-      : {
-          customerDetail: {
-            name: '',
-            email: '',
-            phone: '',
-          },
-          invitationDetail: {
-            type: 'marriage',
-            theme: 'nkh-001',
-            groomDetail: {
-              fullName: '',
-              nickName: '',
-              father: '',
-              mother: '',
-            },
-            brideDetail: {
-              fullName: '',
-              nickName: '',
-              father: '',
-              mother: '',
-            },
-            marriageInfo: {
-              date: date,
-              time: date,
-              location: '',
-              maps: '',
-            },
-            receptionInfo: {
-              date: date,
-              time: date,
-              location: '',
-              maps: '',
-            },
-            galery: [],
-          },
-        };
 
   const validationSchema = Yup.object({
     customerDetail: Yup.object({
@@ -109,19 +68,16 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
   };
 
   const onSubmit = (value, props) => {
-    // console.log(value);
-    // const { customerDetail, ...invitationDetail } = value;
-    if (Object.keys(data).length === 0) {
+    if (value && value._id) {
+      handleCloseModal();
+      dispatch(updateOrderById(value));
+    } else {
       const payload = {
         store: store._id,
         ...value,
       };
-      // console.log(payload);
-      dispatch(createOrder(payload));
-    } else {
-      console.log(value);
       handleCloseModal();
-      dispatch(updateOrderById(value));
+      dispatch(createOrder(payload));
     }
   };
   const onReset = (value, props) => {
@@ -140,7 +96,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
               <Tab label="Waktu & Tempat" value="dateLocation" />
               <Tab label="Galeri" value="galery" />
             </Tabs>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
+            <Formik initialValues={data} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
                 console.log(formik);
                 const { setFieldValue } = formik;

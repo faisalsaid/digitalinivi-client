@@ -21,17 +21,55 @@ const StoreDetails = () => {
   const { storeId } = useParams();
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [date, setDate] = useState(new Date());
+
+  const initialValues = {
+    customerDetail: {
+      name: '',
+      email: '',
+      phone: '',
+    },
+    invitationDetail: {
+      type: 'marriage',
+      theme: 'nkh-001',
+      groomDetail: {
+        fullName: '',
+        nickName: '',
+        father: '',
+        mother: '',
+      },
+      brideDetail: {
+        fullName: '',
+        nickName: '',
+        father: '',
+        mother: '',
+      },
+      marriageInfo: {
+        date: date,
+        time: date,
+        location: '',
+        maps: '',
+      },
+      receptionInfo: {
+        date: date,
+        time: date,
+        location: '',
+        maps: '',
+      },
+      galery: [],
+    },
+  };
 
   console.log(listOrder);
 
   const columns = [
     { field: 'customerName', headerName: 'Pemesan', width: 200, valueGetter: (params) => params.row.customerDetail.name },
     { field: 'phone', headerName: 'No Kontak', width: 130, valueGetter: (params) => params.row.customerDetail.phone },
-    { field: 'type', headerName: 'Tipe', width: 100, valueGetter: (params) => (params.row.invitationDetail.type === 'marriage' ? 'Pernikahan' : 'Ulang Tahun'), sortable: false },
+    // { field: 'type', headerName: 'Tipe', width: 100, valueGetter: (params) => (params.row.invitationDetail.type === 'marriage' ? 'Pernikahan' : 'Ulang Tahun'), sortable: false },
     { field: 'theme', headerName: 'Tema', width: 80, valueGetter: (params) => params.row.invitationDetail.theme.toUpperCase() },
-    { field: 'slug', headerName: 'Kode Undangan', width: 200, valueGetter: (params) => params.row.slug },
-    { field: 'groom', headerName: 'Pria', width: 200, valueGetter: (params) => params.row.invitationDetail.groomDetail.nickName },
-    { field: 'bride', headerName: 'Wanita', width: 200, valueGetter: (params) => params.row.invitationDetail.brideDetail.nickName },
+    { field: 'slug', headerName: 'Slug', width: 200, valueGetter: (params) => params.row.slug },
+    { field: 'groom', headerName: 'Pria', width: 200, valueGetter: (params) => params.row.invitationDetail.groomDetail.fullName },
+    { field: 'bride', headerName: 'Wanita', width: 200, valueGetter: (params) => params.row.invitationDetail.brideDetail.fullName },
 
     {
       field: 'action',
@@ -80,7 +118,7 @@ const StoreDetails = () => {
 
   const handleAddInvitationModal = () => {
     setOpenModal(true);
-    // setModalData(theStore);
+    setModalData(initialValues);
   };
 
   const handleEditInvitation = (invitaion_data) => {
