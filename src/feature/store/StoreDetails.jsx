@@ -123,7 +123,8 @@ const StoreDetails = () => {
             <DataGrid
               getRowId={getRowId}
               rows={listOrder}
-              rowSelection
+              rowSelection={false}
+              // rowCount
               columns={columns}
               initialState={{
                 pagination: {

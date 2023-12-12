@@ -124,8 +124,26 @@ const orderSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.error.message;
+      })
+      // handle delete End
+
+      // handle update store start
+      .addCase(updateOrderById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateOrderById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.listOrder = state.listOrder.map((order) => (order._id === action.payload._id ? { ...order, ...action.payload } : order));
+        toast(`Berhasil Perbarui Toko `);
+      })
+      .addCase(updateOrderById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.error.message;
+        console.log(action);
       });
-    // handle delete End
+    // handle update store end
   },
 });
 
