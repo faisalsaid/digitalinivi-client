@@ -120,6 +120,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
       dispatch(createOrder(payload));
     } else {
       console.log(value);
+      handleCloseModal();
       dispatch(updateOrderById(value));
     }
   };
@@ -579,7 +580,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                         <Button type="reset" color="error" className="" variant="contained" startIcon={<CloseIcon />} onClick={handleToCloseModal}>
                           Batal
                         </Button>
-                        <Button type="submit" className="" variant="contained" startIcon={<PhotoIcon />} disabled={false}>
+                        <Button type="submit" className="" variant="contained" startIcon={<PhotoIcon />} disabled={!formik.dirty || (formik.dirty && !formik.isValid)}>
                           Kirim
                         </Button>
                       </div>
