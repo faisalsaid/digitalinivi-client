@@ -8,10 +8,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
 import { getOneStore } from './config/storeSlice';
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, IconButton, Tooltip, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import AddInvitation from './invitation/AddInvitation';
 import { deleteOrderById, fetchAllOrder } from '../order/config/orderSlice';
 import { DataGrid } from '@mui/x-data-grid';
+import DialogComponent from '../../components/share/DialogComponent';
 
 const StoreDetails = () => {
   const navigation = useNavigate();
@@ -22,6 +23,8 @@ const StoreDetails = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [date, setDate] = useState(new Date());
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({});
 
   const initialValues = {
     customerDetail: {
@@ -80,7 +83,7 @@ const StoreDetails = () => {
         <>
           {/* {console.log(params)} */}
           <Tooltip title="Hapus">
-            <IconButton onClick={() => handleDeleteOrder(params.id)} color="error" aria-label="delete">
+            <IconButton onClick={() => handleOpenDialog(params.row)} color="error" aria-label="delete">
               <DeleteForeverIcon />
             </IconButton>
           </Tooltip>
@@ -133,6 +136,26 @@ const StoreDetails = () => {
 
   const handleDeleteOrder = (order_id) => {
     dispatch(deleteOrderById(order_id));
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = (dataRow) => {
+    setOpenDialog(true);
+    setDialogContent({
+      type: 'alert',
+      title: 'Hapus Undangan',
+      text: `Anda yakin ingin menhapus undangan ${dataRow.slug} `,
+      data: dataRow,
+    });
+  };
+
+  const handleSubmitDialog = (data) => {
+    handleDeleteOrder(data._id);
+    console.log(data);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   if (isLoading) {
@@ -174,6 +197,7 @@ const StoreDetails = () => {
             />
           </div>
           <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} data={modalData} />
+          <DialogComponent open={openDialog} handleClose={handleCloseDialog} content={dialogContent} submit={handleSubmitDialog} />
         </div>
       )}
     </>
