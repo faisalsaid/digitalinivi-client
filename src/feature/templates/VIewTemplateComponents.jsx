@@ -16,18 +16,10 @@ import { useEffect, useRef, useState } from 'react';
 import MasterTemplate from './invitationTemplate/MasterTemplate';
 import { colorTheme } from '../../hook/static/themeDetail';
 import THEME_LIST from '../../hook/static/THEME_LIST.json';
+import INVITAION_INFO from '../../hook/static/MOC_INVITATION_DETAIL.json';
 
 const VIewTemplateComponents = () => {
-  const [colorSchema, setColorSchema] = useState('daun');
-  const [invitationCode, setInvitationCode] = useState('');
-  const [category, setCategory] = useState('');
   const { code } = useParams();
-  const navigate = useNavigate();
-
-  const handleColorSchema = (value) => {
-    setColorSchema(value);
-  };
-
   useEffect(() => {
     const result = THEME_LIST.filter((theme) => theme.code === code);
     if (result.length === 0) {
@@ -35,6 +27,14 @@ const VIewTemplateComponents = () => {
     }
     setInvitationCode(code);
   }, [code]);
+
+  const [colorSchema, setColorSchema] = useState('daun');
+  const [invitationCode, setInvitationCode] = useState('');
+  const navigate = useNavigate();
+
+  const handleColorSchema = (value) => {
+    setColorSchema(value);
+  };
 
   return (
     <>
@@ -63,7 +63,7 @@ const VIewTemplateComponents = () => {
           code: invitationCode,
           type: 'marriage',
         }}
-        info={'theOrder'}
+        info={INVITAION_INFO}
       />
     </>
   );
