@@ -1,5 +1,6 @@
 import { Stack, Typography, Card, CardActions, CardContent, CardMedia, Button, Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useState } from 'react';
+import THEME_LIST from '../../hook/static/THEME_LIST.json';
 
 const TemplatesComponent = () => {
   const [category, setCategory] = useState('all');
@@ -38,8 +39,8 @@ const TemplatesComponent = () => {
         </div>
       </Stack>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {[1, 2, 3, 4, 5, 6, 7].map((data, i) => (
-          <Card key={data}>
+        {THEME_LIST.map((data) => (
+          <Card key={data.code}>
             <CardMedia
               sx={{ height: 180 }}
               image="https://cdn.dribbble.com/userupload/2972633/file/original-a04fbbe60fe11c10375ed9ff1fee84d2.png?resize=400x0"
@@ -47,7 +48,7 @@ const TemplatesComponent = () => {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                NKH-001
+                {data.label}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Undangan Penikahan Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci mollitia ad ullam?

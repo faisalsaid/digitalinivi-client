@@ -1,0 +1,58 @@
+{
+    "customerDetail": {
+        "name": "Terbaru",
+        "email": "",
+        "phone": "0843838372243"
+    },
+    "accessAcount": {
+        "userName": "fsdfsdf-fdsfdsfdsfsdfsdf"
+    },
+    "invitationDetail": {
+        "groomDetail": {
+            "fullName": "Kanawe Orghaio",
+            "nickName": "awe",
+            "father": "ayah pria",
+            "mother": "ibu pria"
+        },
+        "brideDetail": {
+            "fullName": "Nama Wanita",
+            "nickName": "wanita",
+            "father": "ayah wanita",
+            "mother": "ibu wanita"
+        },
+        "marriageInfo": {
+            "date": "2023-12-12T01:07:17.850Z",
+            "location": "Tempat Akad",
+            "maps": "",
+            "time": "2023-12-12T01:07:17.850Z"
+        },
+        "receptionInfo": {
+            "date": "2023-12-12T01:07:17.850Z",
+            "location": "Tempat Pesta",
+            "maps": "",
+            "time": "2023-12-12T01:07:17.850Z"
+        },
+        "theme": {
+            "code": "marriage",
+            "theme": "nkh-001",
+            "color": "daun"
+        },
+        "galery": [],
+        "guests": []
+    },
+    "_id": "6577b2608fe82358101c69ba",
+    "store": {
+        "_id": "65751081b9c690c6c1ad53c8",
+        "owner": "6570236c500cad36e74d4bc5",
+        "storeName": "Suckseed Enterprize",
+        "slug": "suckseed-enterprize",
+        "avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+        "createdAt": "2023-12-10T01:12:33.414Z",
+        "updatedAt": "2023-12-10T03:59:48.959Z",
+        "__v": 0
+    },
+    "slug": "nikahan-fdfdsfd-fdfd",
+    "createdAt": "2023-12-12T01:07:44.117Z",
+    "updatedAt": "2023-12-12T07:46:46.714Z",
+    "__v": 0
+}

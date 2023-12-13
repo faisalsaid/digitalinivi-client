@@ -39,22 +39,20 @@ const bottomMenu = [
   },
 ];
 
-const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
-  console.log(invitaionDetail);
+const MasterTemplate = ({ invitaionTheme, info }) => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
-  const [theme, setTheme] = useState('daun');
+  const [theme, setTheme] = useState('');
   const [category, setCategory] = useState('');
-  const [decoration, setDecoration] = useState('/nkh-001-daun.svg');
+  const [decoration, setDecoration] = useState('');
 
   useEffect(() => {
-    // console.log(themeDetail);
-    if (themeDetail && themeDetail?.invitationCode && themeDetail?.themeColor) {
-      setDecoration(`/${themeDetail.invitationCode}-${themeDetail.themeColor}.svg`);
+    if (invitaionTheme && invitaionTheme?.code && invitaionTheme?.color) {
+      setDecoration(`/${invitaionTheme?.code}-${invitaionTheme?.color}.svg`);
     }
-    if (themeDetail && themeDetail.themeColor) {
-      setTheme(themeDetail.themeColor);
+    if (invitaionTheme && invitaionTheme?.color) {
+      setTheme(invitaionTheme?.color);
     }
-  }, [themeDetail]);
+  }, [invitaionTheme]);
 
   const coverSection = useRef(null);
   const brideSection = useRef(null);
@@ -122,7 +120,7 @@ const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
           ))}
         </div>
         <div ref={coverSection}>
-          <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
+          <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
         </div>
         {useSection.quote ? (
           <Quote theme={theme} colorTheme={colorTheme} />
@@ -130,11 +128,11 @@ const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
           <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         )}
         <div ref={brideSection}>
-          <Bride theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
+          <Bride theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
         </div>
         <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         <div ref={dateSection}>
-          <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
+          <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
         </div>
         <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         {useSection?.galery && (
@@ -155,7 +153,7 @@ const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
           {/* <div className="absolute -top-[70px]  scale-125">
             <img className="mx-auto" src={`/ornamen-${theme}.svg`} />
           </div> */}
-          <p className="text-xl">{invitaionDetail?.store?.storeName}</p>
+          <p className="text-xl">{info?.store?.storeName}</p>
           <p className="flex gap-2 items-center">
             <FaWhatsapp /> <span>08123456789</span>
           </p>

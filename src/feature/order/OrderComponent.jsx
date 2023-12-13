@@ -10,6 +10,11 @@ const OrderComponent = () => {
   const { theOrder } = useSelector((state) => state.order);
   // console.log(store, order);
 
+  const invitaionTheme = {
+    code: theOrder?.invitationDetail?.theme,
+    type: theOrder?.invitationDetail?.type,
+    color: 'daun',
+  };
   useEffect(() => {
     const theParams = {
       store,
@@ -19,7 +24,7 @@ const OrderComponent = () => {
   }, [store, order]);
   return (
     <>
-      <MasterTemplate invitaionDetail={theOrder} />
+      <MasterTemplate invitaionTheme={invitaionTheme} info={theOrder} />
     </>
   );
 };

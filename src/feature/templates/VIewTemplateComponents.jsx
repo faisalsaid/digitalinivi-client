@@ -48,6 +48,12 @@ const VIewTemplateComponents = () => {
     setColorSchema(value);
   };
 
+  const invitaionTheme = {
+    code: 'nkh-001',
+    type: 'nikahan',
+    color: 'daun',
+  };
+
   return (
     <>
       <div className="p-6 flex justify-between flex-col gap-2">
@@ -66,28 +72,17 @@ const VIewTemplateComponents = () => {
                   </label>
                 </div>
               ))}
-            {/* <div className="flex gap-2 items-center  bg-[#EEFFD2] px-2 border-[#2F4D04] rounded-md border">
-              <input className="cursor-pointer" type="radio" name="theme_color" id="daun" value="daun" onChange={() => handleColorSchema('daun')} />
-              <label className="cursor-pointer " htmlFor="daun">
-                Daun
-              </label>
-            </div>
-            <div className="flex gap-2 items-center bg-[#FFDEDE] px-2 border-[#DA3434] rounded-md border">
-              <input className="cursor-pointer" type="radio" name="theme_color" id="mawar" value="mawar" onChange={() => handleColorSchema('mawar')} />
-              <label className="cursor-pointer" htmlFor="mawar">
-                Mawar
-              </label>
-            </div>
-            <div className="flex gap-2 items-center bg-[#FFE8C4] px-2 border-[#CF7000] rounded-md border">
-              <input className="cursor-pointer" type="radio" name="theme_color" id="kopi" value="kopi" onChange={() => handleColorSchema('kopi')} />
-              <label className="cursor-pointer" htmlFor="kopi">
-                Kopi
-              </label>
-            </div> */}
           </div>
         </div>
       </div>
-      <MasterTemplate themeDetail={{ invitationCode: invitationCode, themeColor: colorSchema }} />
+      <MasterTemplate
+        invitaionTheme={{
+          color: colorSchema,
+          code: 'nkh-001',
+          type: 'marriage',
+        }}
+        info={'theOrder'}
+      />
     </>
   );
 };
