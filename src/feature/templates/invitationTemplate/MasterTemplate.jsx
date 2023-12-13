@@ -124,18 +124,25 @@ const MasterTemplate = ({ themeDetail, invitaionDetail }) => {
         <div ref={coverSection}>
           <Cover theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
         </div>
-        {useSection.quote && <Quote theme={theme} colorTheme={colorTheme} />}
+        {useSection.quote ? (
+          <Quote theme={theme} colorTheme={colorTheme} />
+        ) : (
+          <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
+        )}
         <div ref={brideSection}>
           <Bride theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
         </div>
+        <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         <div ref={dateSection}>
           <DateLocation theme={theme} colorTheme={colorTheme} decoration={decoration} detail={invitaionDetail} />
         </div>
+        <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         {useSection?.galery && (
           <div ref={galerySection}>
             <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
           </div>
         )}
+        <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         {useSection.comment && (
           <div ref={commentsSection}>
             <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} />

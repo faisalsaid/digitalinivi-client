@@ -73,6 +73,16 @@ const StoreDetails = () => {
     { field: 'slug', headerName: 'Slug', width: 200, valueGetter: (params) => params.row.slug },
     { field: 'groom', headerName: 'Pria', width: 200, valueGetter: (params) => params.row.invitationDetail.groomDetail.fullName },
     { field: 'bride', headerName: 'Wanita', width: 200, valueGetter: (params) => params.row.invitationDetail.brideDetail.fullName },
+    {
+      field: 'link',
+      headerName: 'Link Undangan',
+      width: 200,
+      renderCell: (params) => (
+        <Tooltip title={`http://localhost:5173/${params.row.store.slug}/${params.row.slug}`}>
+          <p>{`http://localhost:5173/${params.row.store.slug}/${params.row.slug}`}</p>
+        </Tooltip>
+      ),
+    },
 
     {
       field: 'action',
