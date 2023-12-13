@@ -39,7 +39,7 @@ function App() {
             </Route>
           </Route>
           <Route path="template" element={<TemplatesComponent />} />
-          <Route path="template/:id" element={<VIewTemplateComponents />} />
+          <Route path="template/:code" element={<VIewTemplateComponents />} />
           <Route path=":store">
             <Route path=":order" element={<OrderComponent />} />
           </Route>

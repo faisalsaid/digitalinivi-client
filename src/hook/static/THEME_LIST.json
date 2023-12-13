@@ -1,10 +1,12 @@
 [
     {
         "code": "nkh-001",
-        "label": "NKH-001"
+        "label": "NKH-001",
+        "thumbnail": "image-code"
     },
     {
         "code": "nkh-002",
-        "label": "NKH-002"
+        "label": "NKH-002",
+        "thumbnail": "image-code"
     }
 ]

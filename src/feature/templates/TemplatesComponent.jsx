@@ -1,10 +1,12 @@
 import { Stack, Typography, Card, CardActions, CardContent, CardMedia, Button, Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { useState } from 'react';
 import THEME_LIST from '../../hook/static/THEME_LIST.json';
+import { useNavigate } from 'react-router';
 
 const TemplatesComponent = () => {
   const [category, setCategory] = useState('all');
   const [popular, setPopular] = useState('all');
+  const navigate = useNavigate();
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -56,7 +58,9 @@ const TemplatesComponent = () => {
             </CardContent>
             <CardActions>
               <Button size="small">Pesan</Button>
-              <Button size="small">Lihat</Button>
+              <Button size="small" onClick={() => navigate(`/template/${data.code}`)}>
+                Lihat
+              </Button>
             </CardActions>
           </Card>
         ))}

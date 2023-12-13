@@ -11,54 +11,36 @@ import { FaWhatsapp } from 'react-icons/fa';
 // import icons end
 
 import { Stack, IconButton } from '@mui/material';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import MasterTemplate from './invitationTemplate/MasterTemplate';
 import { colorTheme } from '../../hook/static/themeDetail';
-
-const bottomMenu = [
-  {
-    label: 'cover',
-    icon: <ArticleIcon color="success" />,
-  },
-  {
-    label: 'bride',
-    icon: <FavoriteIcon color="success" />,
-  },
-  {
-    label: 'date',
-    icon: <EventIcon color="success" />,
-  },
-  {
-    label: 'galery',
-    icon: <ImageIcon color="success" />,
-  },
-  {
-    label: 'comment',
-    icon: <CommentIcon color="success" />,
-  },
-];
+import THEME_LIST from '../../hook/static/THEME_LIST.json';
 
 const VIewTemplateComponents = () => {
   const [colorSchema, setColorSchema] = useState('daun');
-  const [invitationCode, setInvitationCode] = useState('nkh-002');
+  const [invitationCode, setInvitationCode] = useState('');
   const [category, setCategory] = useState('');
+  const { code } = useParams();
+  const navigate = useNavigate();
 
   const handleColorSchema = (value) => {
     setColorSchema(value);
   };
 
-  const invitaionTheme = {
-    code: 'nkh-001',
-    type: 'nikahan',
-    color: 'daun',
-  };
+  useEffect(() => {
+    const result = THEME_LIST.filter((theme) => theme.code === code);
+    if (result.length === 0) {
+      navigate('/template');
+    }
+    setInvitationCode(code);
+  }, [code]);
 
   return (
     <>
       <div className="p-6 flex justify-between flex-col gap-2">
         <p>
-          Kode Thema : <span className="uppercase">{invitationCode}</span>
+          Kode Thema : <span className="uppercase">{code}</span>
         </p>
         <div className="flex gap-1 flex-col">
           <p>Warna Tema :</p>
@@ -78,7 +60,7 @@ const VIewTemplateComponents = () => {
       <MasterTemplate
         invitaionTheme={{
           color: colorSchema,
-          code: 'nkh-001',
+          code: invitationCode,
           type: 'marriage',
         }}
         info={'theOrder'}
