@@ -36,6 +36,7 @@ const StoreDetails = () => {
     invitationDetail: {
       type: 'marriage',
       theme: 'nkh-001',
+      themeColor: 'daun',
       groomDetail: {
         fullName: '',
         nickName: '',

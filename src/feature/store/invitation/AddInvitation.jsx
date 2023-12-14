@@ -33,6 +33,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
     invitationDetail: Yup.object({
       type: Yup.string().required('Tipe harus Terisi'),
       theme: Yup.string().required('Tema harus Terisi'),
+      themeColor: Yup.string().required('Warna tema harus Terisi'),
       groomDetail: Yup.object({
         fullName: Yup.string().required('Nama lengkap pria harus terisi').min(3, 'Minimal 3 karakter'),
         nickName: Yup.string().required('Nama sapaan pria harus terisi').min(3, 'Minimal 3 karakter'),
@@ -184,36 +185,64 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         label="Tipe"
                                       >
                                         <MenuItem value={'marriage'}>Nikahan</MenuItem>
-                                        <MenuItem value={'birthday'}>Ulang Tahun</MenuItem>
+                                        {/* <MenuItem value={'birthday'}>Ulang Tahun</MenuItem> */}
                                       </Select>
                                     </>
                                   );
                                 }}
                               </Field>
                             </FormControl>
-                            <Field name="invitationDetail.theme">
-                              {({ field, form, meta }) => {
-                                // console.log(field, form, meta);
-                                return (
-                                  <Autocomplete
-                                    {...field}
-                                    // size="small"
-                                    disablePortal
-                                    id="combo-box-demo"
-                                    options={invitationThemes}
-                                    // sx={{ width: 300 }}
-                                    fullWidth
-                                    defaultValue={{ value: 'nkh-001', label: 'NKH-001' }}
-                                    // value={form.values.invitationDetail.theme}
-                                    onChange={(e, data) => {
-                                      setThemeThumbnailPublicId(data.thumbnail);
-                                      setFieldValue('invitationDetail.theme', data.value);
-                                    }}
-                                    renderInput={(params) => <TextField {...params} label="Tema" />}
-                                  />
-                                );
-                              }}
-                            </Field>
+                            <FormControl fullWidth>
+                              <Field name="invitationDetail.themeColor">
+                                {({ field, form, meta }) => {
+                                  // console.log(field, form, meta);
+                                  return (
+                                    <>
+                                      <InputLabel id="invitation-themeColor-label">Warna Tema</InputLabel>
+                                      <Select
+                                        {...field}
+                                        // size="small"
+                                        labelId="invitation-themeColor-label"
+                                        id="invitation-themeColor-select"
+                                        value={form.values.invitationDetail.themeColor}
+                                        label="Warna Tema"
+                                      >
+                                        <MenuItem value={'daun'}>Daun</MenuItem>
+                                        <MenuItem value={'laut'}>Laut</MenuItem>
+                                        <MenuItem value={'kopi'}>Kopi</MenuItem>
+                                        <MenuItem value={'mawar'}>Mawar</MenuItem>
+                                      </Select>
+                                    </>
+                                  );
+                                }}
+                              </Field>
+                            </FormControl>
+                            <FormControl fullWidth>
+                              <Field name="invitationDetail.theme">
+                                {({ field, form, meta }) => {
+                                  // console.log(field, form, meta);
+                                  return (
+                                    <Autocomplete
+                                      {...field}
+                                      // size="small"
+                                      disablePortal
+                                      id="combo-box-demo"
+                                      options={invitationThemes}
+                                      // sx={{ width: 300 }}
+                                      fullWidth
+                                      defaultValue={{ value: 'nkh-001', label: 'NKH-001' }}
+                                      // value={form.values.invitationDetail.theme}
+                                      onChange={(e, data) => {
+                                        setThemeThumbnailPublicId(data.thumbnail);
+                                        setFieldValue('invitationDetail.theme', data.value);
+                                      }}
+                                      renderInput={(params) => <TextField {...params} label="Tema" />}
+                                    />
+                                  );
+                                }}
+                              </Field>
+                            </FormControl>
+
                             <AdvancedImage cldImg={themeThumbnail} />
                           </div>
                         </TabPanel>
