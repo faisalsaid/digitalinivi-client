@@ -15,10 +15,12 @@ const AddStore = ({ openModal, handleCloseModal, data }) => {
 
   const initialValues = {
     storeName: data && data?.storeName ? data?.storeName : '',
+    phoneNumber: data && data?.phoneNumber ? data?.phoneNumber : '',
   };
 
   const validationSchema = Yup.object({
     storeName: Yup.string().required('Harus terisi').min(3, 'Minimal 3 Karakter').max(25, 'Maksimal 25 Karakter'),
+    phoneNumber: Yup.string().required('Harus terisi').min(8, 'Minimal 8 Karakter'),
   });
   const dispatch = useDispatch();
 
@@ -72,6 +74,22 @@ const AddStore = ({ openModal, handleCloseModal, data }) => {
                             variant="outlined"
                             label="Nama Toko"
                             type={'storeName'}
+                            error={meta.touched && meta.error ? true : false}
+                            helperText={meta.touched && meta.error && meta.error}
+                          />
+                        );
+                      }}
+                    </Field>
+                    <Field name="phoneNumber">
+                      {({ field, form, meta }) => {
+                        // console.log(field, form, meta);
+                        return (
+                          <TextField
+                            // disabled={isLoading}
+                            {...field}
+                            variant="outlined"
+                            label="No Hp"
+                            type={'phoneNumber'}
                             error={meta.touched && meta.error ? true : false}
                             helperText={meta.touched && meta.error && meta.error}
                           />
