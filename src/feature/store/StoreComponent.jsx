@@ -25,6 +25,7 @@ const StoreComponent = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
 
+  console.log(isLoading);
   const handleCloseModal = () => {
     setOpenModal(false);
     setPrevData({});
@@ -74,6 +75,10 @@ const StoreComponent = () => {
       data: dataRow,
     });
   };
+
+  if (isLoading) {
+    return <p>...Loading</p>;
+  }
 
   return (
     <div className="flex gap-4 flex-col">
