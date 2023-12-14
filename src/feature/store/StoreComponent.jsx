@@ -25,7 +25,7 @@ const StoreComponent = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
 
-  console.log(isLoading);
+  // console.log(isLoading);
   const handleCloseModal = () => {
     setOpenModal(false);
     setPrevData({});
