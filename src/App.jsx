@@ -26,8 +26,8 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Router>
           <Routes>
-            <Route path="/" element={<div>Landing Page</div>} />
-            <Route path="home" element={<div>Landing Page</div>} />
+            <Route path="/" element={<TemplatesComponent />} />
+            {/* <Route path="home" element={<div>Landing Page</div>} /> */}
             <Route element={<PrivateRoute authenticated={!curentUser} />}>
               <Route path="signin" element={<SigninComponent />} />
               <Route path="signup" element={<SignupComponent />} />
