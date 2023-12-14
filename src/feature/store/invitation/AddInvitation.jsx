@@ -94,7 +94,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
           <TabContext value={value}>
             <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example">
               <Tab label="Pemesan" value="customerDetail" />
-              <Tab label="Detail" value="invitationDetail" />
+              <Tab label="Tema" value="theme" />
               <Tab label="Pengantin" value="brideDetail" />
               <Tab label="Waktu & Tempat" value="dateLocation" />
               <Tab label="Galeri" value="galery" />
@@ -166,7 +166,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                             </Field>
                           </div>
                         </TabPanel>
-                        <TabPanel value="invitationDetail">
+                        <TabPanel value="theme">
                           <div className="flex flex-col gap-4">
                             <FormControl fullWidth>
                               <Field name="invitationDetail.type">
