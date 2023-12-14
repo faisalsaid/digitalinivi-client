@@ -25,8 +25,6 @@ const StoreComponent = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
 
-  // console.log(storeList, isLoading, isSuccess);
-
   const handleCloseModal = () => {
     setOpenModal(false);
     setPrevData({});
@@ -64,7 +62,7 @@ const StoreComponent = () => {
 
   const handleSubmitDialog = (data) => {
     handleDeleteStore(data._id);
-    console.log(data);
+    // console.log(data);
   };
 
   const handleOpenDialog = (dataRow) => {
@@ -107,21 +105,25 @@ const StoreComponent = () => {
                   This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
                 </Typography>
               </CardContent> */}
-              <CardActions disableSpacing>
-                <Tooltip title="Hapus">
-                  <IconButton onClick={() => handleOpenDialog(data)} color="error" sx={{ marginRight: 'auto' }} aria-label="delete">
-                    <DeleteForeverIcon />
+              {isLoading ? (
+                <p>..Loading</p>
+              ) : (
+                <CardActions disableSpacing>
+                  <Tooltip title="Hapus">
+                    <IconButton onClick={() => handleOpenDialog(data)} color="error" sx={{ marginRight: 'auto' }} aria-label="delete">
+                      <DeleteForeverIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <IconButton onClick={() => handleEditStore(data)} color="success" aria-label="edit">
+                    <EditIcon />
                   </IconButton>
-                </Tooltip>
-                <IconButton onClick={() => handleEditStore(data)} color="success" aria-label="edit">
-                  <EditIcon />
-                </IconButton>
-                <Tooltip title="Lihat">
-                  <IconButton onClick={() => handleChooseStore(data._id)} color="primary" aria-label="detail">
-                    <VisibilityIcon />
-                  </IconButton>
-                </Tooltip>
-              </CardActions>
+                  <Tooltip title="Lihat">
+                    <IconButton onClick={() => handleChooseStore(data._id)} color="primary" aria-label="detail">
+                      <VisibilityIcon />
+                    </IconButton>
+                  </Tooltip>
+                </CardActions>
+              )}
             </Card>
           ))}
       </div>

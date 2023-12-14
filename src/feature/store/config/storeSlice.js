@@ -71,12 +71,12 @@ const storeSlice = createSlice({
   name: 'store',
   initialState,
   reducers: {
-    reset: (state) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = false;
-      state.message = '';
-    },
+    // reset: (state) => {
+    //   state.isLoading = false;
+    //   state.isError = false;
+    //   state.isSuccess = false;
+    //   state.message = '';
+    // },
   },
   extraReducers: (builder) => {
     builder

@@ -6,7 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 const DialogComponent = ({ open, handleClose, content, submit }) => {
-  console.log(content);
+  // console.log(content);
 
   return (
     <>

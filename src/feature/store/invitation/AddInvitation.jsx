@@ -37,8 +37,8 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
         mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
       }),
       brideDetail: Yup.object({
-        fullName: Yup.string().required('Nama lengkap wanita harus terisi'),
-        nickName: Yup.string().required('Nama sapaan wanita harus terisi'),
+        fullName: Yup.string().required('Nama lengkap wanita harus terisi').min(3, 'Minimal 3 karakter'),
+        nickName: Yup.string().required('Nama sapaan wanita harus terisi').min(3, 'Minimal 3 karakter'),
         father: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
         mother: Yup.string().required('Nama ayah pria harus terisi').min(3, 'Minimal 3 karakter'),
       }),

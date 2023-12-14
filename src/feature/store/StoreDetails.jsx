@@ -16,8 +16,8 @@ import DialogComponent from '../../components/share/DialogComponent';
 
 const StoreDetails = () => {
   const navigation = useNavigate();
-  const { theStore, isLoading } = useSelector((state) => state.store);
-  const { listOrder } = useSelector((state) => state.order);
+  const { theStore, isLoading: storeLoading } = useSelector((state) => state.store);
+  const { listOrder, isLoading: orderLoading } = useSelector((state) => state.order);
   const dispatch = useDispatch();
   const { storeId } = useParams();
   const [openModal, setOpenModal] = useState(false);
@@ -26,6 +26,7 @@ const StoreDetails = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
 
+  console.log(theStore, listOrder, storeLoading, orderLoading);
   const initialValues = {
     customerDetail: {
       name: '',
@@ -63,7 +64,7 @@ const StoreDetails = () => {
     },
   };
 
-  console.log(listOrder);
+  // console.log(listOrder);
 
   const columns = [
     { field: 'customerName', headerName: 'Pemesan', width: 200, valueGetter: (params) => params.row.customerDetail.name },
@@ -173,7 +174,7 @@ const StoreDetails = () => {
     navigation(`/${order_detail.store.slug}/${order_detail.slug}`);
   };
 
-  if (isLoading) {
+  if (storeLoading) {
     return <>...Loding</>;
   }
   return (
@@ -196,20 +197,24 @@ const StoreDetails = () => {
             </div>
           </div>
           <div style={{ height: 400, width: '90%' }}>
-            <DataGrid
-              getRowId={getRowId}
-              rows={listOrder}
-              rowSelection={false}
-              // rowCount
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
-                },
-              }}
-              pageSizeOptions={[5, 10]}
-              checkboxSelection
-            />
+            {orderLoading ? (
+              <p>...loading</p>
+            ) : (
+              <DataGrid
+                getRowId={getRowId}
+                rows={listOrder}
+                rowSelection={false}
+                // rowCount
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5 },
+                  },
+                }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+              />
+            )}
           </div>
           <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} data={modalData} />
           <DialogComponent open={openDialog} handleClose={handleCloseDialog} content={dialogContent} submit={handleSubmitDialog} />
