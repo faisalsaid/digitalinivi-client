@@ -51,7 +51,8 @@ const ProfileComponent = () => {
     <Stack direction={'column'} gap={2}>
       <div className="w-full h-52 bg-sky-400 relative">
         <div className="w-32 h-32 absolute -bottom-12 left-1/2 -translate-x-1/2 ">
-          <div className="rounded-full overflow-hidden">
+          <div className="rounded-full overflow-hidden w-32 h-32 object-cover">
+            {/* <img className="w-full " src={curentUser.avatar.url}></img> */}
             <AdvancedImage cldImg={theImage} />
           </div>
           {/* <Avatar alt="Remy Sharp" src={curentUser ? curentUser?.avatar : ''} sx={{ width: '100%', height: '100%' }} /> */}

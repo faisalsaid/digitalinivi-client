@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { Button, Stack, Typography, Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Avatar, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router';
 import AddStore from './AddStore';
+import DialogComponent from '../../components/share/DialogComponent';
 
 const StoreComponent = () => {
   const { storeList, isLoading, isSuccess, isError } = useSelector((state) => state.store);
@@ -21,6 +22,8 @@ const StoreComponent = () => {
   const [openModal, setOpenModal] = useState(false);
   const [prevData, setPrevData] = useState({});
   const [diplayStore, setDisplayStore] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({});
 
   // console.log(storeList, isLoading, isSuccess);
 
@@ -51,8 +54,27 @@ const StoreComponent = () => {
   };
 
   const handleDeleteStore = (_id) => {
-    // console.log(_id);
+    setOpenDialog(false);
     dispatch(deleteStore(_id));
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleSubmitDialog = (data) => {
+    handleDeleteStore(data._id);
+    console.log(data);
+  };
+
+  const handleOpenDialog = (dataRow) => {
+    setOpenDialog(true);
+    setDialogContent({
+      type: 'alert',
+      title: 'Hapus Toko',
+      text: `Anda yakin ingin menhapus undangan ${dataRow.slug} `,
+      data: dataRow,
+    });
   };
 
   return (
@@ -87,7 +109,7 @@ const StoreComponent = () => {
               </CardContent> */}
               <CardActions disableSpacing>
                 <Tooltip title="Hapus">
-                  <IconButton onClick={() => handleDeleteStore(data._id)} color="error" sx={{ marginRight: 'auto' }} aria-label="delete">
+                  <IconButton onClick={() => handleOpenDialog(data)} color="error" sx={{ marginRight: 'auto' }} aria-label="delete">
                     <DeleteForeverIcon />
                   </IconButton>
                 </Tooltip>
@@ -104,6 +126,7 @@ const StoreComponent = () => {
           ))}
       </div>
       <AddStore openModal={openModal} handleCloseModal={handleCloseModal} data={prevData} />
+      <DialogComponent open={openDialog} handleClose={handleCloseDialog} content={dialogContent} submit={handleSubmitDialog} />
     </div>
   );
 };
