@@ -16,37 +16,41 @@ import MasterTemplate from './feature/templates/invitationTemplate/MasterTemplat
 import StoreComponent from './feature/store/StoreComponent';
 import StoreDetails from './feature/store/StoreDetails';
 import OrderComponent from './feature/order/OrderComponent';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 function App() {
   const { curentUser } = useSelector((state) => state.user);
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<div>Landing Page</div>} />
-          <Route path="home" element={<div>Landing Page</div>} />
-          <Route element={<PrivateRoute authenticated={!curentUser} />}>
-            <Route path="signin" element={<SigninComponent />} />
-            <Route path="signup" element={<SignupComponent />} />
-          </Route>
-          <Route element={<PrivateRoute authenticated={curentUser} />}>
-            <Route element={<Layout />}>
-              <Route path="dashboard" element={<DashboardComponent />} />
-              <Route path="store" element={<StoreComponent />} />
-              <Route path="store/:storeId" element={<StoreDetails />} />
-              <Route path="profile" element={<ProfileComponent />} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<div>Landing Page</div>} />
+            <Route path="home" element={<div>Landing Page</div>} />
+            <Route element={<PrivateRoute authenticated={!curentUser} />}>
+              <Route path="signin" element={<SigninComponent />} />
+              <Route path="signup" element={<SignupComponent />} />
             </Route>
-          </Route>
-          <Route path="template" element={<TemplatesComponent />} />
-          <Route path="template/:code" element={<VIewTemplateComponents />} />
-          <Route path=":store">
-            <Route path=":order" element={<OrderComponent />} />
-          </Route>
-          <Route path="/*" element={<PageNotFound />} />
-        </Routes>
-      </Router>
-      <ToastContainer />
+            <Route element={<PrivateRoute authenticated={curentUser} />}>
+              <Route element={<Layout />}>
+                <Route path="dashboard" element={<DashboardComponent />} />
+                <Route path="store" element={<StoreComponent />} />
+                <Route path="store/:storeId" element={<StoreDetails />} />
+                <Route path="profile" element={<ProfileComponent />} />
+              </Route>
+            </Route>
+            <Route path="template" element={<TemplatesComponent />} />
+            <Route path="template/:code" element={<VIewTemplateComponents />} />
+            <Route path=":store">
+              <Route path=":order" element={<OrderComponent />} />
+            </Route>
+            <Route path="/*" element={<PageNotFound />} />
+          </Routes>
+        </Router>
+        <ToastContainer />
+      </LocalizationProvider>
     </>
   );
 }

@@ -26,7 +26,7 @@ const StoreDetails = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
 
-  console.log(theStore, listOrder, storeLoading, orderLoading);
+  // console.log(theStore, listOrder, storeLoading, orderLoading);
   const initialValues = {
     customerDetail: {
       name: '',

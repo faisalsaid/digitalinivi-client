@@ -13,6 +13,9 @@ import { cloudImage } from '../../../config/cloudinary.js';
 import { AdvancedImage } from '@cloudinary/react';
 import { useDispatch } from 'react-redux';
 import { createOrder, updateOrderById } from '../../order/config/orderSlice.js';
+import { DatePicker } from '@mui/x-date-pickers';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import dayjs from 'dayjs';
 
 const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
   const dispatch = useDispatch();
@@ -98,7 +101,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
             </Tabs>
             <Formik initialValues={data} validationSchema={validationSchema} onReset={onReset} onSubmit={onSubmit} enableReinitialize>
               {(formik) => {
-                console.log(formik);
+                // console.log(formik);
                 const { setFieldValue } = formik;
                 return (
                   <Form>
@@ -116,7 +119,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                     variant="outlined"
                                     label="Nama"
                                     type={'text'}
-                                    size="small"
+                                    // size="small"
                                     fullWidth
                                     error={meta.touched && meta.error ? true : false}
                                     helperText={meta.touched && meta.error && meta.error}
@@ -135,7 +138,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                     variant="outlined"
                                     label="No Hp"
                                     type={'text'}
-                                    size="small"
+                                    // size="small"
                                     fullWidth
                                     error={meta.touched && meta.error ? true : false}
                                     helperText={meta.touched && meta.error && meta.error}
@@ -153,7 +156,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                     variant="outlined"
                                     label="Email"
                                     type={'text'}
-                                    size="small"
+                                    // size="small"
                                     fullWidth
                                     error={meta.touched && meta.error ? true : false}
                                     helperText={meta.touched && meta.error && meta.error}
@@ -174,7 +177,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                       <InputLabel id="invitation-type-label">Tipe</InputLabel>
                                       <Select
                                         {...field}
-                                        size="small"
+                                        // size="small"
                                         labelId="invitation-type-label"
                                         id="invitation-type-select"
                                         value={form.values.invitationDetail.type}
@@ -194,7 +197,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                 return (
                                   <Autocomplete
                                     {...field}
-                                    size="small"
+                                    // size="small"
                                     disablePortal
                                     id="combo-box-demo"
                                     options={invitationThemes}
@@ -229,7 +232,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Nama Lengkap"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -247,7 +250,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Nama Sapaan"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -265,7 +268,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Ayah"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -283,7 +286,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Ibu"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -306,7 +309,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Nama Lengkap"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -324,7 +327,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Nama Sapaan"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -342,7 +345,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Ayah"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -360,7 +363,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Ibu"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -379,15 +382,15 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                               <div className="flex flex-col gap-4">
                                 <Field name="invitationDetail.marriageInfo.date">
                                   {({ field, form, meta }) => {
-                                    // console.log(field, form, meta);
+                                    // console.log(field.value);
                                     return (
-                                      <TextField
-                                        // disabled={isLoading}
+                                      <DatePicker
                                         {...field}
-                                        variant="outlined"
-                                        label="Waktu"
-                                        type={'text'}
-                                        size="small"
+                                        value={dayjs(field.value)}
+                                        label="Tanggal"
+                                        onChange={(data, validate) => {
+                                          setFieldValue('invitationDetail.marriageInfo.date', data.$d);
+                                        }}
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -399,14 +402,13 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
-                                      <TextField
-                                        // disabled={isLoading}
+                                      <TimePicker
                                         {...field}
-                                        variant="outlined"
                                         label="Waktu"
-                                        type={'text'}
-                                        size="small"
-                                        fullWidth
+                                        value={dayjs(field.value)}
+                                        onChange={(data, validate) => {
+                                          setFieldValue('invitationDetail.marriageInfo.time', data.$d);
+                                        }}
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
                                       />
@@ -423,7 +425,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Lokasi"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -441,7 +443,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Map"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -458,16 +460,17 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
-                                      <TextField
-                                        // disabled={isLoading}
+                                      <DatePicker
                                         {...field}
-                                        variant="outlined"
+                                        value={dayjs(field.value)}
                                         label="Tanggal"
-                                        type={'text'}
-                                        size="small"
+                                        onChange={(data, validate) => {
+                                          setFieldValue('invitationDetail.receptionInfo.date', data.$d);
+                                        }}
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
+                                        // size="small"
                                       />
                                     );
                                   }}
@@ -476,14 +479,13 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                   {({ field, form, meta }) => {
                                     // console.log(field, form, meta);
                                     return (
-                                      <TextField
-                                        // disabled={isLoading}
+                                      <TimePicker
                                         {...field}
-                                        variant="outlined"
                                         label="Waktu"
-                                        type={'text'}
-                                        size="small"
-                                        fullWidth
+                                        value={dayjs(field.value)}
+                                        onChange={(data, validate) => {
+                                          setFieldValue('invitationDetail.receptionInfo.time', data.$d);
+                                        }}
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
                                       />
@@ -500,7 +502,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Lokasi"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -518,7 +520,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         variant="outlined"
                                         label="Map"
                                         type={'text'}
-                                        size="small"
+                                        // size="small"
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
