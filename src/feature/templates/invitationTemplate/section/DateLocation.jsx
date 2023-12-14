@@ -1,7 +1,9 @@
 import { MdOutlinePinDrop, MdOutlineDateRange, MdOutlineAccessTime } from 'react-icons/md';
 import { FaMapMarkedAlt } from 'react-icons/fa';
-
 // import icons END
+
+import { parseISO, format } from 'date-fns';
+import { id } from 'date-fns/locale';
 
 const DateLocation = ({ theme, colorTheme, decoration, detail }) => {
   return (
@@ -18,13 +20,13 @@ const DateLocation = ({ theme, colorTheme, decoration, detail }) => {
               <div>
                 <MdOutlineDateRange />
               </div>
-              <p>{detail?.invitationDetail?.marriageInfo?.date}</p>
+              <p>Tanggal : {format(new Date(detail?.invitationDetail?.marriageInfo?.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
             </div>
             <div className="flex gap-2 items-center">
               <div>
                 <MdOutlineAccessTime />
               </div>
-              <p>{detail?.invitationDetail?.marriageInfo?.time}</p>
+              <p>Waktu : {format(parseISO(detail?.invitationDetail?.marriageInfo?.time), 'hh:mm a')} - Selesai</p>
             </div>
             <div className="flex gap-2 items-baseline">
               <div>
@@ -45,13 +47,14 @@ const DateLocation = ({ theme, colorTheme, decoration, detail }) => {
               <div>
                 <MdOutlineDateRange />
               </div>
-              <p>{detail?.invitationDetail?.receptionInfo?.date}</p>
+              <p>Tanggal : {format(new Date(detail?.invitationDetail?.receptionInfo?.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
             </div>
             <div className="flex gap-2 items-center">
               <div>
                 <MdOutlineAccessTime />
               </div>
-              <p>{detail?.invitationDetail?.receptionInfo?.time}</p>
+              {/* {console.log()} */}
+              <p>Waktu : {format(parseISO(detail?.invitationDetail?.marriageInfo?.time), 'hh:mm a')} - Selesai</p>
             </div>
             <div className="flex gap-2 items-baseline">
               <div>

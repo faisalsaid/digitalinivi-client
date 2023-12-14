@@ -2,7 +2,10 @@ import { IoIosSend } from 'react-icons/io';
 import { GiConfirmed } from 'react-icons/gi';
 // import icons end
 
-const Comment = ({ theme, colorTheme, decoration }) => {
+import { format } from 'date-fns';
+import { id } from 'date-fns/locale';
+
+const Comment = ({ theme, colorTheme, decoration, detail }) => {
   return (
     <div className="min-h-screen flex flex-col justify-between items-center">
       <div className=" top-0   scale-x-105">
@@ -23,7 +26,7 @@ const Comment = ({ theme, colorTheme, decoration }) => {
           <p className="text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
             Budi & Wati
           </p>
-          <p>Sabtu, 29 April 2023</p>
+          <p>{format(new Date(detail?.invitationDetail?.marriageInfo?.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
         </div>
         <div className="shadow-lg bg-transparent max-w-2xl mx-auto">
           <p className=" text-white p-2 rounded-t-lg" style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }}>

@@ -1,4 +1,5 @@
-import React from 'react';
+import { format } from 'date-fns';
+import { id } from 'date-fns/locale';
 
 const Cover = ({ theme, colorTheme, decoration, detail }) => {
   return (
@@ -18,7 +19,8 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
         <span className="capitalize">{detail?.invitationDetail?.groomDetail?.nickName}</span> &{' '}
         <span className="capitalize"> {detail?.invitationDetail?.brideDetail?.nickName}</span>
       </p>
-      <p className="text-lg font-semibold  text-center">{detail?.invitationDetail?.marriageInfo.date}</p>
+      {console.log(detail?.invitationDetail?.marriageInfo.date)}
+      <p className="text-lg font-semibold  text-center">{format(new Date(detail?.invitationDetail?.marriageInfo.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
       <div className="flex gap-4">
         {['Hari', 'Jam', 'Menit'].map((data) => (
           <div key={data} className="">

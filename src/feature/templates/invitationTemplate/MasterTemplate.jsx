@@ -140,7 +140,7 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
         <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         {useSection.comment && (
           <div ref={commentsSection}>
-            <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} />
+            <Comment theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
           </div>
         )}
         <div
