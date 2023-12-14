@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import MasterTemplate from '../templates/invitationTemplate/MasterTemplate';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOneOrder } from './config/orderSlice';
 
 const OrderComponent = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { store, order } = useParams();
-  const { theOrder } = useSelector((state) => state.order);
-  // console.log(store, order);
+  const { theOrder, isLoading } = useSelector((state) => state.order);
+  const { curentUser } = useSelector((state) => state.user);
 
   const invitaionTheme = {
     code: theOrder?.invitationDetail?.theme,
     type: theOrder?.invitationDetail?.type,
-    color: 'daun',
+    color: theOrder?.invitationDetail?.themeColor,
   };
   useEffect(() => {
     const theParams = {
@@ -22,9 +23,21 @@ const OrderComponent = () => {
     };
     dispatch(getOneOrder(theParams));
   }, [store, order]);
+
+  if (isLoading || !theOrder) {
+    return <p>...Loading</p>;
+  }
+
+  // console.log(curentUser?._id, theOrder?.store?.owner, theOrder?.isPublish);
   return (
     <>
-      <MasterTemplate invitaionTheme={invitaionTheme} info={theOrder} />
+      {curentUser?._id === theOrder?.store?.owner || theOrder?.isPublish ? (
+        <div>
+          <MasterTemplate invitaionTheme={invitaionTheme} info={theOrder} />
+        </div>
+      ) : (
+        <p>This Page Private, Please contact {theOrder?.store?.storeName}</p>
+      )}
     </>
   );
 };

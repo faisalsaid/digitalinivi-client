@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
 import TemplatesComponent from './feature/templates/TemplatesComponent';
 import VIewTemplateComponents from './feature/templates/VIewTemplateComponents';
-import MasterTemplate from './feature/templates/invitationTemplate/MasterTemplate';
 import StoreComponent from './feature/store/StoreComponent';
 import StoreDetails from './feature/store/StoreDetails';
 import OrderComponent from './feature/order/OrderComponent';

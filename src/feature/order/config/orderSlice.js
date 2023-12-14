@@ -51,8 +51,8 @@ export const updateOrderById = createAsyncThunk('store/updateOrderById', async (
 export const getOneOrder = createAsyncThunk('store/getOneOrder', async (toParams, thunkAPI) => {
   // console.log(order);
   try {
-    const token = thunkAPI.getState().user.curentUser.token;
-    return await orderServices.getOneOrder(toParams, token);
+    // const token = thunkAPI.getState().user.curentUser.token;
+    return await orderServices.getOneOrder(toParams);
   } catch (error) {
     const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
     return thunkAPI.rejectWithValue(message);

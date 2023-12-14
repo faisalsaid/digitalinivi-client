@@ -60,13 +60,13 @@ const updateOrderById = async (order, token) => {
 const getOneOrder = async (params, token) => {
   // console.log('getOneOrder', params);
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  // const config = {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // };
 
-  const response = await axios.get(`${apiURI}/order/${params.store}/${params.order}`, config);
+  const response = await axios.get(`${apiURI}/order/${params.store}/${params.order}`);
   // console.log(response.data);
 
   return response.data;
