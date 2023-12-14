@@ -96,9 +96,6 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
     });
   };
 
-  const handleColorTheme = (value) => {
-    setTheme(value);
-  };
   return (
     <>
       <div

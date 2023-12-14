@@ -1,18 +1,5 @@
-import ArticleIcon from '@mui/icons-material/Article';
-import EventIcon from '@mui/icons-material/Event';
-import ImageIcon from '@mui/icons-material/Image';
-import CommentIcon from '@mui/icons-material/Comment';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { MdOutlinePinDrop, MdOutlineDateRange, MdOutlineAccessTime } from 'react-icons/md';
-import { FaMapMarkedAlt } from 'react-icons/fa';
-import { IoIosSend } from 'react-icons/io';
-import { GiConfirmed } from 'react-icons/gi';
-import { FaWhatsapp } from 'react-icons/fa';
-// import icons end
-
-import { Stack, IconButton } from '@mui/material';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import MasterTemplate from './invitationTemplate/MasterTemplate';
 import { colorTheme } from '../../hook/static/themeDetail';
 import THEME_LIST from '../../hook/static/THEME_LIST.json';
@@ -38,7 +25,7 @@ const VIewTemplateComponents = () => {
 
   return (
     <>
-      <div className="p-6 flex justify-between flex-col gap-2">
+      <div className="p-6  justify-between flex-col gap-2 ">
         <p>
           Kode Thema : <span className="uppercase">{code}</span>
         </p>

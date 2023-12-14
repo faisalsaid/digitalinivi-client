@@ -32,9 +32,7 @@ const OrderComponent = () => {
   return (
     <>
       {curentUser?._id === theOrder?.store?.owner || theOrder?.isPublish ? (
-        <div>
-          <MasterTemplate invitaionTheme={invitaionTheme} info={theOrder} />
-        </div>
+        <MasterTemplate invitaionTheme={invitaionTheme} info={theOrder} />
       ) : (
         <p>This Page Private, Please contact {theOrder?.store?.storeName}</p>
       )}
