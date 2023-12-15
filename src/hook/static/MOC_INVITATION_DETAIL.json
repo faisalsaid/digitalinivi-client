@@ -4,6 +4,7 @@
         "email": "",
         "phone": "0123456789"
     },
+    "dumyData": true,
     "accessAcount": {
         "userName": "jhon-doe"
     },
@@ -46,13 +47,7 @@
         "owner": "6570236c500cad36e74d4bc5",
         "storeName": "Suckseed Enterprize",
         "slug": "suckseed-enterprize",
-        "avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-        "createdAt": "2023-12-10T01:12:33.414Z",
-        "updatedAt": "2023-12-10T03:59:48.959Z",
-        "__v": 0
+        "avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
     },
-    "slug": "nikahan-fdfdsfd-fdfd",
-    "createdAt": "2023-12-12T01:07:44.117Z",
-    "updatedAt": "2023-12-12T07:46:46.714Z",
-    "__v": 0
+    "slug": "nikahan-Budi-Wati"
 }

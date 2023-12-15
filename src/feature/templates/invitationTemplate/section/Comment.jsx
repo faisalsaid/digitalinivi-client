@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 
 const Comment = ({ theme, colorTheme, decoration, detail }) => {
-  console.log(detail);
+  // console.log(detail);
   return (
     <div className="min-h-screen flex flex-col justify-between items-center">
       <div className=" top-0   scale-x-105">

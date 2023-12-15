@@ -3,8 +3,17 @@ import { id } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
 
 const Cover = ({ theme, colorTheme, decoration, detail }) => {
-  // Set your target date here (in this example, it's set to December 31, 2023)
-  const targetDate = new Date(detail?.invitationDetail?.marriageInfo.date).getTime();
+  // init this day
+  const currentDate = new Date();
+
+  // Set the date to next week
+  const nextWeekDate = new Date(currentDate);
+  console.log(nextWeekDate);
+  nextWeekDate.setDate(currentDate.getDate() + 7);
+
+  const targetDate = detail?.dumyData ? nextWeekDate : new Date(detail?.invitationDetail?.marriageInfo.date).getTime();
+
+  console.log(detail?.dumyData ? 'Dumy' : 'Asli');
 
   const calculateTimeRemaining = () => {
     const now = new Date().getTime();
@@ -19,7 +28,7 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
       days,
       hours,
       minutes,
-      // seconds,
+      seconds,
     };
   };
 
@@ -51,8 +60,11 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
         <span className="capitalize">{detail?.invitationDetail?.groomDetail?.nickName}</span> &{' '}
         <span className="capitalize"> {detail?.invitationDetail?.brideDetail?.nickName}</span>
       </p>
-      {/* {console.log(detail?.invitationDetail?.marriageInfo.date)} */}
-      <p className="text-lg font-semibold  text-center">{format(new Date(detail?.invitationDetail?.marriageInfo.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
+
+      {/* <p className="text-lg font-semibold  text-center">{format(new Date(detail?.invitationDetail?.marriageInfo.date), 'EEEE dd-MM-yyyy', { locale: id })}</p> */}
+      <p className="text-lg font-semibold  text-center">
+        {format(detail?.dumyData ? nextWeekDate : new Date(detail?.invitationDetail?.marriageInfo.date), 'EEEE dd-MM-yyyy', { locale: id })}
+      </p>
       <div className="flex gap-4">
         <div className="">
           <p
@@ -81,7 +93,7 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
           </p>
           <p className="text-center ">Menit</p>
         </div>
-        {/* <div className="">
+        <div className="">
           <p
             className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
             style={{ backgroundColor: colorTheme ? colorTheme.filter((data) => data.name === theme).map((data) => data.dark) : 'grey' }}
@@ -89,7 +101,7 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
             {timeRemaining.seconds}
           </p>
           <p className="text-center ">Detik</p>
-        </div> */}
+        </div>
       </div>
       <div className="absolute bottom-0 rotate-180  scale-x-105">
         <img src={decoration} />
