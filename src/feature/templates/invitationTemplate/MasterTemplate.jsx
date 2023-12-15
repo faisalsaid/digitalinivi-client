@@ -16,6 +16,7 @@ import DateLocation from './section/DateLocation';
 import Galery from './section/Galery';
 import Comment from './section/Comment';
 import { colorTheme } from '../../../hook/static/themeDetail';
+import TimeLine from './section/TimeLine';
 
 const MasterTemplate = ({ invitaionTheme, info }) => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
@@ -89,7 +90,7 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
         }}
       >
         <div
-          className={`fixed bottom-0 p-4  w-full  flex justify-around sm:max-w-lg left-1/2 -translate-x-1/2 sm:rounded-full sm:bottom-4 z-10`}
+          className={`fixed bottom-0 px-4 py-2  w-full  flex justify-around sm:max-w-lg left-1/2 -translate-x-1/2 sm:rounded-full sm:bottom-4 z-10`}
           style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.medium) }}
         >
           {bottomMenu.map((menu, i) => (
@@ -120,6 +121,7 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
             <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
           </div>
         )}
+        <TimeLine theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
         <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         {useSection.comment && (
           <div ref={commentsSection}>
