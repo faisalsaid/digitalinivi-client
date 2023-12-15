@@ -135,7 +135,7 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
           </div> */}
           <p className="text-xl">{info?.store?.storeName}</p>
           <p className="flex gap-2 items-center">
-            <FaWhatsapp /> <span>08123456789</span>
+            <FaWhatsapp /> <span>{info?.store?.phoneNumber}</span>
           </p>
         </div>
       </div>
