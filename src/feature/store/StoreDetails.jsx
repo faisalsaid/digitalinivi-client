@@ -26,8 +26,7 @@ const StoreDetails = () => {
   const [date, setDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
-  const location = useLocation();
-  console.log(location);
+  // const location = useLocation();
 
   // console.log(theStore, listOrder, storeLoading, orderLoading);
   const initialValues = {
@@ -212,7 +211,7 @@ const StoreDetails = () => {
             ) : (
               <DataGrid
                 getRowId={getRowId}
-                rows={listOrder}
+                rows={listOrder ? listOrder : []}
                 rowSelection={false}
                 // rowCount
                 columns={columns}
