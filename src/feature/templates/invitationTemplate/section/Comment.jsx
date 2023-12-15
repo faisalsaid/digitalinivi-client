@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 
 const Comment = ({ theme, colorTheme, decoration, detail }) => {
+  console.log(detail);
   return (
     <div className="min-h-screen flex flex-col justify-between items-center">
       <div className=" top-0   scale-x-105">
@@ -24,7 +25,7 @@ const Comment = ({ theme, colorTheme, decoration, detail }) => {
             />
           </div>
           <p className="text-4xl" style={{ fontFamily: 'Great Vibes', fontWeight: 400 }}>
-            Budi & Wati
+            {detail?.invitationDetail?.groomDetail?.nickName} & {detail?.invitationDetail?.brideDetail?.nickName}
           </p>
           <p>{format(new Date(detail?.invitationDetail?.marriageInfo?.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
         </div>
@@ -68,7 +69,7 @@ const Comment = ({ theme, colorTheme, decoration, detail }) => {
             </div>
             <div className="flex flex-col gap-1 text-slate-700">
               <div className="flex gap-2">
-                <p>Mister Puttin</p>
+                <p className="font-medium">Mister Puttin</p>
                 <p className="flex gap-1 items-center bg-red-300 px-2 rounded-md text-sm">
                   <GiConfirmed />
                   <span>Tidak hadir</span>
