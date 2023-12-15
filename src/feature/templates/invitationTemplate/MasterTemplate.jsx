@@ -4,6 +4,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import CommentIcon from '@mui/icons-material/Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FaWhatsapp } from 'react-icons/fa';
+import HomeIcon from '@mui/icons-material/Home';
 // import icons end
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -16,33 +17,9 @@ import Galery from './section/Galery';
 import Comment from './section/Comment';
 import { colorTheme } from '../../../hook/static/themeDetail';
 
-const bottomMenu = [
-  {
-    label: 'cover',
-    icon: <ArticleIcon color="success" />,
-  },
-  {
-    label: 'bride',
-    icon: <FavoriteIcon color="success" />,
-  },
-  {
-    label: 'date',
-    icon: <EventIcon color="success" />,
-  },
-  {
-    label: 'galery',
-    icon: <ImageIcon color="success" />,
-  },
-  {
-    label: 'comment',
-    icon: <CommentIcon color="success" />,
-  },
-];
-
 const MasterTemplate = ({ invitaionTheme, info }) => {
   const [useSection, setUseSection] = useState({ quote: true, galery: true, comment: true });
   const [theme, setTheme] = useState('');
-  const [category, setCategory] = useState('');
   const [decoration, setDecoration] = useState('');
 
   useEffect(() => {
@@ -62,27 +39,32 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
 
   const bottomMenu = [
     {
-      label: 'cover',
-      icon: <ArticleIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
+      value: 'cover',
+      label: 'Cover',
+      icon: <HomeIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: coverSection,
     },
     {
-      label: 'bride',
+      value: 'bride',
+      label: 'Bride',
       icon: <FavoriteIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: brideSection,
     },
     {
-      label: 'date',
+      value: 'date',
+      label: 'Date',
       icon: <EventIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: dateSection,
     },
     {
-      label: 'galery',
+      value: 'galery',
+      label: 'Galery',
       icon: <ImageIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: galerySection,
     },
     {
-      label: 'comment',
+      value: 'comment',
+      label: 'Comment',
       icon: <CommentIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: commentsSection,
     },
@@ -111,9 +93,10 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
           style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.medium) }}
         >
           {bottomMenu.map((menu, i) => (
-            <IconButton onClick={() => scroolToSection(menu.section)} key={menu.label} aria-label={menu.label}>
-              {menu.icon}
-            </IconButton>
+            <div onClick={() => scroolToSection(menu.section)} key={menu.value} className="flex flex-1 flex-col justify-center items-center cursor-pointer">
+              <IconButton aria-label={menu.label}>{menu.icon}</IconButton>
+              <p className="text-xs uppercase">{menu.label}</p>
+            </div>
           ))}
         </div>
         <div ref={coverSection}>
