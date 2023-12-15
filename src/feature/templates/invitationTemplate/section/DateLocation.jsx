@@ -54,7 +54,7 @@ const DateLocation = ({ theme, colorTheme, decoration, detail }) => {
                 <MdOutlineAccessTime />
               </div>
               {/* {console.log()} */}
-              <p>Waktu : {format(parseISO(detail?.invitationDetail?.marriageInfo?.time), 'hh:mm a')} - Selesai</p>
+              <p>Waktu : {format(parseISO(detail?.invitationDetail?.receptionInfo?.time), 'hh:mm a')} - Selesai</p>
             </div>
             <div className="flex gap-2 items-baseline">
               <div>

@@ -8,11 +8,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
 import { getOneStore } from './config/storeSlice';
-import { Button, IconButton, Tooltip, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Button, IconButton, Tooltip, Chip, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import AddInvitation from './invitation/AddInvitation';
 import { deleteOrderById, fetchAllOrder } from '../order/config/orderSlice';
 import { DataGrid } from '@mui/x-data-grid';
 import DialogComponent from '../../components/share/DialogComponent';
+import { useLocation } from 'react-router';
 
 const StoreDetails = () => {
   const navigation = useNavigate();
@@ -25,6 +26,7 @@ const StoreDetails = () => {
   const [date, setDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({});
+  // const location = useLocation();
 
   // console.log(theStore, listOrder, storeLoading, orderLoading);
   const initialValues = {
@@ -68,11 +70,17 @@ const StoreDetails = () => {
   // console.log(listOrder);
 
   const columns = [
-    { field: 'customerName', headerName: 'Pemesan', width: 200, valueGetter: (params) => params.row.customerDetail.name },
+    { field: 'customerName', headerName: 'Pemesan', width: 150, valueGetter: (params) => params.row.customerDetail.name },
     { field: 'phone', headerName: 'No Kontak', width: 130, valueGetter: (params) => params.row.customerDetail.phone },
     // { field: 'type', headerName: 'Tipe', width: 100, valueGetter: (params) => (params.row.invitationDetail.type === 'marriage' ? 'Pernikahan' : 'Ulang Tahun'), sortable: false },
-    { field: 'theme', headerName: 'Tema', width: 80, valueGetter: (params) => params.row.invitationDetail.theme.toUpperCase() },
-    { field: 'slug', headerName: 'Slug', width: 200, valueGetter: (params) => params.row.slug },
+    // { field: 'status', headerName: 'Status', width: 80, valueGetter: (params) => params.row.isPublish === true && <Chip label="Publish" color="primary" variant="outlined" /> },
+    {
+      field: 'status',
+      headerName: 'Status',
+      width: 100,
+      renderCell: (params) => (params.row.isPublish === true ? <Chip label="Publik" color="success" variant="filled" /> : <Chip label="Tunda" color="error" variant="filled" />),
+    },
+    { field: 'slug', headerName: 'Slug', width: 150, valueGetter: (params) => params.row.slug },
     { field: 'groom', headerName: 'Pria', width: 200, valueGetter: (params) => params.row.invitationDetail.groomDetail.fullName },
     { field: 'bride', headerName: 'Wanita', width: 200, valueGetter: (params) => params.row.invitationDetail.brideDetail.fullName },
     {
@@ -80,8 +88,8 @@ const StoreDetails = () => {
       headerName: 'Link Undangan',
       width: 200,
       renderCell: (params) => (
-        <Tooltip title={`http://localhost:5173/${params.row.store.slug}/${params.row.slug}`}>
-          <p>{`http://localhost:5173/${params.row.store.slug}/${params.row.slug}`}</p>
+        <Tooltip title={`https://digitalinvi.vercel.app/${params.row.store.slug}/${params.row.slug}`}>
+          <p>{`https://digitalinvi.vercel.app/${params.row.store.slug}/${params.row.slug}`}</p>
         </Tooltip>
       ),
     },
@@ -203,7 +211,7 @@ const StoreDetails = () => {
             ) : (
               <DataGrid
                 getRowId={getRowId}
-                rows={listOrder}
+                rows={listOrder ? listOrder : []}
                 rowSelection={false}
                 // rowCount
                 columns={columns}

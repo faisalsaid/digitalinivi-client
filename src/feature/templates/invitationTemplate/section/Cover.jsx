@@ -1,7 +1,39 @@
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
+import { useEffect, useState } from 'react';
 
 const Cover = ({ theme, colorTheme, decoration, detail }) => {
+  // Set your target date here (in this example, it's set to December 31, 2023)
+  const targetDate = new Date(detail?.invitationDetail?.marriageInfo.date).getTime();
+
+  const calculateTimeRemaining = () => {
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    return {
+      days,
+      hours,
+      minutes,
+      // seconds,
+    };
+  };
+
+  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+  // console.log(timeRemaining);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeRemaining(calculateTimeRemaining());
+    }, 1000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div id="cover" className={` w-full min-h-[calc[100vh-70px]] p-2 py-24 relative flex justify-center items-center flex-col gap-8`}>
       <div className="absolute top-0   scale-x-105">
@@ -22,17 +54,42 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
       {/* {console.log(detail?.invitationDetail?.marriageInfo.date)} */}
       <p className="text-lg font-semibold  text-center">{format(new Date(detail?.invitationDetail?.marriageInfo.date), 'EEEE dd-MM-yyyy', { locale: id })}</p>
       <div className="flex gap-4">
-        {['Hari', 'Jam', 'Menit'].map((data) => (
-          <div key={data} className="">
-            <p
-              className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
-              style={{ backgroundColor: colorTheme ? colorTheme.filter((data) => data.name === theme).map((data) => data.dark) : 'grey' }}
-            >
-              99
-            </p>
-            <p className="text-center ">{data}</p>
-          </div>
-        ))}
+        <div className="">
+          <p
+            className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
+            style={{ backgroundColor: colorTheme ? colorTheme.filter((data) => data.name === theme).map((data) => data.dark) : 'grey' }}
+          >
+            {timeRemaining.days}
+          </p>
+          <p className="text-center ">Hari</p>
+        </div>
+        <div className="">
+          <p
+            className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
+            style={{ backgroundColor: colorTheme ? colorTheme.filter((data) => data.name === theme).map((data) => data.dark) : 'grey' }}
+          >
+            {timeRemaining.hours}
+          </p>
+          <p className="text-center ">Jam</p>
+        </div>
+        <div className="">
+          <p
+            className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
+            style={{ backgroundColor: colorTheme ? colorTheme.filter((data) => data.name === theme).map((data) => data.dark) : 'grey' }}
+          >
+            {timeRemaining.minutes}
+          </p>
+          <p className="text-center ">Menit</p>
+        </div>
+        {/* <div className="">
+          <p
+            className={` w-16 h-16 text-white flex justify-center items-center text-3xl rounded-3xl`}
+            style={{ backgroundColor: colorTheme ? colorTheme.filter((data) => data.name === theme).map((data) => data.dark) : 'grey' }}
+          >
+            {timeRemaining.seconds}
+          </p>
+          <p className="text-center ">Detik</p>
+        </div> */}
       </div>
       <div className="absolute bottom-0 rotate-180  scale-x-105">
         <img src={decoration} />
