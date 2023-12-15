@@ -8,12 +8,12 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
 
   // Set the date to next week
   const nextWeekDate = new Date(currentDate);
-  console.log(nextWeekDate);
+  // console.log(nextWeekDate);
   nextWeekDate.setDate(currentDate.getDate() + 7);
 
   const targetDate = detail?.dumyData ? nextWeekDate : new Date(detail?.invitationDetail?.marriageInfo.date).getTime();
 
-  console.log(detail?.dumyData ? 'Dumy' : 'Asli');
+  // console.log(detail?.dumyData ? 'Dumy' : 'Asli');
 
   const calculateTimeRemaining = () => {
     const now = new Date().getTime();

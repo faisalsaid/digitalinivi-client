@@ -42,7 +42,7 @@ const Bride = ({ theme, colorTheme, decoration, detail }) => {
               </p>
               <div className="flex flex-col gap-1 justify-center items-center">
                 <p>Putri Dari:</p>
-                <p className="font-semibold">
+                <p className="font-semibold text-center">
                   {detail?.invitationDetail?.brideDetail?.father} & {detail?.invitationDetail?.brideDetail?.mother}
                 </p>
               </div>
