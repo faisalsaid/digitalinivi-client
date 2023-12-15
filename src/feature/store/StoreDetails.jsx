@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
 import { getOneStore } from './config/storeSlice';
-import { Button, IconButton, Tooltip, Chip, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Button, IconButton, Tooltip, Chip, Stack, DialogContentText, DialogTitle } from '@mui/material';
 import AddInvitation from './invitation/AddInvitation';
 import { deleteOrderById, fetchAllOrder } from '../order/config/orderSlice';
 import { DataGrid } from '@mui/x-data-grid';
@@ -187,49 +187,45 @@ const StoreDetails = () => {
     return <>...Loding</>;
   }
   return (
-    <>
-      {theStore.stack ? (
-        <p>Toko Tidak Ditemukan</p>
-      ) : (
-        <div className="flex flex-col gap-2 max-w-[100vw] ">
-          <div className="flex flex-col gap-2 sm:flex-row items-center justify-between ">
-            <div className="flex gap-3 items-center ">
-              <div className="h-14 w-14 rounded-full overflow-hidden ">
-                <img src={theStore.avatar} />
-              </div>
-              <h2 className="text-2xl">{theStore && theStore?.storeName}</h2>
-            </div>
-            <div>
-              <Button onClick={handleAddInvitationModal} variant="contained" startIcon={<PostAddIcon />}>
-                Buat Undangan
-              </Button>
-            </div>
+    <Stack gap={2}>
+      <div className="flex flex-col gap-2 ">
+        <div className="flex gap-3 items-center ">
+          <div className="h-14 w-14 rounded-full overflow-hidden ">
+            <img src={theStore.avatar} />
           </div>
-          <div style={{ height: 400, width: '90%' }}>
-            {orderLoading ? (
-              <p>...loading</p>
-            ) : (
-              <DataGrid
-                getRowId={getRowId}
-                rows={listOrder ? listOrder : []}
-                rowSelection={false}
-                // rowCount
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}
-                pageSizeOptions={[5, 10]}
-                checkboxSelection
-              />
-            )}
-          </div>
-          <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} data={modalData} />
-          <DialogComponent open={openDialog} handleClose={handleCloseDialog} content={dialogContent} submit={handleSubmitDialog} />
+          <h2 className="text-2xl">{theStore && theStore?.storeName}</h2>
         </div>
-      )}
-    </>
+        <div>
+          <Button onClick={handleAddInvitationModal} variant="contained" startIcon={<PostAddIcon />}>
+            Buat Undangan
+          </Button>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2 w-[100vw] ">
+        <div style={{ height: 400, width: '100%' }}>
+          {orderLoading ? (
+            <p>...loading</p>
+          ) : (
+            <DataGrid
+              getRowId={getRowId}
+              rows={listOrder ? listOrder : []}
+              rowSelection={false}
+              // rowCount
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
+              // checkboxSelection
+            />
+          )}
+        </div>
+        <AddInvitation openModal={openModal} handleCloseModal={handleCloseModal} store={theStore} data={modalData} />
+        <DialogComponent open={openDialog} handleClose={handleCloseDialog} content={dialogContent} submit={handleSubmitDialog} />
+      </div>
+    </Stack>
   );
 };
 
