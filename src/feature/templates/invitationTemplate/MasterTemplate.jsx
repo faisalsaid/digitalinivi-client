@@ -41,31 +41,31 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
   const bottomMenu = [
     {
       value: 'cover',
-      label: 'Cover',
+      label: 'Depan',
       icon: <HomeIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: coverSection,
     },
     {
       value: 'bride',
-      label: 'Bride',
+      label: 'Pengantin',
       icon: <FavoriteIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: brideSection,
     },
     {
       value: 'date',
-      label: 'Date',
+      label: 'Tanggal',
       icon: <EventIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: dateSection,
     },
     {
       value: 'galery',
-      label: 'Galery',
+      label: 'Galeri',
       icon: <ImageIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: galerySection,
     },
     {
       value: 'comment',
-      label: 'Comment',
+      label: 'Komentar',
       icon: <CommentIcon style={{ color: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} />,
       section: commentsSection,
     },
