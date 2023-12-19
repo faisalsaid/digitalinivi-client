@@ -71,8 +71,28 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
     // onReset();
   };
 
+  const concateDate = (date, time) => {
+    const date1 = new Date(date);
+    const time2 = new Date(time);
+
+    // Extract date from date1
+    const extractedDate = date1.toISOString().split('T')[0];
+
+    // Extract time from time2
+    const extractedTime = time2.toISOString().split('T')[1];
+
+    // Combine date and time
+    const result = `${extractedDate}T${extractedTime}`;
+    // console.log(result);
+    return result;
+  };
+
   const onSubmit = (value, props) => {
+    console.log(value);
+    const marriageTime = concateDate(value.invitationDetail.marriageInfo.date, value.invitationDetail.marriageInfo.time);
+    value.invitationDetail.marriageInfo.date = marriageTime;
     if (value && value._id) {
+      console.log(value);
       handleCloseModal();
       dispatch(updateOrderById(value));
     } else {
@@ -84,9 +104,11 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
       dispatch(createOrder(payload));
     }
   };
+
   const onReset = (value, props) => {
     console.log(props);
   };
+
   return (
     <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
@@ -418,7 +440,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         value={dayjs(field.value)}
                                         label="Tanggal"
                                         onChange={(data, validate) => {
-                                          setFieldValue('invitationDetail.marriageInfo.date', data.$d);
+                                          setFieldValue('invitationDetail.marriageInfo.date', data.$d.toISOString());
                                         }}
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
@@ -436,7 +458,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         label="Waktu"
                                         value={dayjs(field.value)}
                                         onChange={(data, validate) => {
-                                          setFieldValue('invitationDetail.marriageInfo.time', data.$d);
+                                          setFieldValue('invitationDetail.marriageInfo.time', data.$d.toISOString());
                                         }}
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}
@@ -494,7 +516,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         value={dayjs(field.value)}
                                         label="Tanggal"
                                         onChange={(data, validate) => {
-                                          setFieldValue('invitationDetail.receptionInfo.date', data.$d);
+                                          setFieldValue('invitationDetail.receptionInfo.date', data.$d.toISOString());
                                         }}
                                         fullWidth
                                         error={meta.touched && meta.error ? true : false}
@@ -513,7 +535,7 @@ const AddInvitation = ({ openModal, handleCloseModal, store, data }) => {
                                         label="Waktu"
                                         value={dayjs(field.value)}
                                         onChange={(data, validate) => {
-                                          setFieldValue('invitationDetail.receptionInfo.time', data.$d);
+                                          setFieldValue('invitationDetail.receptionInfo.time', data.$d.toISOString());
                                         }}
                                         error={meta.touched && meta.error ? true : false}
                                         helperText={meta.touched && meta.error && meta.error}

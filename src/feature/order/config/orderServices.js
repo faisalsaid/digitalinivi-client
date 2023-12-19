@@ -43,7 +43,7 @@ const deleteOneById = async (order_id, token) => {
 };
 
 const updateOrderById = async (order, token) => {
-  console.log('updateOrderById', order);
+  // console.log('updateOrderById', order);
 
   const { _id, ...payload } = order;
   const config = {
