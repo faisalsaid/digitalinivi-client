@@ -17,6 +17,15 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
 
   const calculateTimeRemaining = () => {
     const now = new Date().getTime();
+
+    if (targetDate < now) {
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      };
+    }
     const difference = targetDate - now;
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -38,7 +47,9 @@ const Cover = ({ theme, colorTheme, decoration, detail }) => {
     const timer = setInterval(() => {
       setTimeRemaining(calculateTimeRemaining());
     }, 1000);
-
+    if (timeRemaining.days === 0 && timeRemaining.hours === 0 && timeRemaining.minutes === 0 && timeRemaining.seconds === 0) {
+      clearInterval(timer);
+    }
     // Clean up the interval when the component unmounts
     return () => clearInterval(timer);
   }, []);
