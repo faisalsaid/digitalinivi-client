@@ -6,6 +6,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import StoreIcon from '@mui/icons-material/Store';
+
 // Import Icons END
 
 import { useState } from 'react';
@@ -172,7 +174,7 @@ export default Layout;
 
 const listMenu = [
   { label: 'Dasbor', value: 'dashboard', icon: <DashboardIcon /> },
-  { label: 'Toko', value: 'store', icon: <PersonIcon /> },
+  { label: 'Toko', value: 'store', icon: <StoreIcon /> },
   { label: 'Profil', value: 'profile', icon: <PersonIcon /> },
 ];
 const settingMenu = [{ label: 'Pengaturan', value: 'setting', icon: <DashboardIcon /> }];
