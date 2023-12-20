@@ -61,11 +61,7 @@ const TemplatesComponent = () => {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {THEME_LIST.map((data) => (
             <Card key={data.code}>
-              <CardMedia
-                sx={{ height: 180 }}
-                image="https://cdn.dribbble.com/userupload/2972633/file/original-a04fbbe60fe11c10375ed9ff1fee84d2.png?resize=400x0"
-                title="green iguana"
-              />
+              <CardMedia sx={{ height: 180 }} image={data.thumbnail} title="green iguana" />
               <CardContent>
                 <Typography gutterBottom variant="h6" component="p">
                   {data.label}
