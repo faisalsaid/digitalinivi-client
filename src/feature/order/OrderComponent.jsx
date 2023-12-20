@@ -17,6 +17,13 @@ const OrderComponent = () => {
     type: theOrder?.invitationDetail?.type,
     color: theOrder?.invitationDetail?.themeColor,
   };
+
+  useEffect(() => {
+    document.title = `${theOrder?.invitationDetail?.type === 'marriage' ? 'Nikahan' : ''} ${theOrder?.invitationDetail?.groomDetail?.nickName} & ${
+      theOrder?.invitationDetail?.brideDetail?.nickName
+    }`;
+  }, [theOrder]);
+
   useEffect(() => {
     const theParams = {
       store,

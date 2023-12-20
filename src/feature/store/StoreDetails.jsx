@@ -179,7 +179,7 @@ const StoreDetails = () => {
   };
 
   const handleViewOrderDetail = (order_detail) => {
-    console.log(order_detail);
+    // console.log(order_detail);
     navigation(`/${order_detail.store.slug}/${order_detail.slug}`);
   };
 
