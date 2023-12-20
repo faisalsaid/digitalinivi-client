@@ -16,8 +16,10 @@ const initialValues = {
   password: '',
 };
 
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
 const validationSchema = Yup.object({
-  email: Yup.string().required('Required'),
+  email: Yup.string().required('Required').email().matches(emailRegex, 'invalid email format'),
   password: Yup.string().required('Required').min(6, 'Min 6 character'),
 });
 
@@ -94,7 +96,7 @@ const SigninComponent = () => {
                         }}
                       </Field>
 
-                      <Button type="submit" variant="contained" startIcon={<SendIcon />} disabled={isLoading}>
+                      <Button type="submit" variant="contained" startIcon={<SendIcon />} disabled={isLoading || !formik.dirty || (formik.dirty && !formik.isValid)}>
                         {isLoading ? '...loading' : 'Masuk'}
                       </Button>
                     </Stack>

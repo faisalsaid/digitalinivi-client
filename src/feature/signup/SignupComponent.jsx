@@ -19,9 +19,12 @@ const initialValues = {
   password: '',
 };
 
+// const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
 const validationSchema = Yup.object({
   name: Yup.string().required('Name required').min(5, 'Min 5 character'),
-  email: Yup.string().required('Email required'),
+  email: Yup.string().required('Email required').email().matches(emailRegex, 'invalid email format'),
   password: Yup.string().required('Password required').min(6, 'Min 6 character'),
 });
 
@@ -44,8 +47,8 @@ const SignupComponent = () => {
 
   // Handle submit form
   const onSubmit = (value, props) => {
-    dispatch(register(value));
     // console.log(value);
+    dispatch(register(value));
   };
 
   // Handle reset form
@@ -114,7 +117,7 @@ const SignupComponent = () => {
                         }}
                       </Field>
 
-                      <Button type="submit" variant="contained" startIcon={<SendIcon />} disabled={isLoading}>
+                      <Button type="submit" variant="contained" startIcon={<SendIcon />} disabled={isLoading || !formik.dirty || (formik.dirty && !formik.isValid)}>
                         {isLoading ? '...loading' : 'Daftarkan Akun'}
                       </Button>
                     </Stack>
