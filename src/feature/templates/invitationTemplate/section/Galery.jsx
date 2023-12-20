@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Galery = ({ theme, colorTheme, decoration }) => {
+const Galery = ({ theme, colorTheme, decoration, detail }) => {
+  if (Object.keys(detail).length === 0) {
+    return (
+      <>
+        <p>...loading</p>
+      </>
+    );
+  }
   return (
     <div id="galery" className=" flex flex-col min-h-screen justify-center items-center">
       <div className=" top-0   scale-x-105">

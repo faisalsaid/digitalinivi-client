@@ -2,6 +2,13 @@ import React from 'react';
 
 const Bride = ({ theme, colorTheme, decoration, detail }) => {
   // console.log(detail);
+  if (Object.keys(detail).length === 0) {
+    return (
+      <>
+        <p>...loading</p>
+      </>
+    );
+  }
   return (
     <>
       <div id="bride" className={` flex w-full min-h-screen flex-col justify-center items-center `}>

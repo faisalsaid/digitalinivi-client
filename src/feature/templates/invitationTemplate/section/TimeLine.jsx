@@ -35,6 +35,14 @@ const TimeLine = ({ theme, colorTheme, decoration, detail }) => {
     );
   };
 
+  if (Object.keys(detail).length === 0) {
+    return (
+      <>
+        <p>...loading</p>
+      </>
+    );
+  }
+
   return (
     <div className="py-4">
       <Timeline position="alternate-reverse">

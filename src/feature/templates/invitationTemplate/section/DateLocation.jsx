@@ -6,6 +6,13 @@ import { parseISO, format } from 'date-fns';
 import { id } from 'date-fns/locale';
 
 const DateLocation = ({ theme, colorTheme, decoration, detail }) => {
+  if (Object.keys(detail).length === 0) {
+    return (
+      <>
+        <p>...loading</p>
+      </>
+    );
+  }
   return (
     <div className=" min-h-[calc(100vh-70px)] flex justify-between flex-col items-center">
       <div className=" top-0   scale-x-105">

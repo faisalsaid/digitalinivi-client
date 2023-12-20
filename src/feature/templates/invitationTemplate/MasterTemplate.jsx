@@ -118,7 +118,7 @@ const MasterTemplate = ({ invitaionTheme, info }) => {
         <div style={{ backgroundColor: colorTheme.filter((data) => data.name === theme).map((data) => data.dark) }} className="h-2"></div>
         {useSection?.galery && (
           <div ref={galerySection}>
-            <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} />
+            <Galery theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
           </div>
         )}
         <TimeLine theme={theme} colorTheme={colorTheme} decoration={decoration} detail={info} />
